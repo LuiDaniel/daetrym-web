@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "DaeTrym — Cybersecurity and software development",
+    "titleTemplate": "%s | DaeTrym",
+    "description": "We build web applications and custom software, and protect what you build with penetration testing, code audits and hardening."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "requestQuote": "Request a proposal",
+    "bookCall": "Book a call",
+    "homeLink": "DaeTrym, go to home"
+  },
+  "nav": {
+    "services": "Services",
+    "cybersecurity": "Cybersecurity",
+    "projects": "Projects",
+    "process": "Process",
+    "about": "About",
+    "blog": "Blog",
+    "resources": "Resources",
+    "contact": "Contact",
+    "security": "Security",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  },
+  "header": {
+    "mainNavLabel": "Main navigation",
+    "openMenu": "Open menu"
+  },
+  "menu": {
+    "title": "Menu",
+    "description": "Site navigation. Drag the panel to the right to close it.",
+    "close": "Close menu"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Change language to {language}",
+    "names": {
+      "es": "Español",
+      "en": "English"
+    }
+  },
+  "footer": {
+    "tagline": "Cybersecurity and software development: web applications, custom software and technology.",
+    "exploreTitle": "Explore",
+    "companyTitle": "Company",
+    "legalTitle": "Legal",
+    "socialTitle": "Social",
+    "contactTitle": "Contact",
+    "copyright": "© {year} {name}. All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Cybersecurity · Web Apps · Custom software",
+      "title": "Secure software, by design.",
+      "lead": "We build web applications and custom software, and protect what you build: penetration testing, code audits and hardening using open methodologies."
+    },
+    "pillars": {
+      "web": {
+        "title": "Web applications",
+        "description": "Fast, accessible and maintainable products, with security built in from the first line."
+      },
+      "custom": {
+        "title": "Custom software",
+        "description": "Systems made for how your team works, with code that is yours and clear documentation."
+      },
+      "security": {
+        "title": "Cybersecurity",
+        "description": "Penetration testing, code review and hardening, always with written authorization."
+      }
+    }
+  },
+  "maintenance": {
+    "title": "We'll be right back",
+    "description": "We're performing maintenance. Please try again in a few minutes."
+  }
+}

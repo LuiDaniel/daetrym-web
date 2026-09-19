@@ -1,0 +1,25 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# next
+.next
+out
+next-env.d.ts
+
+# tests
+coverage
+playwright-report
+test-results
+blob-report
+
+# env — nunca subir secretos
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.tsbuildinfo
+.vercel
+npm-debug.log*

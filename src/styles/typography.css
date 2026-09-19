@@ -1,0 +1,63 @@
+/*
+ * Escala tipográfica (apple-design §15): el tracking y el leading dependen del tamaño.
+ * Display/títulos: tracking negativo y leading ajustado. Cuerpo: tracking ≈ 0.
+ * Texto pequeño: tracking ligeramente positivo. Tamaños fluidos en rem (respetan el texto del usuario).
+ */
+@utility text-display {
+  font-size: clamp(2.75rem, 1.6rem + 5.2vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@utility text-h1 {
+  font-size: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@utility text-h2 {
+  font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.5;
+  letter-spacing: -0.006em;
+  text-wrap: pretty;
+}
+
+@utility text-body {
+  font-size: 1rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+
+@utility text-small {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+@utility text-label {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}

@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './typography.css';
+@import './materials.css';
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  /* Foco siempre visible (WCAG 2.4.7 / 2.4.11) */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  button,
+  [role='button'],
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Cambio de tema sin salto brusco de brillo (apple-design §14). Lo activa theme-toggle. */
+  :root[data-theme-transition] *,
+  :root[data-theme-transition] *::before,
+  :root[data-theme-transition] *::after {
+    transition:
+      background-color 300ms ease,
+      color 300ms ease,
+      border-color 300ms ease,
+      fill 300ms ease !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Contenedor de contenido con gutter fluido */
+  .container-page {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Primera sección de una página: el header es translúcido y flota sobre el contenido, así que
+     el espacio superior debe incluir su altura. */
+  .page-top {
+    padding-top: calc(var(--header-height) + clamp(3.5rem, 8vw, 7rem));
+  }
+
+  /* Skip link (WCAG 2.4.1): invisible hasta recibir foco */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-200%);
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 600;
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  /* Feedback de press instantáneo en pointer-down (apple-design §1) */
+  .press {
+    transition: transform var(--press-duration) ease-out;
+  }
+  .press:active {
+    transform: scale(var(--press-scale));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .press:active {
+      transform: none;
+      opacity: 0.8;
+    }
+  }
+}

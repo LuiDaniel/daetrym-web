@@ -1,0 +1,81 @@
+/*
+ * Materiales translúcidos (apple-design §12).
+ * thin    → chips y controles secundarios (lo más ligero, atrae atención a lo interactivo)
+ * regular → header, tarjetas
+ * thick   → sheets y modales (superficies grandes = más espesas: más blur y sombra más profunda)
+ * Nunca apilar una superficie translúcida clara sobre otra.
+ */
+@utility material-thin {
+  background: var(--material-thin-bg);
+  -webkit-backdrop-filter: blur(var(--blur-thin)) saturate(160%);
+  backdrop-filter: blur(var(--blur-thin)) saturate(160%);
+  border: 1px solid var(--material-border);
+  box-shadow: var(--shadow-thin);
+}
+
+@utility material-regular {
+  background: var(--material-regular-bg);
+  -webkit-backdrop-filter: blur(var(--blur-regular)) saturate(180%);
+  backdrop-filter: blur(var(--blur-regular)) saturate(180%);
+  border: 1px solid var(--material-border);
+  border-top-color: var(--material-edge);
+  box-shadow: var(--shadow-regular);
+}
+
+@utility material-thick {
+  background: var(--material-thick-bg);
+  -webkit-backdrop-filter: blur(var(--blur-thick)) saturate(180%);
+  backdrop-filter: blur(var(--blur-thick)) saturate(180%);
+  border: 1px solid var(--material-border);
+  border-top-color: var(--material-edge);
+  box-shadow: var(--shadow-thick);
+}
+
+/*
+ * Scroll-edge effect: en lugar de una línea de 1px bajo el header, un degradado con blur
+ * que se desvanece hacia el contenido. La opacidad la controla el scroll (ver site-header.tsx).
+ */
+@utility scroll-edge {
+  position: absolute;
+  inset: 0 0 -1.25rem 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--material-regular-bg) 0%, transparent 100%);
+  -webkit-backdrop-filter: blur(var(--blur-regular)) saturate(180%);
+  backdrop-filter: blur(var(--blur-regular)) saturate(180%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent 100%);
+}
+
+/* Sin soporte de backdrop-filter: superficie casi sólida para mantener legibilidad. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .material-thin,
+  .material-regular,
+  .material-thick,
+  .scroll-edge {
+    background: var(--material-solid-bg);
+  }
+}
+
+/* prefers-reduced-transparency: superficies opacas, sin blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .material-thin,
+  .material-regular,
+  .material-thick,
+  .scroll-edge {
+    background: var(--material-solid-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* prefers-contrast: more → casi sólido con borde definido. */
+@media (prefers-contrast: more) {
+  .material-thin,
+  .material-regular,
+  .material-thick {
+    background: var(--material-solid-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--hairline-strong);
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "DaeTrym — Ciberseguridad y desarrollo de software",
+    "titleTemplate": "%s | DaeTrym",
+    "description": "Desarrollamos aplicaciones web y software a medida, y protegemos lo que construyes con pentesting, auditoría de código y hardening."
+  },
+  "common": {
+    "skipToContent": "Saltar al contenido",
+    "requestQuote": "Solicitar propuesta",
+    "bookCall": "Agendar llamada",
+    "homeLink": "DaeTrym, ir al inicio"
+  },
+  "nav": {
+    "services": "Servicios",
+    "cybersecurity": "Ciberseguridad",
+    "projects": "Proyectos",
+    "process": "Proceso",
+    "about": "Nosotros",
+    "blog": "Blog",
+    "resources": "Recursos",
+    "contact": "Contacto",
+    "security": "Seguridad",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies"
+  },
+  "header": {
+    "mainNavLabel": "Navegación principal",
+    "openMenu": "Abrir menú"
+  },
+  "menu": {
+    "title": "Menú",
+    "description": "Navegación del sitio. Arrastra el panel hacia la derecha para cerrarlo.",
+    "close": "Cerrar menú"
+  },
+  "theme": {
+    "toLight": "Cambiar a modo claro",
+    "toDark": "Cambiar a modo oscuro"
+  },
+  "language": {
+    "label": "Idioma",
+    "switchTo": "Cambiar el idioma a {language}",
+    "names": {
+      "es": "Español",
+      "en": "English"
+    }
+  },
+  "footer": {
+    "tagline": "Ciberseguridad y desarrollo de software: aplicaciones web, software a medida y tecnología.",
+    "exploreTitle": "Explorar",
+    "companyTitle": "Empresa",
+    "legalTitle": "Legal",
+    "socialTitle": "Redes",
+    "contactTitle": "Contacto",
+    "copyright": "© {year} {name}. Todos los derechos reservados."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Ciberseguridad · Web Apps · Software a medida",
+      "title": "Software seguro, desde el diseño.",
+      "lead": "Construimos aplicaciones web y software a medida, y protegemos lo que construyes: pentesting, auditoría de código y hardening con metodologías abiertas."
+    },
+    "pillars": {
+      "web": {
+        "title": "Aplicaciones web",
+        "description": "Productos rápidos, accesibles y mantenibles, con la seguridad integrada desde la primera línea."
+      },
+      "custom": {
+        "title": "Software a medida",
+        "description": "Sistemas hechos para cómo trabaja tu equipo, con código que es tuyo y documentación clara."
+      },
+      "security": {
+        "title": "Ciberseguridad",
+        "description": "Pruebas de penetración, revisión de código y endurecimiento, siempre con autorización por escrito."
+      }
+    }
+  },
+  "maintenance": {
+    "title": "Volvemos enseguida",
+    "description": "Estamos realizando tareas de mantenimiento. Vuelve a intentarlo en unos minutos."
+  }
+}

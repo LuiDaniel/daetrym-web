@@ -1,0 +1,8 @@
+node_modules
+.next
+pnpm-lock.yaml
+public
+coverage
+playwright-report
+test-results
+src/db/migrations

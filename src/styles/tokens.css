@@ -1,0 +1,132 @@
+/*
+ * DaeTrym — tokens de diseño (única fuente de verdad visual, derivada de apple-design).
+ * Valores de marca muestreados de public/brand/logo.png: fondo #040712, verde #01BF63, blanco.
+ * Los tokens de motion viven en ./motion.ts; los que también necesita CSS (press) se duplican aquí
+ * y tests/unit/tokens.test.ts verifica que no diverjan.
+ * Contrastes verificados por `pnpm check:contrast`.
+ */
+
+/* ---------- Oscuro (por defecto) ---------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #040712;
+  --surface-1: #0b1020;
+  --surface-2: #121829;
+  --surface-3: #1a2236;
+
+  --fg: #ffffff;
+  --fg-muted: rgb(255 255 255 / 0.72);
+  --fg-subtle: rgb(255 255 255 / 0.56);
+
+  --accent: #01bf63;
+  --accent-hover: #19d477;
+  --accent-pressed: #00a356;
+  --accent-text: #01bf63;
+  --on-accent: #04110a;
+
+  --danger: #ff7a7a;
+
+  --hairline: rgb(255 255 255 / 0.08);
+  --hairline-strong: rgb(255 255 255 / 0.16);
+  --focus-ring: #19d477;
+
+  /* Materiales (translúcidos) */
+  --material-thin-bg: rgb(255 255 255 / 0.06);
+  --material-regular-bg: rgb(11 16 32 / 0.62);
+  --material-thick-bg: rgb(18 24 41 / 0.78);
+  --material-solid-bg: #121829; /* fallback: reduced-transparency / sin backdrop-filter */
+  --material-edge: rgb(255 255 255 / 0.12); /* luz sobre el borde superior */
+  --material-border: rgb(255 255 255 / 0.08);
+  --shadow-thin: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-regular: 0 8px 24px -8px rgb(0 0 0 / 0.5);
+  --shadow-thick: 0 24px 64px -12px rgb(0 0 0 / 0.65), 0 2px 8px rgb(0 0 0 / 0.4);
+  --scrim: rgb(2 4 10 / 0.6);
+}
+
+/* ---------- Claro ---------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f5f6f8;
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #eef0f4;
+
+  --fg: #0b1020;
+  --fg-muted: rgb(11 16 32 / 0.72);
+  --fg-subtle: rgb(11 16 32 / 0.6);
+
+  --accent: #01bf63;
+  /* Con texto oscuro sobre el botón, hover/pressed no pueden oscurecer el verde (AA). */
+  --accent-hover: #19d477;
+  --accent-pressed: #00a356;
+  --accent-text: #00713a;
+  --on-accent: #04110a;
+
+  --danger: #b3261e;
+
+  --hairline: rgb(4 7 18 / 0.1);
+  --hairline-strong: rgb(4 7 18 / 0.18);
+  --focus-ring: #00713a;
+
+  --material-thin-bg: rgb(4 7 18 / 0.05);
+  --material-regular-bg: rgb(255 255 255 / 0.7);
+  --material-thick-bg: rgb(255 255 255 / 0.82);
+  --material-solid-bg: #ffffff;
+  --material-edge: rgb(255 255 255 / 0.9);
+  --material-border: rgb(4 7 18 / 0.08);
+  --shadow-thin: 0 1px 2px rgb(4 7 18 / 0.08);
+  --shadow-regular: 0 8px 24px -8px rgb(4 7 18 / 0.16);
+  --shadow-thick: 0 24px 64px -12px rgb(4 7 18 / 0.28), 0 2px 8px rgb(4 7 18 / 0.1);
+  --scrim: rgb(4 7 18 / 0.4);
+}
+
+/* ---------- Constantes (no dependen del tema) ---------- */
+/* Radios: declarados en @theme (abajo) para que rounded-* de Tailwind los use. */
+:root {
+  --blur-thin: 12px;
+  --blur-regular: 20px;
+  --blur-thick: 40px;
+
+  --header-height: 4rem;
+  --content-width: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+
+  /* Press: respuesta en pointer-down (apple-design §1). Duplicado en motion.ts */
+  --press-scale: 0.97;
+  --press-duration: 100ms;
+}
+
+/* ---------- Mapeo a Tailwind v4 (utilidades bg-*, text-*, border-*, rounded-*) ---------- */
+@theme static {
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-pressed: var(--accent-pressed);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-scrim: var(--scrim);
+
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+}
