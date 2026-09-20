@@ -1,0 +1,154 @@
+{
+  "cybersecurity": {
+    "meta": {
+      "title": "Cybersecurity: testing, auditing and response",
+      "description": "Penetration testing, code audits, hardening and incident response using OWASP, NIST and PTES. Always with written authorization and an agreed scope."
+    },
+    "hero": {
+      "eyebrow": "Cybersecurity",
+      "title": "We find your weaknesses before someone else does",
+      "lead": "Security testing, code review and incident response based on open methodologies, with authorization, an agreed scope and full transparency."
+    },
+    "authorization": {
+      "eyebrow": "Golden rule",
+      "title": "Every test requires written authorization",
+      "lead": "This is the rule we do not negotiate: for ethical reasons, and because accessing a system without permission is a crime in most countries.",
+      "points": [
+        "Before any test we sign an agreement that defines the assets included, the dates, the allowed techniques and the emergency contacts.",
+        "We only test systems that are yours or that you have the authority to authorize. We turn down requests to test third-party assets.",
+        "If your infrastructure runs on a cloud provider, we also comply with its security testing policies.",
+        "We do not act outside the agreed scope: if we find something relevant beyond it, we tell you without exploiting it."
+      ],
+      "disclosureText": "Found a vulnerability in our own website?",
+      "disclosureLink": "Read our responsible disclosure policy"
+    },
+    "scope": {
+      "eyebrow": "Scope",
+      "title": "What we cover",
+      "lead": "Five services that can be hired separately.",
+      "includesLabel": "Includes",
+      "items": {
+        "pentest": {
+          "title": "Web and API penetration testing",
+          "text": "Manual and automated testing of web applications, APIs and exposed services, following the OWASP testing guide and PTES.",
+          "includes": [
+            "Authentication, sessions and access control",
+            "Injection, XSS, CSRF and business logic flaws",
+            "Server configuration, headers and TLS",
+            "Data and secrets exposure"
+          ]
+        },
+        "codeAudit": {
+          "title": "Code audit",
+          "text": "Review of source code and dependencies to find design and implementation flaws that external testing cannot reach.",
+          "includes": [
+            "Manual review of critical flows",
+            "Static and dependency analysis",
+            "Secrets and configuration management",
+            "Code-level remediation recommendations"
+          ]
+        },
+        "hardening": {
+          "title": "Hardening",
+          "text": "Securing servers, containers, cloud and services: a smaller attack surface, least privilege and secure configuration.",
+          "includes": [
+            "Servers, containers and networks",
+            "Accounts, permissions and secrets",
+            "Logging, monitoring and backups",
+            "Reference to recognized guides such as the CIS Benchmarks"
+          ]
+        },
+        "incident": {
+          "title": "Incident response",
+          "text": "Help to contain, investigate and recover from an incident, and to make sure it does not happen again.",
+          "includes": [
+            "Containment and evidence preservation",
+            "Root cause analysis",
+            "Recovery and communication",
+            "A lessons-learned report"
+          ]
+        },
+        "training": {
+          "title": "Training",
+          "text": "Hands-on training for developers and technical teams, and awareness for the rest of the organization.",
+          "includes": [
+            "Secure development with real examples",
+            "Threat modeling",
+            "Practical workshops on the OWASP Top 10",
+            "Awareness of phishing and social engineering"
+          ]
+        }
+      },
+      "outTitle": "What we do not do",
+      "outItems": [
+        "Testing systems without the owner’s authorization",
+        "Denial-of-service attacks, unless expressly agreed and run in controlled environments",
+        "Social engineering of your staff without written agreement",
+        "Offensive activity against third parties, whatever the reason"
+      ]
+    },
+    "methodologies": {
+      "eyebrow": "Methodologies",
+      "title": "Open standards, not homemade recipes",
+      "lead": "We work with frameworks recognized across the industry so that results are comparable, reproducible and easy to understand.",
+      "items": {
+        "owasp": {
+          "name": "OWASP",
+          "subtitle": "WSTG · ASVS · Top 10",
+          "text": "The reference for web application security testing and requirements. We use the Web Security Testing Guide as our testing guide, the ASVS as the verification criteria and the Top 10 to prioritize the most common risks."
+        },
+        "nist": {
+          "name": "NIST",
+          "subtitle": "SP 800-115 · SP 800-61 · CSF · SSDF",
+          "text": "Guidance for technical security assessment (SP 800-115), incident handling (SP 800-61), risk governance (the Cybersecurity Framework) and secure software development (SSDF)."
+        },
+        "ptes": {
+          "name": "PTES",
+          "subtitle": "Penetration Testing Execution Standard",
+          "text": "A standard that structures a penetration test into seven phases, from pre-engagement to reporting, so that none gets skipped."
+        }
+      },
+      "scoringNote": "We rate findings with CVSS and map them to CWE so you can prioritize and track them with your own tools."
+    },
+    "phases": {
+      "eyebrow": "Phases of a test",
+      "title": "Seven phases, no shortcuts",
+      "lead": "This is how we structure a penetration test, following PTES.",
+      "stepLabel": "Phase {number}",
+      "items": [
+        {
+          "title": "Pre-engagement",
+          "text": "We define the scope, the rules of engagement and the authorization."
+        },
+        {
+          "title": "Intelligence gathering",
+          "text": "We identify assets, technologies and the exposed attack surface."
+        },
+        {
+          "title": "Threat modeling",
+          "text": "We prioritize which assets matter and how they could be attacked."
+        },
+        {
+          "title": "Vulnerability analysis",
+          "text": "We discover and validate weaknesses with tools and manual review."
+        },
+        {
+          "title": "Exploitation",
+          "text": "We demonstrate real impact with the least intrusion necessary, always within scope."
+        },
+        {
+          "title": "Post-exploitation",
+          "text": "We assess how far an attacker could get and remove any trace of our own."
+        },
+        {
+          "title": "Reporting",
+          "text": "We deliver findings, evidence, risk and recommendations your team can act on."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Want to put your defenses to the test?",
+      "lead": "Together we define the scope and we send you a proposal with authorization and clear timelines."
+    }
+  }
+}

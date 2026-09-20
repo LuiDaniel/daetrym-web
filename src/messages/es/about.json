@@ -1,0 +1,74 @@
+{
+  "about": {
+    "meta": {
+      "title": "Nosotros",
+      "description": "Somos un equipo que combina desarrollo de software y ciberseguridad. Conoce nuestra misión, nuestros valores y cómo trabajamos."
+    },
+    "hero": {
+      "eyebrow": "Nosotros",
+      "title": "Ingeniería de software con mentalidad de seguridad",
+      "lead": "Construimos software y lo sometemos a las mismas pruebas que aplicaría un atacante. Creemos que la confianza se gana con hechos verificables."
+    },
+    "story": {
+      "eyebrow": "Por qué existimos",
+      "title": "La seguridad no se añade al final",
+      "paragraphs": [
+        "Demasiado software se construye primero y se protege después. El resultado es conocido: parches de urgencia, brechas evitables y equipos que aprenden de seguridad cuando ya es tarde.",
+        "DaeTrym nace para cambiar ese orden. Diseñamos y desarrollamos con la seguridad como requisito desde el primer día y, por separado, ponemos a prueba sistemas —nuestros o de otros— con criterio independiente.",
+        "Nuestra convicción es sencilla: un software seguro es un software bien pensado, bien construido y bien explicado. Por eso valoramos el código claro, las decisiones documentadas y los informes que cualquiera puede entender."
+      ],
+      "draftNote": "Añade aquí la historia real de la empresa: cuándo y cómo empezó, hitos y aprendizajes. Este texto describe nuestra filosofía, no una cronología."
+    },
+    "mission": {
+      "eyebrow": "Misión y visión",
+      "missionTitle": "Misión",
+      "missionText": "Ayudar a organizaciones de cualquier tamaño a construir y operar software en el que se pueda confiar.",
+      "visionTitle": "Visión",
+      "visionText": "Un ecosistema digital donde la seguridad sea una decisión de diseño y no una reacción a un incidente."
+    },
+    "values": {
+      "eyebrow": "Valores",
+      "title": "Cómo trabajamos",
+      "items": {
+        "security": {
+          "title": "Seguridad como base",
+          "text": "No es una fase ni un extra: forma parte de cada decisión."
+        },
+        "honesty": {
+          "title": "Honestidad técnica",
+          "text": "Decimos lo que sabemos y lo que no. Si algo no es buena idea, lo explicamos."
+        },
+        "clarity": {
+          "title": "Claridad",
+          "text": "Menos jerga, más explicaciones. Un buen informe se entiende sin traductor."
+        },
+        "responsibility": {
+          "title": "Responsabilidad",
+          "text": "Asumimos lo que entregamos y damos la cara por ello."
+        },
+        "ethics": {
+          "title": "Ética",
+          "text": "Solo probamos lo que tenemos autorización para probar y protegemos la información que se nos confía."
+        },
+        "learning": {
+          "title": "Aprendizaje continuo",
+          "text": "El panorama de amenazas cambia; nuestra forma de trabajar también."
+        }
+      }
+    },
+    "team": {
+      "eyebrow": "Equipo",
+      "title": "Las personas detrás de DaeTrym",
+      "lead": "Un equipo pequeño y multidisciplinar que combina desarrollo y seguridad.",
+      "notice": "Equipo de ejemplo: sustituye estos perfiles por los reales en src/config/team.ts."
+    },
+    "social": {
+      "title": "Síguenos",
+      "linkLabel": "{name} de DaeTrym"
+    },
+    "cta": {
+      "title": "¿Hablamos?",
+      "lead": "Cuéntanos tu proyecto o tu duda. Te respondemos personalmente."
+    }
+  }
+}

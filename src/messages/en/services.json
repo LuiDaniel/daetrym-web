@@ -1,0 +1,356 @@
+{
+  "services": {
+    "meta": {
+      "title": "Development and cybersecurity services",
+      "description": "Web application development, custom software, cybersecurity and technical consulting. We build software and check that it holds up."
+    },
+    "eyebrow": "Services",
+    "title": "Development and cybersecurity services",
+    "lead": "We build software and check that it holds up. You can hire each service on its own or combine them in a single project.",
+    "index": {
+      "listTitle": "Our services",
+      "helpTitle": "Not sure what you need?",
+      "helpText": "Tell us about your situation and we will recommend the most sensible place to start, no strings attached."
+    },
+    "detail": {
+      "rootLabel": "Services",
+      "problemEyebrow": "The problem",
+      "solutionEyebrow": "Our solution",
+      "processEyebrow": "How we do it",
+      "processTitle": "A clear process, step by step",
+      "deliverablesEyebrow": "What you get",
+      "deliverablesTitle": "Concrete deliverables",
+      "faqEyebrow": "Frequently asked questions",
+      "faqTitle": "Common questions",
+      "relatedTitle": "Other services",
+      "stepLabel": "Step {number}",
+      "cybersecurityHubLink": "Methodologies, scope and rules of engagement"
+    },
+    "items": {
+      "web-apps": {
+        "name": "Web application development",
+        "summary": "Fast, accessible and secure web applications, designed to grow with you.",
+        "tagline": "Web products that load fast, make sense at first glance and withstand real attacks.",
+        "meta": {
+          "title": "Secure web application development",
+          "description": "We design and build fast, accessible and secure web applications. Clear architecture, OWASP best practices, delivered with source code and documentation."
+        },
+        "problem": {
+          "title": "Shipping fast should not mean shipping fragile",
+          "body": "Many web applications are born in a hurry: getting to production comes first, and security, performance and accessibility are left for “later”. The result is slow products that are hard to maintain and carry vulnerabilities discovered only after they have already cost money or reputation.",
+          "points": [
+            "Performance that gets worse with every new feature",
+            "Unchecked dependencies and accumulated technical debt",
+            "Security flaws found late, or found by someone else",
+            "Interfaces that exclude part of your users"
+          ]
+        },
+        "solution": {
+          "title": "Security, performance and accessibility from the first sprint",
+          "body": "We treat these qualities as requirements, not extras. Every architectural decision is documented and every feature is reviewed against security criteria before it reaches production.",
+          "points": [
+            "Clear, modular architecture with documented decisions",
+            "OWASP best practices (ASVS) built into development",
+            "Measurable performance: Core Web Vitals are an acceptance criterion",
+            "WCAG 2.2 AA accessibility and a design that adapts to any screen",
+            "Continuous integration with automated tests and dependency analysis"
+          ]
+        },
+        "process": [
+          {
+            "title": "Discovery and scope",
+            "text": "We understand the problem, the users and the constraints. We define scope, priorities and success criteria."
+          },
+          {
+            "title": "Design and architecture",
+            "text": "We design the experience and the architecture, and model the most relevant threats before writing code."
+          },
+          {
+            "title": "Iterative development",
+            "text": "We deliver in short cycles with code review, automated tests and demos so you see real progress."
+          },
+          {
+            "title": "Testing and security review",
+            "text": "We verify performance, accessibility and security, dependencies included, before every release."
+          },
+          {
+            "title": "Launch and follow-up",
+            "text": "We deploy with a reproducible process, monitor, and hand the knowledge over to your team."
+          }
+        ],
+        "deliverables": [
+          "Application in production and source code in your repository",
+          "Technical documentation and deployment guide",
+          "Continuous integration and deployment set up",
+          "Test report: functional, performance, accessibility and security",
+          "Handover session with your team"
+        ],
+        "faq": [
+          {
+            "q": "What technologies do you use?",
+            "a": "We choose based on the problem, not on fashion. We usually work with TypeScript, React, Next.js, Node.js and PostgreSQL, and we adapt to your stack when one already exists."
+          },
+          {
+            "q": "Can you take over a project that already exists?",
+            "a": "Yes. We start with a review of the code and the architecture to understand the real state of things, and propose a prioritized improvement plan."
+          },
+          {
+            "q": "How do you guarantee the application is secure?",
+            "a": "We do not promise invulnerable software: nobody can. We reduce risk through secure design, code review, dependency analysis and targeted testing, and we explain which risks are accepted and why."
+          },
+          {
+            "q": "What happens after launch?",
+            "a": "We agree on a stabilization period to fix issues, and we offer maintenance and evolution plans if you need them."
+          }
+        ],
+        "cta": {
+          "title": "Have a web application in mind?",
+          "text": "Tell us what you want to build and we will propose the most sensible path to get there."
+        }
+      },
+      "custom-software": {
+        "name": "Custom software",
+        "summary": "Systems made for how your team works, with code that is yours and clear documentation.",
+        "tagline": "Software that adapts to your business, not the other way around.",
+        "meta": {
+          "title": "Custom software development",
+          "description": "Internal systems, integrations and automation built for you, with security built in, our own code and clear documentation."
+        },
+        "problem": {
+          "title": "Generic tools force you to bend your business around them",
+          "body": "When a process does not fit a standard tool, parallel spreadsheets, manual tasks and duplicated data appear. Over time those patches become fragile, hard to audit and dependent on specific people.",
+          "points": [
+            "Manual processes that eat up hours and cause mistakes",
+            "Information scattered across tools that do not talk to each other",
+            "Dependence on a single vendor or a key person",
+            "Insufficient permissions and traceability for sensitive data"
+          ]
+        },
+        "solution": {
+          "title": "A system designed around the way you work",
+          "body": "We analyze your real processes and build modular software that automates them, integrates with what you already use and can grow without being rewritten.",
+          "points": [
+            "Process analysis and domain modeling before any coding",
+            "Modular architecture and documented APIs to integrate with other systems",
+            "Role-based access control and an audit log from the design stage",
+            "Migration of existing data, with validation and a rollback plan",
+            "Our own code and no vendor lock-in: you can maintain it with us or without us"
+          ]
+        },
+        "process": [
+          {
+            "title": "Process analysis",
+            "text": "We observe how you work today, identify bottlenecks and prioritize what brings the most value."
+          },
+          {
+            "title": "Solution design",
+            "text": "We define the data model, the flows and the architecture, and agree on a phased scope."
+          },
+          {
+            "title": "Delivery in increments",
+            "text": "We build in usable increments so your team can try things early and adjust course."
+          },
+          {
+            "title": "Migration and testing",
+            "text": "We migrate existing data, test with real cases and review security before go-live."
+          },
+          {
+            "title": "Go-live and training",
+            "text": "We deploy, train your users and leave documentation for whoever maintains the system."
+          }
+        ],
+        "deliverables": [
+          "Deployed software and source code with its history",
+          "Functional, technical and operations documentation",
+          "User manual and training sessions",
+          "Backup and recovery plan",
+          "Security review report"
+        ],
+        "faq": [
+          {
+            "q": "How long does custom development take?",
+            "a": "It depends on the scope. That is why we work in phases: the first useful delivery usually arrives in weeks, not months, and the rest is planned from what we learn."
+          },
+          {
+            "q": "Who owns the code?",
+            "a": "You do. The transfer of rights is set out in the contract, and we hand over the source code, the documentation and the access."
+          },
+          {
+            "q": "Can we integrate it with our current tools?",
+            "a": "Usually yes, as long as they offer an API or a reliable export route. We assess it during the analysis phase."
+          },
+          {
+            "q": "What if we need changes later?",
+            "a": "Software changes with the business. We design it to evolve and offer maintenance plans, or you can carry on with your own team thanks to the documentation."
+          }
+        ],
+        "cta": {
+          "title": "A process that fits no existing tool?",
+          "text": "Tell us about it. Sometimes the best answer is a custom system; other times it is a tool that already exists. We will tell you honestly."
+        }
+      },
+      "cybersecurity": {
+        "name": "Cybersecurity",
+        "summary": "Web penetration testing, code audits, hardening, incident response and training.",
+        "tagline": "Check your defenses with people who know how attacks work, and fix things before someone else finds them.",
+        "meta": {
+          "title": "Cybersecurity services",
+          "description": "Web penetration testing, code audits, hardening, incident response and training. OWASP, NIST and PTES methodologies, always with written authorization."
+        },
+        "problem": {
+          "title": "You cannot defend what you do not know is exposed",
+          "body": "Applications change every week, and an attacker only needs one flaw. Without independent testing it is easy to rely on controls that do not work in practice, or to find out about a problem only after an incident.",
+          "points": [
+            "Unknown vulnerabilities in applications and APIs",
+            "Default configurations or excessive permissions on servers and cloud",
+            "Code with security flaws that no review has caught",
+            "Teams without a clear plan for what to do during an incident"
+          ]
+        },
+        "solution": {
+          "title": "Five services covering prevention, detection and response",
+          "body": "Each service can be hired independently. Always with an agreed scope and written authorization.",
+          "points": [
+            "Web and API penetration testing: manual and automated tests following the OWASP testing guide and PTES",
+            "Code audits: review of source code and dependencies to find flaws that external testing cannot see",
+            "Hardening: securing servers, containers, cloud and services based on recognized guides",
+            "Incident response: containment, analysis and recovery, with lessons learned in writing",
+            "Training: hands-on secure development training and awareness for your team"
+          ]
+        },
+        "process": [
+          {
+            "title": "Authorization and scope",
+            "text": "We sign an agreement that defines assets, dates, allowed techniques and emergency contacts. We do not start without this step."
+          },
+          {
+            "title": "Reconnaissance",
+            "text": "We map the attack surface: what is exposed and how it behaves."
+          },
+          {
+            "title": "Testing and validation",
+            "text": "We identify and validate vulnerabilities with the least possible intrusion, without putting your data or your service at risk."
+          },
+          {
+            "title": "Report",
+            "text": "We document every finding with evidence, impact, severity (CVSS) and a remediation recommendation."
+          },
+          {
+            "title": "Remediation and retest",
+            "text": "We support you through remediation and verify that each issue is resolved."
+          }
+        ],
+        "deliverables": [
+          "Executive summary for leadership, in plain language",
+          "Technical report with reproducible evidence and CVSS severity",
+          "Remediation recommendations prioritized by risk",
+          "Results presentation session with your team",
+          "Retest of the vulnerabilities that were fixed"
+        ],
+        "faq": [
+          {
+            "q": "Do you need authorization to run the tests?",
+            "a": "Always. Every test requires written authorization from whoever controls the system. We do not test assets that do not belong to the client, or anything without a prior agreement."
+          },
+          {
+            "q": "Can a penetration test affect my service?",
+            "a": "We work to minimize any impact: agreed techniques, testing windows and an emergency contact. Where possible, we prefer a test environment for the most intrusive actions."
+          },
+          {
+            "q": "How often should we run tests?",
+            "a": "At the very least after major changes and on a regular basis; many organizations do it at least once a year. We help you define the cadence based on your level of risk."
+          },
+          {
+            "q": "Do you help fix what you find?",
+            "a": "Yes. The report includes concrete recommendations, and we can support your team through remediation and then verify it with a retest."
+          },
+          {
+            "q": "How do you handle confidential information?",
+            "a": "We sign a confidentiality agreement, limit access to what is strictly necessary, protect the evidence and delete the data when we finish, as agreed."
+          }
+        ],
+        "cta": {
+          "title": "Want to know what an attacker sees of your application?",
+          "text": "Tell us what you want to protect. Together we define the scope and we send you a proposal with authorization and clear timelines."
+        }
+      },
+      "consulting": {
+        "name": "Technical consulting",
+        "summary": "Expert judgment to decide well: architecture, technology and security.",
+        "tagline": "Technical decisions with independent judgment, before they become expensive to reverse.",
+        "meta": {
+          "title": "Technical and architecture consulting",
+          "description": "Architecture review, technology selection, technical debt assessment and a security roadmap, with independent judgment."
+        },
+        "problem": {
+          "title": "Expensive technical decisions are made early and paid for late",
+          "body": "Choosing an architecture, a vendor or a technology shapes years of cost, risk and speed. Without an expert second opinion it is easy to decide out of habit, fashion or deadline pressure.",
+          "points": [
+            "Doubts between technical alternatives with no clear criteria to choose",
+            "Accumulated technical debt that slows down every new feature",
+            "Security and continuity risks that have not been prioritized",
+            "An overloaded team with no technical lead who can see the big picture"
+          ]
+        },
+        "solution": {
+          "title": "An independent, actionable point of view",
+          "body": "We analyze your situation together with your team and hand you concrete, prioritized and justified recommendations, not generic reports.",
+          "points": [
+            "Architecture and code review to spot risks and bottlenecks",
+            "Technology and vendor selection with explicit criteria",
+            "Technical debt assessment with a prioritized reduction plan",
+            "A security roadmap aligned with frameworks such as NIST CSF and SSDF",
+            "Support for your team as an external technical lead, by the hour or by period"
+          ]
+        },
+        "process": [
+          {
+            "title": "Initial conversation",
+            "text": "We understand the context, the goals and the constraints, and agree on which decision has to be made."
+          },
+          {
+            "title": "Analysis",
+            "text": "We review documentation, architecture and code, and talk to the people who know the system."
+          },
+          {
+            "title": "Recommendations",
+            "text": "We present alternatives with their pros, costs and risks, and our reasoned recommendation."
+          },
+          {
+            "title": "Ongoing support",
+            "text": "If you need it, we help you execute the plan and review the results."
+          }
+        ],
+        "deliverables": [
+          "Assessment report with prioritized findings",
+          "Comparison of alternatives and a justified recommendation",
+          "Roadmap with milestones and estimated effort",
+          "Presentation session with leadership and the technical team",
+          "Follow-up sessions (optional)"
+        ],
+        "faq": [
+          {
+            "q": "What kind of teams is this useful for?",
+            "a": "Product teams, startups and small businesses about to make an important technical decision, or that feel their platform is holding the business back, and want an independent opinion."
+          },
+          {
+            "q": "Do you work with our team or replace it?",
+            "a": "We work with your team. The goal is for you to make better decisions and gain autonomy, not to create dependence."
+          },
+          {
+            "q": "How long does a consulting engagement last?",
+            "a": "A one-off assessment is usually resolved within a few weeks; ongoing support is agreed by period. We define it around what you need."
+          },
+          {
+            "q": "Do you always recommend your own services?",
+            "a": "No. If what you need is an existing tool, or another provider to do the work, we will tell you."
+          }
+        ],
+        "cta": {
+          "title": "A technical decision you want a second opinion on?",
+          "text": "Tell us the context and we will tell you whether we can help, and how."
+        }
+      }
+    }
+  }
+}

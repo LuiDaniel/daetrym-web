@@ -50,7 +50,15 @@ export const viewport: Viewport = {
 };
 
 /** Solo estos espacios de nombres llegan al cliente (el resto se queda en el servidor). */
-const CLIENT_NAMESPACES = ['common', 'nav', 'header', 'menu', 'theme', 'language'] as const;
+const CLIENT_NAMESPACES = [
+  'common',
+  'nav',
+  'header',
+  'menu',
+  'theme',
+  'language',
+  'errors',
+] as const;
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;

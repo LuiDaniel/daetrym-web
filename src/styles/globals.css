@@ -71,6 +71,11 @@
     padding-top: calc(var(--header-height) + clamp(3.5rem, 8vw, 7rem));
   }
 
+  /* Ritmo vertical entre secciones (fluido, en rem: respeta el tamaño de texto del usuario). */
+  .section-y {
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
   /* Skip link (WCAG 2.4.1): invisible hasta recibir foco */
   .skip-link {
     position: fixed;
@@ -99,6 +104,34 @@
     .press:active {
       transform: none;
       opacity: 0.8;
+    }
+  }
+}
+
+/*
+ * Revelado al hacer scroll (apple-design: restricción). Mejora progresiva y sin JavaScript:
+ * solo donde el navegador soporta scroll-driven animations y el usuario no pide menos movimiento.
+ * En el resto, el contenido simplemente está visible. Nunca se aplica al hero (LCP).
+ * `backwards` (no `both`): tras el revelado no queda ningún estilo "congelado" que pise a `.press:active`.
+ * Es una animación ligada al scroll (no a un gesto), por eso se permite CSS en lugar de springs.
+ */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
     }
   }
 }

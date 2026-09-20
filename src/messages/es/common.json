@@ -8,7 +8,17 @@
     "skipToContent": "Saltar al contenido",
     "requestQuote": "Solicitar propuesta",
     "bookCall": "Agendar llamada",
-    "homeLink": "DaeTrym, ir al inicio"
+    "homeLink": "DaeTrym, ir al inicio",
+    "learnMore": "Saber más",
+    "learnMoreAbout": "Saber más sobre {name}",
+    "viewAllServices": "Ver todos los servicios",
+    "example": "Ejemplo",
+    "breadcrumbLabel": "Ruta de navegación",
+    "onThisPage": "En esta página",
+    "lastUpdated": "Última actualización: {date}",
+    "draftNoticeTitle": "Pendiente de revisión",
+    "backToHome": "Volver al inicio",
+    "opensInNewTab": "se abre en una pestaña nueva"
   },
   "nav": {
     "services": "Servicios",
@@ -54,26 +64,9 @@
     "contactTitle": "Contacto",
     "copyright": "© {year} {name}. Todos los derechos reservados."
   },
-  "home": {
-    "hero": {
-      "eyebrow": "Ciberseguridad · Web Apps · Software a medida",
-      "title": "Software seguro, desde el diseño.",
-      "lead": "Construimos aplicaciones web y software a medida, y protegemos lo que construyes: pentesting, auditoría de código y hardening con metodologías abiertas."
-    },
-    "pillars": {
-      "web": {
-        "title": "Aplicaciones web",
-        "description": "Productos rápidos, accesibles y mantenibles, con la seguridad integrada desde la primera línea."
-      },
-      "custom": {
-        "title": "Software a medida",
-        "description": "Sistemas hechos para cómo trabaja tu equipo, con código que es tuyo y documentación clara."
-      },
-      "security": {
-        "title": "Ciberseguridad",
-        "description": "Pruebas de penetración, revisión de código y endurecimiento, siempre con autorización por escrito."
-      }
-    }
+  "comingSoon": {
+    "eyebrow": "En construcción",
+    "description": "Esta sección estará disponible muy pronto. Mientras tanto, escríbenos a {email} y te responderemos personalmente."
   },
   "maintenance": {
     "title": "Volvemos enseguida",

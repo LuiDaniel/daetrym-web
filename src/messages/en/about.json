@@ -1,0 +1,74 @@
+{
+  "about": {
+    "meta": {
+      "title": "About us",
+      "description": "We are a team that combines software development and cybersecurity. Learn about our mission, our values and how we work."
+    },
+    "hero": {
+      "eyebrow": "About us",
+      "title": "Software engineering with a security mindset",
+      "lead": "We build software and subject it to the same tests an attacker would apply. We believe trust is earned through verifiable facts."
+    },
+    "story": {
+      "eyebrow": "Why we exist",
+      "title": "Security is not something you add at the end",
+      "paragraphs": [
+        "Too much software is built first and protected later. The outcome is familiar: emergency patches, avoidable breaches and teams that learn about security when it is already too late.",
+        "DaeTrym was born to change that order. We design and build with security as a requirement from day one and, separately, we test systems — ours or other people’s — with independent judgment.",
+        "Our conviction is simple: secure software is software that is well thought out, well built and well explained. That is why we value clear code, documented decisions and reports that anyone can understand."
+      ],
+      "draftNote": "Add the company’s real story here: when and how it started, milestones and lessons learned. This text describes our philosophy, not a timeline."
+    },
+    "mission": {
+      "eyebrow": "Mission and vision",
+      "missionTitle": "Mission",
+      "missionText": "To help organizations of any size build and run software that can be trusted.",
+      "visionTitle": "Vision",
+      "visionText": "A digital ecosystem where security is a design decision, not a reaction to an incident."
+    },
+    "values": {
+      "eyebrow": "Values",
+      "title": "How we work",
+      "items": {
+        "security": {
+          "title": "Security as a foundation",
+          "text": "It is not a phase or an extra: it is part of every decision."
+        },
+        "honesty": {
+          "title": "Technical honesty",
+          "text": "We say what we know and what we do not. If something is a bad idea, we explain why."
+        },
+        "clarity": {
+          "title": "Clarity",
+          "text": "Less jargon, more explanation. A good report can be understood without a translator."
+        },
+        "responsibility": {
+          "title": "Responsibility",
+          "text": "We stand behind what we deliver and answer for it."
+        },
+        "ethics": {
+          "title": "Ethics",
+          "text": "We only test what we are authorized to test and we protect the information entrusted to us."
+        },
+        "learning": {
+          "title": "Continuous learning",
+          "text": "The threat landscape changes; so does the way we work."
+        }
+      }
+    },
+    "team": {
+      "eyebrow": "Team",
+      "title": "The people behind DaeTrym",
+      "lead": "A small, multidisciplinary team that combines development and security.",
+      "notice": "Example team: replace these profiles with the real ones in src/config/team.ts."
+    },
+    "social": {
+      "title": "Follow us",
+      "linkLabel": "DaeTrym on {name}"
+    },
+    "cta": {
+      "title": "Shall we talk?",
+      "lead": "Tell us about your project or your question. We reply personally."
+    }
+  }
+}

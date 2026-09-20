@@ -1,0 +1,400 @@
+{
+  "legal": {
+    "draft": {
+      "title": "Plantilla pendiente de revisión legal",
+      "body": "Este documento es una plantilla genérica y no constituye asesoramiento legal. Debe ser revisado y adaptado por un abogado antes de publicarse. Los textos marcados con «[COMPLETAR: …]» requieren datos propios de la empresa."
+    },
+    "privacy": {
+      "meta": {
+        "title": "Política de privacidad",
+        "description": "Cómo tratamos tus datos personales: qué recogemos, para qué, con quién los compartimos, cuánto tiempo los conservamos y cuáles son tus derechos."
+      },
+      "title": "Política de privacidad",
+      "intro": "Esta política explica, de forma clara, qué datos personales tratamos cuando usas este sitio, para qué los usamos y qué derechos tienes.",
+      "sections": [
+        {
+          "id": "responsable",
+          "title": "Responsable del tratamiento",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "El responsable del tratamiento de los datos personales recogidos en este sitio es {legalName}."
+            },
+            {
+              "type": "p",
+              "text": "[COMPLETAR: domicilio social, número de identificación fiscal y datos de inscripción registral]"
+            },
+            {
+              "type": "p",
+              "text": "Puedes contactar con nosotros en [{email}](mailto:{email})."
+            }
+          ]
+        },
+        {
+          "id": "datos",
+          "title": "Qué datos recogemos",
+          "blocks": [
+            {
+              "type": "ul",
+              "items": [
+                "Formulario de contacto: nombre, correo electrónico, empresa (opcional), asunto y mensaje.",
+                "Solicitud de propuesta: datos de contacto y la información que nos facilites sobre tu proyecto (tipo de proyecto, servicios, presupuesto, plazo y descripción).",
+                "Boletín, recursos descargables y lista de espera: correo electrónico, idioma e intereses. Solo enviamos comunicaciones tras confirmar tu suscripción (doble confirmación).",
+                "Datos técnicos para seguridad y prevención de abuso: una huella (hash) irreversible de la dirección IP, calculada con una clave secreta, y una versión abreviada del agente de usuario. No almacenamos la dirección IP en claro.",
+                "Estadísticas de uso agregadas, mediante una herramienta de analítica que no utiliza cookies ni identifica a usuarios individuales."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "No recogemos categorías especiales de datos personales. Te pedimos que no las incluyas en tus mensajes."
+            }
+          ]
+        },
+        {
+          "id": "finalidades",
+          "title": "Para qué usamos tus datos y con qué base",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Finalidades y bases jurídicas del tratamiento",
+              "headers": ["Finalidad", "Base jurídica"],
+              "rows": [
+                [
+                  "Responder a tus consultas y preparar propuestas",
+                  "Medidas precontractuales y consentimiento"
+                ],
+                [
+                  "Enviarte el boletín, los recursos y los avisos de la lista de espera",
+                  "Consentimiento, con doble confirmación"
+                ],
+                ["Proteger el sitio frente al spam y el abuso", "Interés legítimo"],
+                ["Mejorar el sitio con estadísticas agregadas", "Interés legítimo"],
+                ["Cumplir nuestras obligaciones legales", "Obligación legal"]
+              ]
+            },
+            {
+              "type": "p",
+              "text": "[COMPLETAR: adaptar las bases jurídicas a la normativa de protección de datos aplicable]"
+            }
+          ]
+        },
+        {
+          "id": "destinatarios",
+          "title": "Con quién compartimos los datos",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "No vendemos tus datos. Los compartimos únicamente con proveedores que nos prestan servicio y actúan como encargados del tratamiento:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Vercel: alojamiento del sitio.",
+                "Neon: base de datos.",
+                "Resend: envío de correos electrónicos.",
+                "Upstash: limitación de peticiones para prevenir abusos.",
+                "Cloudflare (Turnstile): verificación anti-spam en los formularios.",
+                "[COMPLETAR: proveedor de analítica y, si se utiliza, de agenda (por ejemplo, Cal.com)]"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Algunos de estos proveedores pueden tratar datos fuera de tu país o del Espacio Económico Europeo. [COMPLETAR: describir las garantías aplicables a las transferencias internacionales]"
+            }
+          ]
+        },
+        {
+          "id": "conservacion",
+          "title": "Cuánto tiempo conservamos los datos",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Plazos de conservación",
+              "headers": ["Dato", "Plazo"],
+              "rows": [
+                [
+                  "Mensajes de contacto y solicitudes de propuesta",
+                  "24 meses desde la última actividad"
+                ],
+                ["Suscripciones pendientes de confirmar", "7 días"],
+                ["Mensajes marcados como spam", "30 días"],
+                ["Bajas del boletín", "Solo lo mínimo imprescindible para no volver a escribirte"]
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Al vencer estos plazos, los datos se eliminan de forma automática."
+            }
+          ]
+        },
+        {
+          "id": "derechos",
+          "title": "Tus derechos",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar tu consentimiento en cualquier momento, escribiendo a [{email}](mailto:{email}). Responderemos en los plazos que establezca la ley."
+            },
+            {
+              "type": "p",
+              "text": "Si consideras que no hemos tratado tus datos correctamente, puedes reclamar ante la autoridad de protección de datos competente. [COMPLETAR: indicar la autoridad de control aplicable]"
+            }
+          ]
+        },
+        {
+          "id": "seguridad",
+          "title": "Cómo protegemos tus datos",
+          "blocks": [
+            {
+              "type": "ul",
+              "items": [
+                "Conexiones cifradas (HTTPS) y cabeceras de seguridad estrictas.",
+                "Validación de todos los datos en el servidor y consultas parametrizadas.",
+                "Minimización: solo pedimos lo necesario.",
+                "Acceso restringido y secretos fuera del código fuente."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Ningún sistema es infalible. Si detectáramos una brecha que te afecte, te lo comunicaremos conforme a la ley."
+            }
+          ]
+        },
+        {
+          "id": "menores",
+          "title": "Menores de edad",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Este sitio está dirigido a profesionales y organizaciones. No recogemos datos de menores de forma intencionada."
+            }
+          ]
+        },
+        {
+          "id": "cambios",
+          "title": "Cambios en esta política",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Publicaremos aquí cualquier modificación y actualizaremos la fecha de la última revisión. Te recomendamos consultarla periódicamente."
+            }
+          ]
+        },
+        {
+          "id": "contacto",
+          "title": "Contacto",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Para cualquier duda sobre privacidad, escríbenos a [{email}](mailto:{email}). Para más información sobre el almacenamiento en tu dispositivo, consulta la [política de cookies](/legal/cookies)."
+            }
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "meta": {
+        "title": "Términos de uso",
+        "description": "Condiciones que rigen el uso de este sitio web: uso permitido, propiedad intelectual, responsabilidad y legislación aplicable."
+      },
+      "title": "Términos de uso",
+      "intro": "Estos términos regulan el acceso y el uso de este sitio web. Te pedimos que los leas antes de utilizarlo.",
+      "sections": [
+        {
+          "id": "aceptacion",
+          "title": "Aceptación",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Al acceder y utilizar este sitio aceptas estos términos. Si no estás de acuerdo con ellos, te pedimos que no lo utilices."
+            }
+          ]
+        },
+        {
+          "id": "servicios",
+          "title": "Información sobre nuestros servicios",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "El contenido de este sitio es meramente informativo. Las propuestas que te enviemos no son vinculantes hasta que ambas partes firmen un contrato específico, que prevalecerá sobre estos términos en lo relativo a la prestación del servicio."
+            }
+          ]
+        },
+        {
+          "id": "uso",
+          "title": "Uso permitido",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Te comprometes a utilizar el sitio de forma lícita y a no:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Intentar acceder sin autorización a sistemas, cuentas o datos.",
+                "Interferir con el funcionamiento del sitio, por ejemplo con ataques de denegación de servicio o con el envío masivo de peticiones.",
+                "Usar el sitio para enviar spam o contenido ilícito.",
+                "Realizar pruebas de seguridad que no se ajusten a nuestra [política de divulgación responsable](/security)."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "propiedad",
+          "title": "Propiedad intelectual",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Los textos, diseños, logotipos, código y demás contenidos del sitio son propiedad de {legalName} o se utilizan bajo licencia, y están protegidos por la normativa de propiedad intelectual. Puedes compartir enlaces al sitio; para cualquier otro uso necesitamos tu autorización previa."
+            }
+          ]
+        },
+        {
+          "id": "contenido",
+          "title": "Contenido del blog y de los recursos",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Los artículos y recursos son orientativos y no constituyen asesoramiento profesional para tu caso concreto. Aunque nos esforzamos por que sean rigurosos, no garantizamos que estén libres de errores ni que se mantengan actualizados."
+            }
+          ]
+        },
+        {
+          "id": "enlaces",
+          "title": "Enlaces a terceros",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "El sitio puede enlazar a páginas de terceros. No controlamos su contenido ni sus políticas y no somos responsables de ellas."
+            }
+          ]
+        },
+        {
+          "id": "responsabilidad",
+          "title": "Limitación de responsabilidad",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "En la medida en que la ley lo permita, {legalName} no será responsable de los daños indirectos derivados del uso del sitio. [COMPLETAR: revisar y adaptar esta cláusula a la legislación aplicable]"
+            }
+          ]
+        },
+        {
+          "id": "legislacion",
+          "title": "Legislación aplicable",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "[COMPLETAR: indicar la legislación aplicable y los tribunales competentes]"
+            }
+          ]
+        },
+        {
+          "id": "cambios",
+          "title": "Cambios",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Podemos actualizar estos términos. La versión vigente será siempre la publicada en esta página."
+            }
+          ]
+        },
+        {
+          "id": "contacto",
+          "title": "Contacto",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Si tienes preguntas sobre estos términos, escríbenos a [{email}](mailto:{email})."
+            }
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "meta": {
+        "title": "Política de cookies",
+        "description": "Qué cookies y almacenamiento local utiliza este sitio, para qué sirven y cómo puedes gestionarlos."
+      },
+      "title": "Política de cookies",
+      "intro": "Este sitio utiliza únicamente lo imprescindible para funcionar y recordar tus preferencias. Aquí te explicamos qué es y cómo gestionarlo.",
+      "sections": [
+        {
+          "id": "que-son",
+          "title": "Qué son las cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Las cookies y las tecnologías similares, como el almacenamiento local del navegador, guardan pequeñas cantidades de información en tu dispositivo."
+            }
+          ]
+        },
+        {
+          "id": "que-usamos",
+          "title": "Qué utilizamos",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Cookies y almacenamiento utilizados en este sitio",
+              "headers": ["Nombre", "Tipo", "Finalidad", "Duración"],
+              "rows": [
+                [
+                  "NEXT_LOCALE",
+                  "Cookie propia · preferencia",
+                  "Recuerda el idioma que has elegido.",
+                  "1 año"
+                ],
+                [
+                  "daetrym-theme",
+                  "Almacenamiento local · preferencia",
+                  "Recuerda si prefieres el modo claro o el oscuro.",
+                  "Hasta que lo borres"
+                ],
+                [
+                  "Cloudflare Turnstile",
+                  "Tercero · seguridad",
+                  "Verifica que quien envía un formulario es una persona. Solo se carga en las páginas con formularios.",
+                  "Según Cloudflare [COMPLETAR: confirmar]"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "que-no-usamos",
+          "title": "Lo que no utilizamos",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "No utilizamos cookies publicitarias, de seguimiento ni de análisis que identifiquen a usuarios. Nuestras estadísticas de uso se recogen de forma agregada y sin cookies. Por eso no mostramos un banner de consentimiento."
+            },
+            {
+              "type": "p",
+              "text": "Si en el futuro incorporáramos cookies no esenciales, pediremos tu consentimiento antes de usarlas. [COMPLETAR: validar con asesoría legal que las cookies de preferencia están exentas de consentimiento en tu jurisdicción]"
+            }
+          ]
+        },
+        {
+          "id": "gestion",
+          "title": "Cómo gestionar o eliminar las cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Puedes bloquear o borrar las cookies desde la configuración de tu navegador. Si lo haces, el sitio seguirá funcionando, pero tendrás que volver a elegir tu idioma y tu tema en cada visita."
+            }
+          ]
+        },
+        {
+          "id": "cambios",
+          "title": "Cambios en esta política",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Actualizaremos esta página si cambian las tecnologías que utilizamos. Para más información sobre el tratamiento de tus datos, consulta la [política de privacidad](/legal/privacy)."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -46,6 +46,31 @@ for (const theme of ['dark', 'light'] as const) {
     check(theme, `--danger sobre ${bg}`, color(theme, '--danger'), color(theme, bg), TEXT);
   }
 
+  // Avisos (contenido de ejemplo) y tinte de acento: el fondo es translúcido, así que se compone
+  // sobre cada superficie donde puede aparecer.
+  for (const surfaceName of surfaces) {
+    const surface = color(theme, surfaceName);
+    const warningBg = composite(color(theme, '--warning-bg'), surface);
+    check(theme, `--warning sobre ${surfaceName}`, color(theme, '--warning'), surface, TEXT);
+    check(
+      theme,
+      `--warning sobre --warning-bg / ${surfaceName}`,
+      color(theme, '--warning'),
+      warningBg,
+      TEXT,
+    );
+    check(theme, `--fg sobre --warning-bg / ${surfaceName}`, color(theme, '--fg'), warningBg, TEXT);
+
+    const tint = composite(color(theme, '--accent-tint'), surface);
+    check(
+      theme,
+      `--accent-text sobre --accent-tint / ${surfaceName}`,
+      color(theme, '--accent-text'),
+      tint,
+      TEXT,
+    );
+  }
+
   // Texto sobre botones de acento
   for (const bg of ['--accent', '--accent-hover', '--accent-pressed']) {
     check(theme, `--on-accent sobre ${bg}`, color(theme, '--on-accent'), color(theme, bg), TEXT);

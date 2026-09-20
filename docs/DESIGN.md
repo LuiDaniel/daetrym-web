@@ -18,7 +18,7 @@ Este documento explica **dónde vive cada decisión** para mantener la coherenci
 | Base global, foco, skip-link, `.press`, `.page-top`   | `src/styles/globals.css`    |
 
 `tests/unit/tokens.test.ts` comprueba que lo duplicado entre CSS y TS (`--press-scale`) no diverja.
-`pnpm check:contrast` valida WCAG AA sobre los tokens (82 pares, incluidos los materiales).
+`pnpm check:contrast` valida WCAG AA sobre los tokens (114 pares, incluidos los materiales, el aviso ámbar y el tinte de acento).
 
 ## Color
 
@@ -41,7 +41,7 @@ consistencia entre Windows/Android/iOS; es fácil de revertir en `src/app/fonts.
 
 El tracking **nunca es un valor fijo**: los títulos grandes van con tracking negativo y leading
 ajustado; el cuerpo, ~0; el texto pequeño, ligeramente positivo. Usar las utilidades
-`text-display | h1 | h2 | h3 | lead | body | small | label` (no `text-lg`, etc.). Todo en `rem`/`clamp`,
+`text-display | h1 | h2 | h3 | title | lead | body | small | label | eyebrow` (no `text-lg`, etc.). Todo en `rem`/`clamp`,
 así que respeta el tamaño de texto del usuario.
 
 `src/lib/cn.ts` registra estas utilidades en `tailwind-merge`. Sin eso, `text-small` se interpreta como
@@ -111,3 +111,21 @@ conserva opacidad/color. Todo gesto tiene alternativa de teclado.
   un dispositivo real (Safari iOS usa el prefijo `-webkit-`, ya incluido).
 - Las transiciones de _salida_ entre páginas quedan para la Fase 5 (View Transitions como mejora
   progresiva); hoy no hay transición de página.
+
+## Fase 2: secciones, tarjetas y contenido
+
+**Ritmo.** `.section-y` (fluido, 3.5–6 rem) separa secciones. Se alternan fondo normal y `tone="raised"` (banda `surface-1`) en lugar de líneas o sombras: la jerarquía viene de la superficie, no de decoración.
+
+**Tarjetas = superficies sólidas.** Los materiales translúcidos se reservan para el chrome flotante (header, sheet, controles). Una tarjeta sobre una banda `raised` usa `bg-surface-2`. Una tarjeta enlazable (`ServiceCard`) usa el patrón de **enlace extendido**: el enlace es solo el título (nombre corto para lectores de pantalla) y su `::after` cubre la tarjeta; respuesta en pointer-down (`.press`) y anillo de foco alrededor de toda la tarjeta.
+
+**Verde con restricción.** Aparece en: CTA primario, sobretítulos (`Eyebrow`), iconos sobre tinte, marcas de verificación y enlaces. Los datos de ejemplo usan **ámbar** (`--warning`), un color distinto para que nunca se confundan con contenido definitivo.
+
+**Revelado al hacer scroll (`.reveal`).** CSS puro (`animation-timeline: view()`), sin JavaScript, solo donde el navegador lo soporta y sin `prefers-reduced-motion`; en el resto el contenido simplemente está visible. Nunca en el hero (es el LCP) ni en bloques altos (el fundido duraría demasiado scroll). Usa `fill-mode: backwards`: con `both` el último fotograma quedaría fijado y pisaría `.press:active`.
+
+**FAQ (`Faq`).** La altura se anima con un spring (interrumpible: pulsar a mitad de apertura parte de la altura actual). La respuesta cerrada es `inert`. Con reduced motion la altura cambia al instante y solo se funde la opacidad.
+
+**Header y breakpoints.** El header completo aparece desde 1024 px (`lg`); por debajo, el sheet lateral (móvil y tablet). Las rejillas de tarjetas pasan de 1 a 2 columnas a 640 px (`sm`) y a 3–4 a 1024 px.
+
+**Documentos largos (`LegalDocument`).** Sin animaciones: índice fijo en escritorio, tablas que en móvil pasan a tarjetas con la cabecera como etiqueta (sin scroll horizontal), y los datos pendientes resaltados con `<mark>`.
+
+**Hero.** `SecurityLayers` ilustra "seguridad por capas" (diseño → código → infraestructura → operación) con SVG estático y decorativo; el mismo mensaje está en el texto.

@@ -3,9 +3,9 @@
 Sitio bilingüe (ES/EN) de **DaeTrym / DAETRYM Systems**: ciberseguridad y desarrollo de software.
 Next.js (App Router) + React + TypeScript estricto + Tailwind CSS v4, desplegable en Vercel.
 
-> Estado: **Fase 1 de 6** (base, sistema de diseño, layout, seguridad de cabeceras). Ver el checklist en
-> [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Las páginas de contenido llegan en las fases 2 y 3;
-> hasta entonces los enlaces del menú a esas rutas devuelven 404.
+> Estado: **Fase 2 de 6** (contenido estático: Home, Servicios, Ciberseguridad, Nosotros, Proceso, legales,
+> política de divulgación, `security.txt` y 404). Ver el checklist en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+> Contacto, propuesta, proyectos, blog y recursos son páginas «en construcción» hasta las fases 3 y 4.
 
 ## Requisitos
 
@@ -48,10 +48,19 @@ faltar una obligatoria **rompe la build**. Solo las `NEXT_PUBLIC_*` llegan al na
 ```
 src/app/[locale]/…     páginas (localizadas)        src/styles/     tokens, tipografía, materiales, motion
 src/components/        ui · layout · motion         src/config/     datos de marca (única fuente)
-src/i18n/              routing y navegación         src/messages/   textos ES/EN (cero texto en componentes)
+src/i18n/              routing y navegación         src/messages/   textos ES/EN, un fichero por área
 src/lib/security/      CSP y cabeceras              src/proxy.ts    idioma + CSP con nonce + mantenimiento
 docs/                  ARCHITECTURE · DESIGN        tests/          unit (Vitest) · e2e (Playwright)
 ```
+
+## Contenido y textos pendientes
+
+Todo lo que es **ejemplo o está pendiente** está marcado y se lista con `pnpm check:placeholders`:
+
+- **Equipo, proyectos, redes, stack** → `src/config/*.ts` (`placeholder: true`, distintivo «Ejemplo» en pantalla).
+- **Datos legales** → los textos de `src/messages/<locale>/legal.json` y `security.json` llevan marcadores `[COMPLETAR: …]` (ES) / `[COMPLETE: …]` (EN), resaltados en ámbar.
+- **Avisos de borrador** en las páginas legales → se ocultan con `draftNotices: false` en `src/config/site.ts` cuando estén revisadas por un abogado.
+- No hay cifras, clientes ni testimonios inventados; no los añadas sin marcarlos como ejemplo.
 
 ## Cómo…
 
@@ -61,6 +70,8 @@ docs/                  ARCHITECTURE · DESIGN        tests/          unit (Vites
   `src/messages/<locale>.json` y ejecutar `pnpm check:i18n`. Con más de 3 idiomas, cambiar el selector
   segmentado por un popover.
 - **Activar modo mantenimiento:** `MAINTENANCE_MODE=true` (503 con `Retry-After` en todo el sitio).
+- **Añadir un servicio:** añadir el slug en `src/config/services.ts` y su contenido (`services.items.<slug>`, con la misma forma que los existentes) en **ambos** idiomas; `pnpm test` valida el esquema.
+- **Editar un texto largo (legal, servicios):** en `src/messages/<locale>/*.json`; los enlaces usan `[texto](/ruta)` y los datos de la empresa `{legalName}`, `{email}`, `{securityEmail}`.
 - **Añadir un post/proyecto:** llega en la Fase 3.
 
 ## Seguridad

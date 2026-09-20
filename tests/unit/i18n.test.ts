@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import en from '@/messages/en.json';
-import es from '@/messages/es.json';
+import en from '@/messages/en/index';
+import es from '@/messages/es/index';
 import { footerNav, mainNav } from '@/config/navigation';
 import { routing } from '@/i18n/routing';
 

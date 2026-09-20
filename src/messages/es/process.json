@@ -1,0 +1,110 @@
+{
+  "process": {
+    "meta": {
+      "title": "Proceso de trabajo",
+      "description": "De la idea al soporte en seis etapas con entregables definidos: descubrimiento, diseño, desarrollo, pruebas y seguridad, entrega y soporte."
+    },
+    "hero": {
+      "eyebrow": "Proceso de trabajo",
+      "title": "Un proceso claro, de la idea al soporte",
+      "lead": "Seis etapas con entregables definidos, comunicación frecuente y seguridad presente desde el principio. Los tiempos son orientativos: dependen del alcance de cada proyecto."
+    },
+    "labels": {
+      "stagesTitle": "Etapas del proceso",
+      "step": "Etapa {number}",
+      "duration": "Duración orientativa",
+      "outputs": "Entregables"
+    },
+    "steps": {
+      "discovery": {
+        "title": "Descubrimiento",
+        "summary": "Entendemos el problema antes de proponer una solución.",
+        "description": "Conversamos con las personas implicadas para entender objetivos, usuarios, restricciones y riesgos. Revisamos lo que ya existe y acordamos el alcance, las prioridades y cómo mediremos el éxito.",
+        "duration": "1–2 semanas",
+        "outputs": [
+          "Alcance y prioridades acordados",
+          "Mapa de riesgos inicial",
+          "Propuesta con plazos e inversión"
+        ]
+      },
+      "design": {
+        "title": "Diseño",
+        "summary": "Diseñamos la experiencia y la arquitectura con la seguridad sobre la mesa.",
+        "description": "Definimos flujos, interfaz y arquitectura, y hacemos un modelado de amenazas para decidir qué controles necesita el sistema antes de escribir una línea de código.",
+        "duration": "2–3 semanas",
+        "outputs": [
+          "Prototipo o diseño de la interfaz",
+          "Arquitectura y decisiones documentadas",
+          "Modelo de amenazas"
+        ]
+      },
+      "development": {
+        "title": "Desarrollo",
+        "summary": "Construimos en ciclos cortos, con revisiones y pruebas continuas.",
+        "description": "Trabajamos en iteraciones de dos semanas con una demostración al final de cada una. Todo el código pasa por revisión y por pruebas automáticas, y las dependencias se vigilan de forma continua.",
+        "duration": "4–12 semanas, según el alcance",
+        "outputs": [
+          "Incrementos funcionales cada dos semanas",
+          "Código revisado y con pruebas",
+          "Tablero de avance siempre visible"
+        ]
+      },
+      "security": {
+        "title": "Pruebas y seguridad",
+        "summary": "Verificamos que funciona, que es rápido y que resiste.",
+        "description": "Antes de cada lanzamiento validamos funcionalidad, rendimiento, accesibilidad y seguridad. Cuando el proyecto lo requiere, realizamos pruebas de penetración con el alcance y la autorización que hayamos pactado.",
+        "duration": "1–2 semanas, además de las pruebas continuas",
+        "outputs": [
+          "Informe de pruebas",
+          "Vulnerabilidades corregidas y verificadas",
+          "Lista de riesgos aceptados, si los hay"
+        ]
+      },
+      "delivery": {
+        "title": "Entrega",
+        "summary": "Desplegamos y traspasamos el conocimiento.",
+        "description": "Ponemos el sistema en producción con un proceso reproducible y lo entregamos con su documentación. Formamos a tu equipo para que pueda operar y evolucionar la solución.",
+        "duration": "1 semana",
+        "outputs": [
+          "Sistema en producción",
+          "Código fuente y documentación",
+          "Formación y traspaso"
+        ]
+      },
+      "support": {
+        "title": "Soporte",
+        "summary": "Seguimos a tu lado después del lanzamiento.",
+        "description": "Tras la entrega acordamos un periodo de estabilización para corregir incidencias. Después puedes optar por un plan de mantenimiento, monitorización y mejora continua.",
+        "duration": "Continuo",
+        "outputs": [
+          "Corrección de incidencias",
+          "Actualizaciones y parches de seguridad",
+          "Evolución según tus prioridades"
+        ]
+      }
+    },
+    "collaboration": {
+      "eyebrow": "Cómo colaboramos",
+      "title": "Transparencia en cada etapa",
+      "items": {
+        "cadence": {
+          "title": "Ritmo constante",
+          "text": "Iteraciones de dos semanas con una demostración al final de cada una."
+        },
+        "channel": {
+          "title": "Canal directo",
+          "text": "Hablas con quienes construyen tu proyecto, sin intermediarios."
+        },
+        "visibility": {
+          "title": "Todo a la vista",
+          "text": "Tablero de tareas, decisiones documentadas y riesgos visibles para ti."
+        }
+      },
+      "note": "Los tiempos indicados son orientativos y se confirman en la propuesta."
+    },
+    "cta": {
+      "title": "¿Empezamos por el descubrimiento?",
+      "lead": "Cuéntanos tu proyecto y en pocos días tendrás una propuesta con alcance, plazos e inversión."
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "process": {
+    "meta": {
+      "title": "How we work",
+      "description": "From idea to support in six stages with defined deliverables: discovery, design, development, testing and security, delivery and support."
+    },
+    "hero": {
+      "eyebrow": "How we work",
+      "title": "A clear process, from idea to support",
+      "lead": "Six stages with defined deliverables, frequent communication and security present from the start. Timelines are indicative: they depend on the scope of each project."
+    },
+    "labels": {
+      "stagesTitle": "Process stages",
+      "step": "Stage {number}",
+      "duration": "Estimated duration",
+      "outputs": "Deliverables"
+    },
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "summary": "We understand the problem before proposing a solution.",
+        "description": "We talk with the people involved to understand goals, users, constraints and risks. We review what already exists and agree on scope, priorities and how success will be measured.",
+        "duration": "1–2 weeks",
+        "outputs": [
+          "Agreed scope and priorities",
+          "Initial risk map",
+          "Proposal with timelines and investment"
+        ]
+      },
+      "design": {
+        "title": "Design",
+        "summary": "We design the experience and the architecture with security on the table.",
+        "description": "We define flows, interface and architecture, and run a threat model to decide which controls the system needs before a single line of code is written.",
+        "duration": "2–3 weeks",
+        "outputs": [
+          "Prototype or interface design",
+          "Documented architecture and decisions",
+          "Threat model"
+        ]
+      },
+      "development": {
+        "title": "Development",
+        "summary": "We build in short cycles, with continuous review and testing.",
+        "description": "We work in two-week iterations with a demo at the end of each one. All code goes through review and automated testing, and dependencies are monitored continuously.",
+        "duration": "4–12 weeks, depending on scope",
+        "outputs": [
+          "Working increments every two weeks",
+          "Reviewed, tested code",
+          "An always-visible progress board"
+        ]
+      },
+      "security": {
+        "title": "Testing and security",
+        "summary": "We verify that it works, that it is fast and that it holds up.",
+        "description": "Before every release we validate functionality, performance, accessibility and security. When the project calls for it, we run penetration tests within the scope and authorization we have agreed.",
+        "duration": "1–2 weeks, on top of continuous testing",
+        "outputs": [
+          "Test report",
+          "Vulnerabilities fixed and verified",
+          "List of accepted risks, if any"
+        ]
+      },
+      "delivery": {
+        "title": "Delivery",
+        "summary": "We deploy and hand the knowledge over.",
+        "description": "We put the system into production through a reproducible process and deliver it with its documentation. We train your team so that it can operate and evolve the solution.",
+        "duration": "1 week",
+        "outputs": [
+          "System in production",
+          "Source code and documentation",
+          "Training and handover"
+        ]
+      },
+      "support": {
+        "title": "Support",
+        "summary": "We stay by your side after launch.",
+        "description": "After delivery we agree on a stabilization period to fix issues. Afterwards you can opt for a plan of maintenance, monitoring and continuous improvement.",
+        "duration": "Ongoing",
+        "outputs": [
+          "Issue resolution",
+          "Security updates and patches",
+          "Evolution according to your priorities"
+        ]
+      }
+    },
+    "collaboration": {
+      "eyebrow": "How we collaborate",
+      "title": "Transparency at every stage",
+      "items": {
+        "cadence": {
+          "title": "Steady rhythm",
+          "text": "Two-week iterations with a demo at the end of each one."
+        },
+        "channel": {
+          "title": "Direct channel",
+          "text": "You talk to the people building your project, with no middlemen."
+        },
+        "visibility": {
+          "title": "Everything in view",
+          "text": "Task board, documented decisions and risks visible to you."
+        }
+      },
+      "note": "The timelines shown are indicative and are confirmed in the proposal."
+    },
+    "cta": {
+      "title": "Shall we start with discovery?",
+      "lead": "Tell us about your project and within a few days you will have a proposal with scope, timelines and investment."
+    }
+  }
+}

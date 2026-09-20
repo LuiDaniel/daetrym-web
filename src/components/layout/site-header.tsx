@@ -20,7 +20,7 @@ export function SiteHeader() {
       <div className="container-page relative flex h-full items-center justify-between gap-4">
         <Logo />
 
-        <nav aria-label={t('header.mainNavLabel')} className="hidden md:block">
+        <nav aria-label={t('header.mainNavLabel')} className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {mainNav.map((item) => (
               <li key={item.key}>
@@ -31,7 +31,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>

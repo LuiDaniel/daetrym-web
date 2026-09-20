@@ -1,0 +1,154 @@
+{
+  "cybersecurity": {
+    "meta": {
+      "title": "Ciberseguridad: pruebas, auditoría y respuesta",
+      "description": "Pruebas de penetración, auditoría de código, hardening y respuesta a incidentes con OWASP, NIST y PTES. Siempre con autorización por escrito y alcance acordado."
+    },
+    "hero": {
+      "eyebrow": "Ciberseguridad",
+      "title": "Encontramos tus debilidades antes de que lo haga otro",
+      "lead": "Pruebas de seguridad, revisión de código y respuesta a incidentes basadas en metodologías abiertas, con autorización, alcance acordado y total transparencia."
+    },
+    "authorization": {
+      "eyebrow": "Regla de oro",
+      "title": "Toda prueba requiere autorización por escrito",
+      "lead": "Es la regla que no negociamos: por ética y porque acceder a un sistema sin permiso es delito en la mayoría de los países.",
+      "points": [
+        "Antes de cualquier prueba firmamos un acuerdo que define los activos incluidos, las fechas, las técnicas permitidas y los contactos de emergencia.",
+        "Solo probamos sistemas que son tuyos o sobre los que tienes autoridad para autorizar. Rechazamos las peticiones sobre activos de terceros.",
+        "Si tu infraestructura está en un proveedor cloud, respetamos también sus políticas de pruebas de seguridad.",
+        "No actuamos fuera del alcance acordado: si encontramos algo relevante fuera de él, te lo comunicamos sin explotarlo."
+      ],
+      "disclosureText": "¿Has encontrado una vulnerabilidad en nuestro propio sitio?",
+      "disclosureLink": "Consulta nuestra política de divulgación responsable"
+    },
+    "scope": {
+      "eyebrow": "Alcance",
+      "title": "Qué cubrimos",
+      "lead": "Cinco servicios que se pueden contratar por separado.",
+      "includesLabel": "Incluye",
+      "items": {
+        "pentest": {
+          "title": "Pentesting web y de APIs",
+          "text": "Pruebas manuales y automatizadas de aplicaciones web, APIs y servicios expuestos, siguiendo la guía de pruebas de OWASP y PTES.",
+          "includes": [
+            "Autenticación, sesiones y control de acceso",
+            "Inyecciones, XSS, CSRF y fallos de lógica de negocio",
+            "Configuración de servidores, cabeceras y TLS",
+            "Exposición de datos y de secretos"
+          ]
+        },
+        "codeAudit": {
+          "title": "Auditoría de código",
+          "text": "Revisión del código fuente y de las dependencias para encontrar fallos de diseño e implementación que las pruebas externas no alcanzan.",
+          "includes": [
+            "Revisión manual de los flujos críticos",
+            "Análisis estático y de dependencias",
+            "Gestión de secretos y de configuración",
+            "Recomendaciones de corrección a nivel de código"
+          ]
+        },
+        "hardening": {
+          "title": "Hardening",
+          "text": "Endurecimiento de servidores, contenedores, nube y servicios: menos superficie de ataque, mínimos privilegios y configuración segura.",
+          "includes": [
+            "Servidores, contenedores y redes",
+            "Cuentas, permisos y secretos",
+            "Registro, monitorización y copias de seguridad",
+            "Referencia a guías reconocidas como los CIS Benchmarks"
+          ]
+        },
+        "incident": {
+          "title": "Respuesta a incidentes",
+          "text": "Ayuda para contener, investigar y recuperarte de un incidente, y para que no vuelva a ocurrir.",
+          "includes": [
+            "Contención y preservación de evidencias",
+            "Análisis de causa raíz",
+            "Recuperación y comunicación",
+            "Informe con las lecciones aprendidas"
+          ]
+        },
+        "training": {
+          "title": "Capacitación",
+          "text": "Formación práctica para desarrolladores y equipos técnicos, y concienciación para el resto de la organización.",
+          "includes": [
+            "Desarrollo seguro con ejemplos reales",
+            "Modelado de amenazas",
+            "Talleres prácticos sobre el OWASP Top 10",
+            "Concienciación sobre phishing e ingeniería social"
+          ]
+        }
+      },
+      "outTitle": "Lo que no hacemos",
+      "outItems": [
+        "Pruebas sobre sistemas sin la autorización del propietario",
+        "Ataques de denegación de servicio, salvo acuerdo expreso y en entornos controlados",
+        "Ingeniería social sobre tu personal sin haberlo pactado por escrito",
+        "Actividad ofensiva contra terceros, sea cual sea el motivo"
+      ]
+    },
+    "methodologies": {
+      "eyebrow": "Metodologías",
+      "title": "Estándares abiertos, no recetas propias",
+      "lead": "Trabajamos con marcos reconocidos por la industria para que los resultados sean comparables, reproducibles y fáciles de entender.",
+      "items": {
+        "owasp": {
+          "name": "OWASP",
+          "subtitle": "WSTG · ASVS · Top 10",
+          "text": "La referencia para pruebas y requisitos de seguridad de aplicaciones web. Usamos la Web Security Testing Guide como guía de pruebas, el ASVS como criterio de verificación y el Top 10 para priorizar los riesgos más frecuentes."
+        },
+        "nist": {
+          "name": "NIST",
+          "subtitle": "SP 800-115 · SP 800-61 · CSF · SSDF",
+          "text": "Guías para la evaluación técnica de seguridad (SP 800-115), la gestión de incidentes (SP 800-61), el gobierno del riesgo (Cybersecurity Framework) y el desarrollo seguro de software (SSDF)."
+        },
+        "ptes": {
+          "name": "PTES",
+          "subtitle": "Penetration Testing Execution Standard",
+          "text": "Un estándar que estructura una prueba de penetración en siete fases, de la interacción previa al informe, para que ninguna se quede sin hacer."
+        }
+      },
+      "scoringNote": "Clasificamos los hallazgos con CVSS y los relacionamos con CWE para que puedas priorizar y hacer seguimiento con tus propias herramientas."
+    },
+    "phases": {
+      "eyebrow": "Fases de una prueba",
+      "title": "Siete fases, sin atajos",
+      "lead": "Así estructuramos una prueba de penetración, siguiendo PTES.",
+      "stepLabel": "Fase {number}",
+      "items": [
+        {
+          "title": "Interacción previa",
+          "text": "Definimos el alcance, las reglas de participación y la autorización."
+        },
+        {
+          "title": "Recopilación de información",
+          "text": "Identificamos activos, tecnologías y la superficie de ataque expuesta."
+        },
+        {
+          "title": "Modelado de amenazas",
+          "text": "Priorizamos qué activos importan y cómo podrían ser atacados."
+        },
+        {
+          "title": "Análisis de vulnerabilidades",
+          "text": "Descubrimos y validamos debilidades con herramientas y revisión manual."
+        },
+        {
+          "title": "Explotación",
+          "text": "Demostramos el impacto real con la mínima intrusión necesaria y siempre dentro del alcance."
+        },
+        {
+          "title": "Post-explotación",
+          "text": "Evaluamos hasta dónde podría llegar un atacante y retiramos cualquier rastro nuestro."
+        },
+        {
+          "title": "Informe",
+          "text": "Entregamos hallazgos, evidencias, riesgo y recomendaciones que tu equipo pueda ejecutar."
+        }
+      ]
+    },
+    "cta": {
+      "title": "¿Quieres poner a prueba tus defensas?",
+      "lead": "Definimos juntos el alcance y te enviamos una propuesta con autorización y plazos claros."
+    }
+  }
+}

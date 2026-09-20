@@ -1,0 +1,25 @@
+{
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "title": "Page not found",
+      "body": "The page you are looking for does not exist or has moved. Check the address or visit one of these sections.",
+      "home": "Go to home",
+      "suggestions": "You can also visit"
+    },
+    "error": {
+      "code": "500",
+      "title": "Something went wrong",
+      "body": "An unexpected error occurred. You can try again or go back home. If the problem continues, write to us.",
+      "retry": "Try again",
+      "home": "Go to home",
+      "reference": "Error reference: {digest}"
+    },
+    "global": {
+      "title": "Something went wrong",
+      "body": "An unexpected error occurred. Reload the page or come back later.",
+      "retry": "Reload",
+      "reference": "Error reference: {digest}"
+    }
+  }
+}

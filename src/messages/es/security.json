@@ -1,0 +1,109 @@
+{
+  "security": {
+    "meta": {
+      "title": "Política de divulgación responsable",
+      "description": "Cómo reportar una vulnerabilidad en nuestro sitio, qué está dentro del alcance y qué puedes esperar de nosotros."
+    },
+    "eyebrow": "Seguridad",
+    "title": "Política de divulgación responsable",
+    "intro": "Si has encontrado una vulnerabilidad en nuestro sitio, queremos saberlo. Esta política explica cómo reportarla y qué puedes esperar de nosotros.",
+    "draft": {
+      "title": "Compromisos pendientes de confirmar",
+      "body": "Los plazos, el puerto seguro y el resto de compromisos de esta política son una propuesta. Confírmalos con la empresa y con asesoría legal antes de publicarla."
+    },
+    "sections": [
+      {
+        "id": "reportar",
+        "title": "Cómo reportar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Escríbenos a [{securityEmail}](mailto:{securityEmail}) con una descripción clara del problema, los pasos para reproducirlo y su posible impacto."
+          },
+          {
+            "type": "p",
+            "text": "También puedes consultar nuestro archivo [security.txt](/.well-known/security.txt), que sigue el estándar RFC 9116."
+          },
+          {
+            "type": "p",
+            "text": "[COMPLETAR: si dispones de una clave PGP, indica aquí su huella y dónde descargarla]"
+          }
+        ]
+      },
+      {
+        "id": "alcance",
+        "title": "Alcance",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Está dentro del alcance el sitio web de {legalName} y sus subdominios. Quedan fuera:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Los servicios de terceros que utilizamos (alojamiento, correo, base de datos…). Repórtalos al proveedor correspondiente.",
+              "Ataques de denegación de servicio y pruebas de carga.",
+              "Ingeniería social, phishing o acceso físico contra nuestro personal o instalaciones.",
+              "Informes automáticos sin una prueba de concepto ni un impacto demostrable.",
+              "Hallazgos de bajo riesgo sin impacto explotable, como la ausencia de una cabecera que no supone una vulnerabilidad real."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "normas",
+        "title": "Qué te pedimos",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Actúa de buena fe y evita afectar a otras personas, a sus datos o a la disponibilidad del servicio.",
+              "Accede solo a lo estrictamente necesario para demostrar el problema, y no conserves ni compartas datos personales.",
+              "No modifiques ni elimines datos.",
+              "Danos un plazo razonable para corregir el problema antes de hacerlo público."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "compromisos",
+        "title": "Qué puedes esperar de nosotros",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Confirmaremos la recepción de tu reporte en un plazo objetivo de 3 días hábiles.",
+              "Evaluaremos el hallazgo y te mantendremos informado del avance.",
+              "Corregiremos los problemas confirmados con prioridad según su gravedad.",
+              "Con tu permiso, reconoceremos públicamente tu contribución."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "[COMPLETAR: confirmar los plazos de respuesta que la empresa puede asumir]"
+          }
+        ]
+      },
+      {
+        "id": "puerto-seguro",
+        "title": "Puerto seguro",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "No emprenderemos acciones legales contra las personas que reporten vulnerabilidades de buena fe y cumplan esta política. [COMPLETAR: revisar esta declaración con asesoría legal]"
+          }
+        ]
+      },
+      {
+        "id": "recompensas",
+        "title": "Recompensas",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Actualmente no ofrecemos recompensas económicas (bug bounty). Agradecemos cada reporte y, si lo deseas, te reconoceremos públicamente."
+          }
+        ]
+      }
+    ]
+  }
+}

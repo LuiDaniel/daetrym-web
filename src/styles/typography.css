@@ -61,3 +61,22 @@
   letter-spacing: 0.02em;
   font-weight: 500;
 }
+
+/* Título de tarjeta / elemento de lista: entre H3 y cuerpo. */
+@utility text-title {
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+/* Sobretítulo técnico (mono, mayúsculas): el tracking positivo compensa el tamaño pequeño. */
+@utility text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}

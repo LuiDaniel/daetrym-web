@@ -1,41 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-
-/** Espera a que React haya hidratado (React marca los nodos con __reactFiber$...). */
-async function waitForHydration(page: Page) {
-  await page.waitForFunction(() => {
-    const main = document.querySelector('main');
-    return !!main && Object.keys(main).some((key) => key.startsWith('__reactFiber'));
-  });
-}
-
-/** Registra violaciones de CSP y errores de consola: el sitio debe cargar SIN ninguna. */
-async function watchForProblems(page: Page) {
-  const problems: string[] = [];
-  await page.addInitScript(() => {
-    document.addEventListener('securitypolicyviolation', (event) => {
-      (window as unknown as { __csp: string[] }).__csp ??= [];
-      (window as unknown as { __csp: string[] }).__csp.push(
-        `${event.violatedDirective} → ${event.blockedURI || 'inline'} (${event.sample ?? ''})`,
-      );
-    });
-  });
-  page.on('console', (message) => {
-    // Los enlaces del header hacen prefetch de páginas que llegan en la Fase 2 (404 esperado).
-    if (message.type() === 'error' && !/status of 404/.test(message.text())) {
-      problems.push(`console: ${message.text()}`);
-    }
-  });
-  page.on('pageerror', (error) => problems.push(`pageerror: ${error.message}`));
-  return {
-    async collect() {
-      const csp = await page.evaluate(
-        () => (window as unknown as { __csp?: string[] }).__csp ?? [],
-      );
-      return [...problems, ...csp.map((v) => `csp: ${v}`)];
-    },
-  };
-}
+import { isSheetLayout, sheetVisibleWidth, waitForHydration, watchForProblems } from './helpers';
 
 test.describe('carga y seguridad', () => {
   test('la Home carga sin violaciones de CSP ni errores', async ({ page }) => {
@@ -97,8 +62,11 @@ test.describe('idioma', () => {
     await context.close();
   });
 
-  test('el selector cambia de idioma y lo recuerda', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'En móvil el selector vive dentro del menú (ver test del menú).');
+  test('el selector cambia de idioma y lo recuerda', async ({ page }) => {
+    test.skip(
+      isSheetLayout(page),
+      'En móvil el selector vive dentro del menú (ver test del menú).',
+    );
     await page.goto('/es');
     await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 
@@ -123,11 +91,8 @@ test.describe('idioma', () => {
 });
 
 test.describe('tema', () => {
-  test('es oscuro por defecto y el modo claro persiste sin destello', async ({
-    page,
-    isMobile,
-  }) => {
-    test.skip(isMobile, 'En móvil el toggle vive dentro del menú.');
+  test('es oscuro por defecto y el modo claro persiste sin destello', async ({ page }) => {
+    test.skip(isSheetLayout(page), 'En móvil el toggle vive dentro del menú.');
     await page.goto('/es');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
@@ -141,11 +106,8 @@ test.describe('tema', () => {
 });
 
 test.describe('menú móvil (sheet)', () => {
-  test('se abre, atrapa el foco y se cierra con Esc devolviendo el foco', async ({
-    page,
-    isMobile,
-  }) => {
-    test.skip(!isMobile, 'Solo viewport móvil.');
+  test('se abre, atrapa el foco y se cierra con Esc devolviendo el foco', async ({ page }) => {
+    test.skip(!isSheetLayout(page), 'Solo viewport móvil.');
     await page.goto('/es');
     await waitForHydration(page);
     const trigger = page.getByRole('button', { name: 'Abrir menú' });
@@ -164,9 +126,8 @@ test.describe('menú móvil (sheet)', () => {
 
   test('al abrir, el panel termina dentro del viewport y el botón de cierre es alcanzable', async ({
     page,
-    isMobile,
   }) => {
-    test.skip(!isMobile, 'Solo viewport móvil.');
+    test.skip(!isSheetLayout(page), 'Solo viewport móvil.');
     await page.goto('/es');
     await waitForHydration(page);
     await page.getByRole('button', { name: 'Abrir menú' }).click();
@@ -177,7 +138,7 @@ test.describe('menú móvil (sheet)', () => {
     // Regresión: antes se quedaba en x ≈ 9999 porque Radix Portal monta tras el primer commit.
     await expect
       .poll(async () => (await dialog.boundingBox())?.x ?? Infinity, { timeout: 3000 })
-      .toBeLessThan(viewport.width * 0.2);
+      .toBeLessThan(viewport.width - sheetVisibleWidth(viewport.width) + 8);
     await expect(page.getByRole('button', { name: 'Cerrar menú' })).toBeInViewport();
   });
 
@@ -196,11 +157,8 @@ test.describe('menú móvil (sheet)', () => {
     await page.mouse.up();
   }
 
-  test('un lanzamiento hacia la derecha lo cierra (proyección de momentum)', async ({
-    page,
-    isMobile,
-  }) => {
-    test.skip(!isMobile, 'Solo viewport móvil.');
+  test('un lanzamiento hacia la derecha lo cierra (proyección de momentum)', async ({ page }) => {
+    test.skip(!isSheetLayout(page), 'Solo viewport móvil.');
     await page.goto('/es');
     await waitForHydration(page);
     await page.getByRole('button', { name: 'Abrir menú' }).click();
@@ -214,9 +172,8 @@ test.describe('menú móvil (sheet)', () => {
 
   test('un arrastre corto y quieto vuelve a abrir (sin velocidad no hay lanzamiento)', async ({
     page,
-    isMobile,
   }) => {
-    test.skip(!isMobile, 'Solo viewport móvil.');
+    test.skip(!isSheetLayout(page), 'Solo viewport móvil.');
     await page.goto('/es');
     await waitForHydration(page);
     await page.getByRole('button', { name: 'Abrir menú' }).click();
@@ -229,11 +186,11 @@ test.describe('menú móvil (sheet)', () => {
     await expect(dialog).toBeVisible();
     await expect
       .poll(async () => Math.round((await dialog.boundingBox())!.x))
-      .toBeLessThan(page.viewportSize()!.width * 0.2);
+      .toBeLessThan(page.viewportSize()!.width - sheetVisibleWidth(page.viewportSize()!.width) + 8);
   });
 
-  test('se cierra con el botón de cierre', async ({ page, isMobile }) => {
-    test.skip(!isMobile, 'Solo viewport móvil.');
+  test('se cierra con el botón de cierre', async ({ page }) => {
+    test.skip(!isSheetLayout(page), 'Solo viewport móvil.');
     await page.goto('/es');
     await page.getByRole('button', { name: 'Abrir menú' }).click();
     await page.getByRole('button', { name: 'Cerrar menú' }).click();
@@ -253,6 +210,7 @@ test.describe('accesibilidad', () => {
 
   for (const theme of ['dark', 'light'] as const) {
     test(`axe: sin violaciones WCAG A/AA en la Home (${theme})`, async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' }); // sin revelados a medias: contraste en estado final
       await page.addInitScript((value) => localStorage.setItem('daetrym-theme', value), theme);
       await page.goto('/es');
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);

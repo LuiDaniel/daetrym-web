@@ -1,0 +1,400 @@
+{
+  "legal": {
+    "draft": {
+      "title": "Template pending legal review",
+      "body": "This document is a generic template and does not constitute legal advice. It must be reviewed and adapted by a lawyer before it is published. Text marked “[COMPLETE: …]” requires company-specific details."
+    },
+    "privacy": {
+      "meta": {
+        "title": "Privacy policy",
+        "description": "How we handle your personal data: what we collect, why, who we share it with, how long we keep it and what your rights are."
+      },
+      "title": "Privacy policy",
+      "intro": "This policy explains, in plain terms, which personal data we process when you use this site, what we use it for and which rights you have.",
+      "sections": [
+        {
+          "id": "controller",
+          "title": "Data controller",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The controller of the personal data collected on this site is {legalName}."
+            },
+            {
+              "type": "p",
+              "text": "[COMPLETE: registered address, tax identification number and company registration details]"
+            },
+            {
+              "type": "p",
+              "text": "You can contact us at [{email}](mailto:{email})."
+            }
+          ]
+        },
+        {
+          "id": "data",
+          "title": "What data we collect",
+          "blocks": [
+            {
+              "type": "ul",
+              "items": [
+                "Contact form: name, email address, company (optional), subject and message.",
+                "Proposal request: contact details and the information you give us about your project (project type, services, budget, timeline and description).",
+                "Newsletter, downloadable resources and waitlist: email address, language and interests. We only send communications after you confirm your subscription (double opt-in).",
+                "Technical data for security and abuse prevention: an irreversible hash of the IP address, computed with a secret key, and a shortened version of the user agent. We do not store the IP address in clear text.",
+                "Aggregated usage statistics, through an analytics tool that uses no cookies and does not identify individual users."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "We do not collect special categories of personal data. Please do not include them in your messages."
+            }
+          ]
+        },
+        {
+          "id": "purposes",
+          "title": "What we use your data for, and on what basis",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Purposes and legal bases of processing",
+              "headers": ["Purpose", "Legal basis"],
+              "rows": [
+                [
+                  "Answering your enquiries and preparing proposals",
+                  "Pre-contractual measures and consent"
+                ],
+                [
+                  "Sending you the newsletter, resources and waitlist notices",
+                  "Consent, with double opt-in"
+                ],
+                ["Protecting the site from spam and abuse", "Legitimate interest"],
+                ["Improving the site through aggregated statistics", "Legitimate interest"],
+                ["Complying with our legal obligations", "Legal obligation"]
+              ]
+            },
+            {
+              "type": "p",
+              "text": "[COMPLETE: adapt the legal bases to the applicable data protection law]"
+            }
+          ]
+        },
+        {
+          "id": "recipients",
+          "title": "Who we share data with",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We do not sell your data. We share it only with providers that deliver a service to us and act as data processors:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Vercel: site hosting.",
+                "Neon: database.",
+                "Resend: sending of emails.",
+                "Upstash: request rate limiting to prevent abuse.",
+                "Cloudflare (Turnstile): anti-spam verification on forms.",
+                "[COMPLETE: analytics provider and, if used, scheduling provider (for example, Cal.com)]"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Some of these providers may process data outside your country or the European Economic Area. [COMPLETE: describe the safeguards that apply to international transfers]"
+            }
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "How long we keep data",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Retention periods",
+              "headers": ["Data", "Period"],
+              "rows": [
+                ["Contact messages and proposal requests", "24 months from the last activity"],
+                ["Subscriptions awaiting confirmation", "7 days"],
+                ["Messages flagged as spam", "30 days"],
+                [
+                  "Newsletter unsubscribes",
+                  "Only the bare minimum needed so we do not write to you again"
+                ]
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Once these periods expire, the data is deleted automatically."
+            }
+          ]
+        },
+        {
+          "id": "rights",
+          "title": "Your rights",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "You can exercise your rights of access, rectification, erasure, objection, restriction of processing and portability, and withdraw your consent at any time, by writing to [{email}](mailto:{email}). We will reply within the periods set by law."
+            },
+            {
+              "type": "p",
+              "text": "If you believe we have not handled your data properly, you can lodge a complaint with the competent data protection authority. [COMPLETE: state the applicable supervisory authority]"
+            }
+          ]
+        },
+        {
+          "id": "security",
+          "title": "How we protect your data",
+          "blocks": [
+            {
+              "type": "ul",
+              "items": [
+                "Encrypted connections (HTTPS) and strict security headers.",
+                "Server-side validation of all data and parameterized queries.",
+                "Minimization: we only ask for what is necessary.",
+                "Restricted access and secrets kept out of the source code."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "No system is infallible. If we detect a breach that affects you, we will notify you as required by law."
+            }
+          ]
+        },
+        {
+          "id": "minors",
+          "title": "Minors",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "This site is aimed at professionals and organizations. We do not knowingly collect data from minors."
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Changes to this policy",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We will publish any changes here and update the date of the last review. We recommend checking it periodically."
+            }
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "Contact",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "For any privacy question, write to us at [{email}](mailto:{email}). For more information on what we store on your device, see the [cookie policy](/legal/cookies)."
+            }
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "meta": {
+        "title": "Terms of use",
+        "description": "The conditions governing the use of this website: permitted use, intellectual property, liability and governing law."
+      },
+      "title": "Terms of use",
+      "intro": "These terms govern access to and use of this website. Please read them before using it.",
+      "sections": [
+        {
+          "id": "acceptance",
+          "title": "Acceptance",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "By accessing and using this site you accept these terms. If you do not agree with them, please do not use it."
+            }
+          ]
+        },
+        {
+          "id": "services",
+          "title": "Information about our services",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The content of this site is for information purposes only. Proposals we send you are not binding until both parties sign a specific contract, which will prevail over these terms with regard to the provision of the service."
+            }
+          ]
+        },
+        {
+          "id": "use",
+          "title": "Permitted use",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "You agree to use the site lawfully and not to:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Attempt to gain unauthorized access to systems, accounts or data.",
+                "Interfere with the operation of the site, for example through denial-of-service attacks or mass request flooding.",
+                "Use the site to send spam or unlawful content.",
+                "Carry out security testing that does not follow our [responsible disclosure policy](/security)."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "intellectual-property",
+          "title": "Intellectual property",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The texts, designs, logos, code and other content of the site belong to {legalName} or are used under licence, and are protected by intellectual property law. You may share links to the site; for any other use we need your prior authorization."
+            }
+          ]
+        },
+        {
+          "id": "content",
+          "title": "Blog and resource content",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Articles and resources are for guidance only and do not constitute professional advice for your specific case. Although we strive to make them accurate, we do not guarantee that they are free of errors or kept up to date."
+            }
+          ]
+        },
+        {
+          "id": "links",
+          "title": "Links to third parties",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The site may link to third-party pages. We do not control their content or their policies and are not responsible for them."
+            }
+          ]
+        },
+        {
+          "id": "liability",
+          "title": "Limitation of liability",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "To the extent permitted by law, {legalName} will not be liable for indirect damages arising from the use of the site. [COMPLETE: review and adapt this clause to the applicable law]"
+            }
+          ]
+        },
+        {
+          "id": "governing-law",
+          "title": "Governing law",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "[COMPLETE: state the governing law and the competent courts]"
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Changes",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We may update these terms. The version in force will always be the one published on this page."
+            }
+          ]
+        },
+        {
+          "id": "contact",
+          "title": "Contact",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If you have questions about these terms, write to us at [{email}](mailto:{email})."
+            }
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "meta": {
+        "title": "Cookie policy",
+        "description": "Which cookies and local storage this site uses, what they are for and how you can manage them."
+      },
+      "title": "Cookie policy",
+      "intro": "This site only uses what is essential to work and to remember your preferences. Here we explain what that is and how to manage it.",
+      "sections": [
+        {
+          "id": "what-are-cookies",
+          "title": "What cookies are",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Cookies and similar technologies, such as the browser’s local storage, save small amounts of information on your device."
+            }
+          ]
+        },
+        {
+          "id": "what-we-use",
+          "title": "What we use",
+          "blocks": [
+            {
+              "type": "table",
+              "caption": "Cookies and storage used on this site",
+              "headers": ["Name", "Type", "Purpose", "Duration"],
+              "rows": [
+                [
+                  "NEXT_LOCALE",
+                  "First-party cookie · preference",
+                  "Remembers the language you chose.",
+                  "1 year"
+                ],
+                [
+                  "daetrym-theme",
+                  "Local storage · preference",
+                  "Remembers whether you prefer light or dark mode.",
+                  "Until you clear it"
+                ],
+                [
+                  "Cloudflare Turnstile",
+                  "Third party · security",
+                  "Verifies that whoever submits a form is a person. It only loads on pages with forms.",
+                  "As set by Cloudflare [COMPLETE: confirm]"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "what-we-dont-use",
+          "title": "What we do not use",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We do not use advertising, tracking or analytics cookies that identify users. Our usage statistics are collected in aggregate and without cookies. That is why we do not show a consent banner."
+            },
+            {
+              "type": "p",
+              "text": "If we add non-essential cookies in the future, we will ask for your consent before using them. [COMPLETE: confirm with legal counsel that preference cookies are exempt from consent in your jurisdiction]"
+            }
+          ]
+        },
+        {
+          "id": "managing",
+          "title": "How to manage or delete cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "You can block or delete cookies from your browser settings. If you do, the site will keep working, but you will have to choose your language and theme again on each visit."
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Changes to this policy",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We will update this page if the technologies we use change. For more information on how we handle your data, see the [privacy policy](/legal/privacy)."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

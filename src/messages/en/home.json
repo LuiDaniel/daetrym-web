@@ -1,0 +1,129 @@
+{
+  "home": {
+    "meta": {
+      "title": "DaeTrym — Cybersecurity and software development",
+      "description": "We build web applications and custom software, and protect what you build with penetration testing, code audits and hardening. Security by design."
+    },
+    "hero": {
+      "eyebrow": "Cybersecurity · Web applications · Custom software",
+      "title": "Secure software, by design.",
+      "lead": "We design and build web applications and custom software, and we put what you build — or what you already run — to the test using open methodologies such as OWASP, NIST and PTES.",
+      "trust": "Every security test is carried out with written authorization.",
+      "trustLink": "How we approach security",
+      "layers": {
+        "label": "Diagram: security is present in every layer, from design to operations",
+        "design": "Design",
+        "code": "Code",
+        "infrastructure": "Infrastructure",
+        "operations": "Operations"
+      }
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "We build your software and check that it holds up.",
+      "lead": "From a web application to a custom system, with security built into every stage and, when you need it, independent testing of what you already have in production."
+    },
+    "why": {
+      "eyebrow": "Why DaeTrym",
+      "title": "We build as if we were audited tomorrow.",
+      "lead": "Four principles guide every project. They are not slogans: they show up in how we work and in what we deliver.",
+      "items": {
+        "design": {
+          "title": "Security by design",
+          "text": "We model threats before writing code and review every decision by asking how it could be abused. Fixing a problem at design time usually costs far less than fixing it in production."
+        },
+        "code": {
+          "title": "Our own code, no black boxes",
+          "text": "We write the code we deliver and justify every dependency. No opaque templates, no plugins nobody understands. The code we hand over is yours, documented."
+        },
+        "transparency": {
+          "title": "Transparency",
+          "text": "Scope, timelines and risks in writing from day one. You see real progress, get clear reports and understand the decisions, without needless jargon."
+        },
+        "bothSides": {
+          "title": "We know both sides",
+          "text": "Whoever builds an application understands better how it breaks; whoever tests it understands better how to fix it. Working on both sides makes us better at each."
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Process",
+      "title": "A clear process, from idea to support",
+      "lead": "Six stages with defined deliverables. You will always know where we are and what comes next.",
+      "cta": "See the full process"
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "What our work looks like",
+      "lead": "Three examples of the kind of projects we take on.",
+      "notice": "Example cases: replace them with real projects before publishing (src/config/projects.ts).",
+      "cta": "View all projects",
+      "categories": {
+        "web": "Web application",
+        "software": "Custom software",
+        "security": "Cybersecurity"
+      }
+    },
+    "stack": {
+      "eyebrow": "Technology",
+      "title": "Tools we work with",
+      "lead": "We choose solid, well-maintained technology, not the newest just for the sake of it.",
+      "groups": {
+        "apps": "Applications",
+        "infra": "Data and infrastructure",
+        "security": "Security"
+      }
+    },
+    "faq": {
+      "eyebrow": "Frequently asked questions",
+      "title": "What people usually ask us",
+      "items": [
+        {
+          "q": "What kind of clients do you work with?",
+          "a": "Startups, small and mid-sized companies and product teams that need to build something new or to check the security of what they already have. If you are not sure we are a fit, tell us about your case and we will give you an honest answer."
+        },
+        {
+          "q": "Can I hire a security audit on its own, without development?",
+          "a": "Yes. Penetration testing, code audits and hardening can be hired independently, with no need to commission the development from us as well."
+        },
+        {
+          "q": "Do you run penetration tests without authorization?",
+          "a": "Never. Every test requires written authorization and an agreed scope. It is a non-negotiable condition, for ethical reasons and because accessing a system without permission is a crime in most countries."
+        },
+        {
+          "q": "Who owns the code you develop?",
+          "a": "You do. The transfer of rights is set out in the contract, and we hand over the source code, the documentation and the access you need so you can maintain it with us or without us."
+        },
+        {
+          "q": "How long does a project take, and how much does it cost?",
+          "a": "It depends on the scope. After an initial conversation we send you a proposal with scope, estimated timelines and investment. You can start from the proposal request page."
+        },
+        {
+          "q": "Do you offer support after delivery?",
+          "a": "Yes. We agree on a stabilization period to fix issues and, if you need it, maintenance, monitoring and ongoing improvement plans."
+        }
+      ]
+    },
+    "soon": {
+      "eyebrow": "Coming soon",
+      "title": "What we are preparing",
+      "lead": "Free resources for teams that want to improve their web security. Write to us and we will let you know when they are available.",
+      "items": {
+        "tool": {
+          "title": "Free web security check",
+          "text": "A tool that spots the most common configuration mistakes of a website in minutes."
+        },
+        "checklist": {
+          "title": "Web security checklist",
+          "text": "A practical list for reviewing the essential controls before launching or auditing an application."
+        }
+      },
+      "cta": "Notify me when it launches",
+      "mailSubject": "Please notify me about the free resources"
+    },
+    "cta": {
+      "title": "Shall we build something secure together?",
+      "lead": "Tell us what you need. We will reply with a clear proposal: scope, timelines and investment."
+    }
+  }
+}

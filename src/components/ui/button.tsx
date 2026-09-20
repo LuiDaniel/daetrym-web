@@ -26,7 +26,7 @@ export const buttonVariants = cva(
   },
 );
 
-type ButtonProps = ComponentProps<'button'> &
+export type ButtonProps = ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     /** Renderiza el hijo (p. ej. un <Link>) con el estilo del botón. */
     asChild?: boolean;

@@ -1,0 +1,25 @@
+{
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "title": "Página no encontrada",
+      "body": "La página que buscas no existe o se ha movido. Revisa la dirección o visita una de estas secciones.",
+      "home": "Ir al inicio",
+      "suggestions": "También puedes visitar"
+    },
+    "error": {
+      "code": "500",
+      "title": "Algo ha salido mal",
+      "body": "Ha ocurrido un error inesperado. Puedes intentarlo de nuevo o volver al inicio. Si el problema continúa, escríbenos.",
+      "retry": "Reintentar",
+      "home": "Ir al inicio",
+      "reference": "Referencia del error: {digest}"
+    },
+    "global": {
+      "title": "Algo ha salido mal",
+      "body": "Ha ocurrido un error inesperado. Recarga la página o vuelve más tarde.",
+      "retry": "Recargar",
+      "reference": "Referencia del error: {digest}"
+    }
+  }
+}

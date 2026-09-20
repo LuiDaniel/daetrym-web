@@ -8,7 +8,17 @@
     "skipToContent": "Skip to content",
     "requestQuote": "Request a proposal",
     "bookCall": "Book a call",
-    "homeLink": "DaeTrym, go to home"
+    "homeLink": "DaeTrym, go to home",
+    "learnMore": "Learn more",
+    "learnMoreAbout": "Learn more about {name}",
+    "viewAllServices": "View all services",
+    "example": "Example",
+    "breadcrumbLabel": "Breadcrumb",
+    "onThisPage": "On this page",
+    "lastUpdated": "Last updated: {date}",
+    "draftNoticeTitle": "Pending review",
+    "backToHome": "Back to home",
+    "opensInNewTab": "opens in a new tab"
   },
   "nav": {
     "services": "Services",
@@ -54,29 +64,12 @@
     "contactTitle": "Contact",
     "copyright": "© {year} {name}. All rights reserved."
   },
-  "home": {
-    "hero": {
-      "eyebrow": "Cybersecurity · Web Apps · Custom software",
-      "title": "Secure software, by design.",
-      "lead": "We build web applications and custom software, and protect what you build: penetration testing, code audits and hardening using open methodologies."
-    },
-    "pillars": {
-      "web": {
-        "title": "Web applications",
-        "description": "Fast, accessible and maintainable products, with security built in from the first line."
-      },
-      "custom": {
-        "title": "Custom software",
-        "description": "Systems made for how your team works, with code that is yours and clear documentation."
-      },
-      "security": {
-        "title": "Cybersecurity",
-        "description": "Penetration testing, code review and hardening, always with written authorization."
-      }
-    }
+  "comingSoon": {
+    "eyebrow": "Under construction",
+    "description": "This section will be available very soon. In the meantime, write to us at {email} and we will reply personally."
   },
   "maintenance": {
-    "title": "We'll be right back",
-    "description": "We're performing maintenance. Please try again in a few minutes."
+    "title": "We’ll be right back",
+    "description": "We’re performing maintenance. Please try again in a few minutes."
   }
 }

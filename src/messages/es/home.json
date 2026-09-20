@@ -1,0 +1,129 @@
+{
+  "home": {
+    "meta": {
+      "title": "DaeTrym — Ciberseguridad y desarrollo de software",
+      "description": "Desarrollamos aplicaciones web y software a medida, y protegemos lo que construyes con pentesting, auditoría de código y hardening. Seguridad desde el diseño."
+    },
+    "hero": {
+      "eyebrow": "Ciberseguridad · Aplicaciones web · Software a medida",
+      "title": "Software seguro, desde el diseño.",
+      "lead": "Diseñamos y desarrollamos aplicaciones web y software a medida, y ponemos a prueba lo que construyes —o lo que ya tienes— con metodologías abiertas como OWASP, NIST y PTES.",
+      "trust": "Toda prueba de seguridad se realiza con autorización por escrito.",
+      "trustLink": "Cómo trabajamos en seguridad",
+      "layers": {
+        "label": "Diagrama: la seguridad está presente en cada capa, del diseño a la operación",
+        "design": "Diseño",
+        "code": "Código",
+        "infrastructure": "Infraestructura",
+        "operations": "Operación"
+      }
+    },
+    "services": {
+      "eyebrow": "Servicios",
+      "title": "Construimos tu software y comprobamos que aguanta.",
+      "lead": "Desde una aplicación web hasta un sistema a medida, con la seguridad integrada en cada etapa y, cuando lo necesitas, pruebas independientes de lo que ya tienes en producción."
+    },
+    "why": {
+      "eyebrow": "Por qué DaeTrym",
+      "title": "Construimos como si mañana nos auditaran.",
+      "lead": "Cuatro principios guían cada proyecto. No son eslóganes: se traducen en cómo trabajamos y en lo que entregamos.",
+      "items": {
+        "design": {
+          "title": "Seguridad desde el diseño",
+          "text": "Modelamos las amenazas antes de escribir código y revisamos cada decisión pensando en cómo podría abusarse. Corregir en el diseño suele costar mucho menos que corregir en producción."
+        },
+        "code": {
+          "title": "Código propio, sin cajas negras",
+          "text": "Escribimos el código que entregamos y justificamos cada dependencia. Sin plantillas opacas ni plugins que nadie entiende. El código entregado es tuyo, con su documentación."
+        },
+        "transparency": {
+          "title": "Transparencia",
+          "text": "Alcance, plazos y riesgos por escrito desde el primer día. Ves avances reales, recibes informes claros y las decisiones se explican, sin jerga innecesaria."
+        },
+        "bothSides": {
+          "title": "Conocemos los dos lados",
+          "text": "Quien construye entiende mejor cómo se rompe una aplicación; quien la prueba entiende mejor cómo se arregla. Trabajar en ambos lados nos hace mejores en los dos."
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Proceso",
+      "title": "Un proceso claro, de la idea al soporte",
+      "lead": "Seis etapas con entregables definidos. Sabrás en qué punto estamos y qué viene después.",
+      "cta": "Ver el proceso completo"
+    },
+    "projects": {
+      "eyebrow": "Proyectos",
+      "title": "Cómo es nuestro trabajo",
+      "lead": "Tres ejemplos del tipo de proyectos que abordamos.",
+      "notice": "Casos de ejemplo: sustitúyelos por proyectos reales antes de publicar (src/config/projects.ts).",
+      "cta": "Ver todos los proyectos",
+      "categories": {
+        "web": "Aplicación web",
+        "software": "Software a medida",
+        "security": "Ciberseguridad"
+      }
+    },
+    "stack": {
+      "eyebrow": "Tecnologías",
+      "title": "Herramientas con las que trabajamos",
+      "lead": "Elegimos tecnología sólida y bien mantenida, no la más nueva por el hecho de serlo.",
+      "groups": {
+        "apps": "Aplicaciones",
+        "infra": "Datos e infraestructura",
+        "security": "Seguridad"
+      }
+    },
+    "faq": {
+      "eyebrow": "Preguntas frecuentes",
+      "title": "Lo que suelen preguntarnos",
+      "items": [
+        {
+          "q": "¿Con qué tipo de clientes trabajan?",
+          "a": "Con startups, pymes y equipos de producto que necesitan construir algo nuevo o comprobar la seguridad de lo que ya tienen. Si no estás seguro de si encajamos, cuéntanos tu caso y te lo decimos con honestidad."
+        },
+        {
+          "q": "¿Puedo contratar solo una auditoría de seguridad, sin desarrollo?",
+          "a": "Sí. Las pruebas de penetración, la auditoría de código y el hardening se contratan de forma independiente, sin necesidad de encargarnos también el desarrollo."
+        },
+        {
+          "q": "¿Realizan pruebas de penetración sin autorización?",
+          "a": "Nunca. Toda prueba requiere autorización por escrito y un alcance acordado. Es una condición innegociable, por ética y porque acceder a un sistema sin permiso es delito en la mayoría de los países."
+        },
+        {
+          "q": "¿De quién es el código que desarrollan?",
+          "a": "Tuyo. La cesión de derechos se recoge en el contrato, y entregamos el código fuente, la documentación y los accesos necesarios para que puedas mantenerlo con nosotros o sin nosotros."
+        },
+        {
+          "q": "¿Cuánto tarda y cuánto cuesta un proyecto?",
+          "a": "Depende del alcance. Tras una primera conversación te enviamos una propuesta con alcance, plazos orientativos e inversión. Puedes empezar desde la página de solicitud de propuesta."
+        },
+        {
+          "q": "¿Ofrecen soporte después de la entrega?",
+          "a": "Sí. Acordamos un periodo de estabilización para corregir incidencias y, si lo necesitas, planes de mantenimiento, monitorización y evolución continua."
+        }
+      ]
+    },
+    "soon": {
+      "eyebrow": "Próximamente",
+      "title": "Lo que estamos preparando",
+      "lead": "Recursos gratuitos para equipos que quieren mejorar la seguridad de su web. Escríbenos y te avisamos cuando estén disponibles.",
+      "items": {
+        "tool": {
+          "title": "Revisión de seguridad web gratuita",
+          "text": "Una herramienta para detectar en minutos los fallos de configuración más comunes de un sitio web."
+        },
+        "checklist": {
+          "title": "Checklist de seguridad web",
+          "text": "Una lista práctica para revisar los controles esenciales antes de lanzar o auditar una aplicación."
+        }
+      },
+      "cta": "Avísame del lanzamiento",
+      "mailSubject": "Quiero que me avisen de los recursos gratuitos"
+    },
+    "cta": {
+      "title": "¿Construimos algo seguro juntos?",
+      "lead": "Cuéntanos qué necesitas. Te respondemos con una propuesta clara: alcance, plazos e inversión."
+    }
+  }
+}

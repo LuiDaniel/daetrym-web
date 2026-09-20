@@ -1,0 +1,109 @@
+{
+  "security": {
+    "meta": {
+      "title": "Responsible disclosure policy",
+      "description": "How to report a vulnerability in our website, what is in scope and what you can expect from us."
+    },
+    "eyebrow": "Security",
+    "title": "Responsible disclosure policy",
+    "intro": "If you have found a vulnerability in our website, we want to know. This policy explains how to report it and what you can expect from us.",
+    "draft": {
+      "title": "Commitments pending confirmation",
+      "body": "The timelines, the safe harbor and the other commitments in this policy are a proposal. Confirm them with the company and with legal counsel before publishing."
+    },
+    "sections": [
+      {
+        "id": "reporting",
+        "title": "How to report",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Write to us at [{securityEmail}](mailto:{securityEmail}) with a clear description of the problem, the steps to reproduce it and its potential impact."
+          },
+          {
+            "type": "p",
+            "text": "You can also check our [security.txt](/.well-known/security.txt) file, which follows the RFC 9116 standard."
+          },
+          {
+            "type": "p",
+            "text": "[COMPLETE: if you have a PGP key, state its fingerprint here and where to download it]"
+          }
+        ]
+      },
+      {
+        "id": "scope",
+        "title": "Scope",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "The {legalName} website and its subdomains are in scope. The following are out of scope:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Third-party services we use (hosting, email, database…). Report those to the relevant provider.",
+              "Denial-of-service attacks and load testing.",
+              "Social engineering, phishing or physical access against our staff or premises.",
+              "Automated reports without a proof of concept or a demonstrable impact.",
+              "Low-risk findings without an exploitable impact, such as a missing header that does not amount to a real vulnerability."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rules",
+        "title": "What we ask of you",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Act in good faith and avoid affecting other people, their data or the availability of the service.",
+              "Access only what is strictly necessary to demonstrate the problem, and do not keep or share personal data.",
+              "Do not modify or delete data.",
+              "Give us a reasonable amount of time to fix the problem before making it public."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "commitments",
+        "title": "What you can expect from us",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "We will acknowledge receipt of your report within a target of 3 business days.",
+              "We will assess the finding and keep you informed of progress.",
+              "We will fix confirmed issues, prioritized by severity.",
+              "With your permission, we will publicly acknowledge your contribution."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "[COMPLETE: confirm the response times the company can commit to]"
+          }
+        ]
+      },
+      {
+        "id": "safe-harbor",
+        "title": "Safe harbor",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We will not take legal action against people who report vulnerabilities in good faith and comply with this policy. [COMPLETE: review this statement with legal counsel]"
+          }
+        ]
+      },
+      {
+        "id": "rewards",
+        "title": "Rewards",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We do not currently offer monetary rewards (a bug bounty). We appreciate every report and, if you wish, we will acknowledge you publicly."
+          }
+        ]
+      }
+    ]
+  }
+}

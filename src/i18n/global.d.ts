@@ -1,5 +1,5 @@
 import type { routing } from './routing';
-import type messages from '../messages/es.json';
+import type messages from '../messages/es/index';
 
 // Tipado estricto de las claves de traducción y del locale (next-intl v4).
 declare module 'next-intl' {

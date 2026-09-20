@@ -26,7 +26,14 @@
   --accent-text: #01bf63;
   --on-accent: #04110a;
 
+  --accent-tint: rgb(1 191 99 / 0.14); /* fondo de insignias con icono */
+
   --danger: #ff7a7a;
+
+  /* Contenido de ejemplo / pendiente de revisión: ámbar, distinto del verde de marca */
+  --warning: #f5c451;
+  --warning-bg: rgb(245 196 81 / 0.1);
+  --warning-border: rgb(245 196 81 / 0.35);
 
   --hairline: rgb(255 255 255 / 0.08);
   --hairline-strong: rgb(255 255 255 / 0.16);
@@ -65,7 +72,13 @@
   --accent-text: #00713a;
   --on-accent: #04110a;
 
+  --accent-tint: rgb(0 113 58 / 0.1);
+
   --danger: #b3261e;
+
+  --warning: #8a5a00;
+  --warning-bg: rgb(138 90 0 / 0.08);
+  --warning-border: rgb(138 90 0 / 0.3);
 
   --hairline: rgb(4 7 18 / 0.1);
   --hairline-strong: rgb(4 7 18 / 0.18);
@@ -120,7 +133,11 @@
   --color-accent-pressed: var(--accent-pressed);
   --color-accent-text: var(--accent-text);
   --color-on-accent: var(--on-accent);
+  --color-accent-tint: var(--accent-tint);
   --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-border: var(--warning-border);
   --color-hairline: var(--hairline);
   --color-hairline-strong: var(--hairline-strong);
   --color-scrim: var(--scrim);

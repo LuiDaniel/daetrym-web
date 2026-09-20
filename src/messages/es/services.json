@@ -1,0 +1,356 @@
+{
+  "services": {
+    "meta": {
+      "title": "Servicios de desarrollo y ciberseguridad",
+      "description": "Desarrollo de aplicaciones web, software a medida, ciberseguridad y consultoría técnica. Construimos software y comprobamos que resiste."
+    },
+    "eyebrow": "Servicios",
+    "title": "Servicios de desarrollo y ciberseguridad",
+    "lead": "Construimos software y comprobamos que resiste. Puedes contratar cada servicio por separado o combinarlos en un mismo proyecto.",
+    "index": {
+      "listTitle": "Nuestros servicios",
+      "helpTitle": "¿No tienes claro qué necesitas?",
+      "helpText": "Cuéntanos tu situación y te recomendamos el punto de partida más sensato, sin compromiso."
+    },
+    "detail": {
+      "rootLabel": "Servicios",
+      "problemEyebrow": "El problema",
+      "solutionEyebrow": "Nuestra solución",
+      "processEyebrow": "Cómo lo hacemos",
+      "processTitle": "Un proceso claro, paso a paso",
+      "deliverablesEyebrow": "Qué recibes",
+      "deliverablesTitle": "Entregables concretos",
+      "faqEyebrow": "Preguntas frecuentes",
+      "faqTitle": "Dudas habituales",
+      "relatedTitle": "Otros servicios",
+      "stepLabel": "Paso {number}",
+      "cybersecurityHubLink": "Metodologías, alcance y reglas de participación"
+    },
+    "items": {
+      "web-apps": {
+        "name": "Desarrollo de aplicaciones web",
+        "summary": "Aplicaciones web rápidas, accesibles y seguras, diseñadas para crecer contigo.",
+        "tagline": "Productos web que cargan rápido, se entienden a la primera y resisten ataques reales.",
+        "meta": {
+          "title": "Desarrollo de aplicaciones web seguras",
+          "description": "Diseñamos y desarrollamos aplicaciones web rápidas, accesibles y seguras. Arquitectura clara, buenas prácticas OWASP y entrega con código y documentación."
+        },
+        "problem": {
+          "title": "Lanzar rápido no debería significar lanzar frágil",
+          "body": "Muchas aplicaciones web nacen con prisa: se prioriza salir a producción y la seguridad, el rendimiento y la accesibilidad se dejan «para después». El resultado son productos lentos, difíciles de mantener y con vulnerabilidades que se descubren cuando ya han costado dinero o reputación.",
+          "points": [
+            "Rendimiento que empeora con cada nueva funcionalidad",
+            "Dependencias sin control y deuda técnica acumulada",
+            "Fallos de seguridad detectados tarde, o por terceros",
+            "Interfaces que excluyen a una parte de los usuarios"
+          ]
+        },
+        "solution": {
+          "title": "Seguridad, rendimiento y accesibilidad desde el primer sprint",
+          "body": "Tratamos estas cualidades como requisitos, no como extras. Cada decisión de arquitectura queda documentada y cada funcionalidad se revisa con criterios de seguridad antes de llegar a producción.",
+          "points": [
+            "Arquitectura clara y modular, con decisiones documentadas",
+            "Buenas prácticas de OWASP (ASVS) integradas en el desarrollo",
+            "Rendimiento medible: las métricas Core Web Vitals son un criterio de aceptación",
+            "Accesibilidad WCAG 2.2 AA y diseño adaptable a cualquier pantalla",
+            "Integración continua con pruebas automáticas y análisis de dependencias"
+          ]
+        },
+        "process": [
+          {
+            "title": "Descubrimiento y alcance",
+            "text": "Entendemos el problema, los usuarios y las restricciones. Definimos alcance, prioridades y criterios de éxito."
+          },
+          {
+            "title": "Diseño y arquitectura",
+            "text": "Diseñamos la experiencia y la arquitectura, y modelamos las amenazas más relevantes antes de escribir código."
+          },
+          {
+            "title": "Desarrollo iterativo",
+            "text": "Entregamos en ciclos cortos con revisión de código, pruebas automáticas y demostraciones para que veas avances reales."
+          },
+          {
+            "title": "Pruebas y revisión de seguridad",
+            "text": "Verificamos rendimiento, accesibilidad y seguridad, incluidas las dependencias, antes de cada lanzamiento."
+          },
+          {
+            "title": "Lanzamiento y seguimiento",
+            "text": "Desplegamos con un proceso reproducible, monitorizamos y traspasamos el conocimiento a tu equipo."
+          }
+        ],
+        "deliverables": [
+          "Aplicación en producción y código fuente en tu repositorio",
+          "Documentación técnica y guía de despliegue",
+          "Integración y despliegue continuos configurados",
+          "Informe de pruebas: funcionales, rendimiento, accesibilidad y seguridad",
+          "Sesión de traspaso con tu equipo"
+        ],
+        "faq": [
+          {
+            "q": "¿Qué tecnologías usan?",
+            "a": "Elegimos según el problema, no por moda. Trabajamos habitualmente con TypeScript, React, Next.js, Node.js y PostgreSQL, y nos adaptamos a tu stack cuando ya existe."
+          },
+          {
+            "q": "¿Pueden continuar un proyecto que ya existe?",
+            "a": "Sí. Empezamos con una revisión del código y de la arquitectura para conocer el estado real, y te proponemos un plan de mejora priorizado."
+          },
+          {
+            "q": "¿Cómo garantizan la seguridad de la aplicación?",
+            "a": "No prometemos software invulnerable: nadie puede. Reducimos el riesgo con diseño seguro, revisión de código, análisis de dependencias y pruebas específicas, y te explicamos qué riesgos se aceptan y por qué."
+          },
+          {
+            "q": "¿Qué pasa después del lanzamiento?",
+            "a": "Acordamos un periodo de estabilización para corregir incidencias y ofrecemos planes de mantenimiento y evolución si los necesitas."
+          }
+        ],
+        "cta": {
+          "title": "¿Tienes una aplicación en mente?",
+          "text": "Cuéntanos qué quieres construir y te proponemos el camino más sensato para llegar."
+        }
+      },
+      "custom-software": {
+        "name": "Software a medida",
+        "summary": "Sistemas hechos para cómo trabaja tu equipo, con código que es tuyo y documentación clara.",
+        "tagline": "Software que se adapta a tu negocio, y no al revés.",
+        "meta": {
+          "title": "Desarrollo de software a medida",
+          "description": "Sistemas internos, integraciones y automatización a medida, con seguridad integrada, código propio y documentación clara."
+        },
+        "problem": {
+          "title": "Las herramientas genéricas te obligan a adaptar tu negocio",
+          "body": "Cuando un proceso no encaja en una herramienta estándar aparecen hojas de cálculo paralelas, tareas manuales y datos duplicados. Con el tiempo, esos parches son frágiles, difíciles de auditar y dependen de personas concretas.",
+          "points": [
+            "Procesos manuales que consumen horas y generan errores",
+            "Información dispersa en varias herramientas sin conexión entre sí",
+            "Dependencia de un proveedor o de una persona clave",
+            "Permisos y trazabilidad insuficientes para datos sensibles"
+          ]
+        },
+        "solution": {
+          "title": "Un sistema diseñado alrededor de tu forma de trabajar",
+          "body": "Analizamos tus procesos reales y construimos un software modular que los automatiza, se integra con lo que ya usas y puede crecer sin reescribirse.",
+          "points": [
+            "Análisis de procesos y modelado del dominio antes de programar",
+            "Arquitectura modular y APIs documentadas para integrarlo con otros sistemas",
+            "Control de acceso por roles y registro de auditoría desde el diseño",
+            "Migración de los datos existentes, con validación y plan de vuelta atrás",
+            "Código propio y sin dependencia de proveedor: puedes mantenerlo con nosotros o sin nosotros"
+          ]
+        },
+        "process": [
+          {
+            "title": "Análisis de procesos",
+            "text": "Observamos cómo trabajas hoy, identificamos los cuellos de botella y priorizamos lo que más valor aporta."
+          },
+          {
+            "title": "Diseño de la solución",
+            "text": "Definimos el modelo de datos, los flujos y la arquitectura, y acordamos un alcance por fases."
+          },
+          {
+            "title": "Construcción por entregas",
+            "text": "Desarrollamos en incrementos utilizables para que tu equipo pruebe pronto y ajuste el rumbo."
+          },
+          {
+            "title": "Migración y pruebas",
+            "text": "Migramos los datos existentes, probamos con casos reales y revisamos la seguridad antes de la puesta en marcha."
+          },
+          {
+            "title": "Puesta en marcha y formación",
+            "text": "Desplegamos, formamos a tus usuarios y dejamos documentación para quien mantenga el sistema."
+          }
+        ],
+        "deliverables": [
+          "Software desplegado y código fuente con su historial",
+          "Documentación funcional, técnica y de operación",
+          "Manual de usuario y sesiones de formación",
+          "Plan de copias de seguridad y recuperación",
+          "Informe de revisión de seguridad"
+        ],
+        "faq": [
+          {
+            "q": "¿Cuánto tarda un desarrollo a medida?",
+            "a": "Depende del alcance. Por eso trabajamos por fases: la primera entrega útil suele llegar en semanas, no en meses, y el resto se planifica a partir de lo aprendido."
+          },
+          {
+            "q": "¿Quién es el dueño del código?",
+            "a": "Tú. La cesión de derechos se recoge en el contrato y entregamos el código fuente, la documentación y los accesos."
+          },
+          {
+            "q": "¿Podemos integrarlo con nuestras herramientas actuales?",
+            "a": "Normalmente sí, siempre que dispongan de una API o de una vía de exportación fiable. Lo evaluamos en la fase de análisis."
+          },
+          {
+            "q": "¿Y si necesitamos cambios más adelante?",
+            "a": "El software cambia con el negocio. Diseñamos para que evolucione y ofrecemos planes de mantenimiento, o puedes continuar con tu propio equipo gracias a la documentación."
+          }
+        ],
+        "cta": {
+          "title": "¿Un proceso que no encaja en ninguna herramienta?",
+          "text": "Cuéntanoslo. A veces la mejor solución es un sistema a medida; otras, una herramienta que ya existe. Te lo decimos con honestidad."
+        }
+      },
+      "cybersecurity": {
+        "name": "Ciberseguridad",
+        "summary": "Pentesting web, auditoría de código, hardening, respuesta a incidentes y capacitación.",
+        "tagline": "Comprueba tus defensas con quien sabe cómo se ataca, y corrige antes de que lo haga otro.",
+        "meta": {
+          "title": "Servicios de ciberseguridad",
+          "description": "Pentesting web, auditoría de código, hardening, respuesta a incidentes y capacitación. Metodologías OWASP, NIST y PTES, siempre con autorización por escrito."
+        },
+        "problem": {
+          "title": "No puedes defender lo que no sabes que está expuesto",
+          "body": "Las aplicaciones cambian cada semana y a un atacante le basta con un fallo. Sin pruebas independientes es fácil confiar en controles que en la práctica no funcionan, o descubrir un problema cuando ya hay un incidente.",
+          "points": [
+            "Vulnerabilidades desconocidas en aplicaciones y APIs",
+            "Configuraciones por defecto o permisos excesivos en servidores y nube",
+            "Código con fallos de seguridad que ninguna revisión ha detectado",
+            "Equipos sin un plan claro de qué hacer ante un incidente"
+          ]
+        },
+        "solution": {
+          "title": "Cinco servicios que cubren prevención, detección y respuesta",
+          "body": "Cada servicio se puede contratar de forma independiente. Siempre con alcance acordado y autorización por escrito.",
+          "points": [
+            "Pentesting web y de APIs: pruebas manuales y automatizadas siguiendo la guía de pruebas de OWASP y PTES",
+            "Auditoría de código: revisión del código fuente y de las dependencias para encontrar fallos que las pruebas externas no ven",
+            "Hardening: endurecimiento de servidores, contenedores, nube y servicios a partir de guías reconocidas",
+            "Respuesta a incidentes: contención, análisis y recuperación, con las lecciones aprendidas por escrito",
+            "Capacitación: formación práctica en desarrollo seguro y concienciación para tu equipo"
+          ]
+        },
+        "process": [
+          {
+            "title": "Autorización y alcance",
+            "text": "Firmamos un acuerdo que define activos, fechas, técnicas permitidas y contactos de emergencia. Sin este paso no empezamos."
+          },
+          {
+            "title": "Reconocimiento",
+            "text": "Mapeamos la superficie de ataque: qué está expuesto y cómo se comporta."
+          },
+          {
+            "title": "Pruebas y validación",
+            "text": "Identificamos y validamos vulnerabilidades con la mínima intrusión posible, sin poner en riesgo tus datos ni tu servicio."
+          },
+          {
+            "title": "Informe",
+            "text": "Documentamos cada hallazgo con evidencias, impacto, severidad (CVSS) y una recomendación de corrección."
+          },
+          {
+            "title": "Corrección y reprueba",
+            "text": "Te acompañamos en la corrección y verificamos que cada problema queda resuelto."
+          }
+        ],
+        "deliverables": [
+          "Resumen ejecutivo para dirección, en lenguaje claro",
+          "Informe técnico con evidencias reproducibles y severidad CVSS",
+          "Recomendaciones de corrección priorizadas por riesgo",
+          "Sesión de presentación de resultados con tu equipo",
+          "Reprueba de las vulnerabilidades corregidas"
+        ],
+        "faq": [
+          {
+            "q": "¿Necesitan autorización para hacer las pruebas?",
+            "a": "Siempre. Toda prueba requiere autorización por escrito de quien tiene control sobre el sistema. No realizamos pruebas sobre activos que no sean del cliente ni sin un acuerdo previo."
+          },
+          {
+            "q": "¿Una prueba de penetración puede afectar a mi servicio?",
+            "a": "Trabajamos para minimizar cualquier impacto: técnicas acordadas, ventanas de prueba y un contacto de emergencia. Cuando es posible, preferimos un entorno de pruebas para las acciones más intrusivas."
+          },
+          {
+            "q": "¿Con qué frecuencia conviene hacer pruebas?",
+            "a": "Como mínimo tras cambios importantes y de forma periódica; muchas organizaciones lo hacen al menos una vez al año. Te ayudamos a definir la cadencia según tu nivel de riesgo."
+          },
+          {
+            "q": "¿Ayudan a corregir lo que encuentran?",
+            "a": "Sí. El informe incluye recomendaciones concretas, y podemos acompañar a tu equipo en la corrección y verificarla después con una reprueba."
+          },
+          {
+            "q": "¿Cómo tratan la información confidencial?",
+            "a": "Firmamos un acuerdo de confidencialidad, limitamos el acceso a lo estrictamente necesario, protegemos las evidencias y eliminamos los datos al terminar, según lo pactado."
+          }
+        ],
+        "cta": {
+          "title": "¿Quieres saber qué ve un atacante de tu aplicación?",
+          "text": "Cuéntanos qué quieres proteger. Definimos juntos el alcance y te enviamos una propuesta con autorización y plazos claros."
+        }
+      },
+      "consulting": {
+        "name": "Consultoría técnica",
+        "summary": "Criterio experto para decidir bien: arquitectura, tecnología y seguridad.",
+        "tagline": "Decisiones técnicas con criterio independiente, antes de que sean caras de revertir.",
+        "meta": {
+          "title": "Consultoría técnica y de arquitectura",
+          "description": "Revisión de arquitectura, selección de tecnología, diagnóstico de deuda técnica y hoja de ruta de seguridad, con criterio independiente."
+        },
+        "problem": {
+          "title": "Las decisiones técnicas caras se toman pronto y se pagan tarde",
+          "body": "Elegir una arquitectura, un proveedor o una tecnología condiciona años de coste, riesgo y velocidad. Sin una segunda opinión experta es fácil decidir por costumbre, por moda o por presión de plazos.",
+          "points": [
+            "Dudas entre alternativas técnicas sin un criterio claro para elegir",
+            "Deuda técnica acumulada que frena cada nueva funcionalidad",
+            "Riesgos de seguridad y de continuidad sin priorizar",
+            "Un equipo sobrecargado y sin un responsable técnico con perspectiva"
+          ]
+        },
+        "solution": {
+          "title": "Una mirada independiente y accionable",
+          "body": "Analizamos tu situación con tu equipo y te entregamos recomendaciones concretas, priorizadas y justificadas, no informes genéricos.",
+          "points": [
+            "Revisión de arquitectura y de código para detectar riesgos y cuellos de botella",
+            "Selección de tecnología y de proveedores con criterios explícitos",
+            "Diagnóstico de deuda técnica con un plan de reducción priorizado",
+            "Hoja de ruta de seguridad alineada con marcos como NIST CSF y SSDF",
+            "Acompañamiento a tu equipo como responsable técnico externo, por horas o por periodos"
+          ]
+        },
+        "process": [
+          {
+            "title": "Conversación inicial",
+            "text": "Entendemos el contexto, los objetivos y las restricciones, y acordamos qué decisión hay que tomar."
+          },
+          {
+            "title": "Análisis",
+            "text": "Revisamos documentación, arquitectura y código, y hablamos con las personas que conocen el sistema."
+          },
+          {
+            "title": "Recomendaciones",
+            "text": "Presentamos alternativas con sus ventajas, costes y riesgos, y nuestra recomendación razonada."
+          },
+          {
+            "title": "Acompañamiento",
+            "text": "Si lo necesitas, te ayudamos a ejecutar el plan y a revisar los resultados."
+          }
+        ],
+        "deliverables": [
+          "Informe de diagnóstico con hallazgos priorizados",
+          "Comparativa de alternativas y recomendación justificada",
+          "Hoja de ruta con hitos y esfuerzos estimados",
+          "Sesión de presentación con dirección y equipo técnico",
+          "Sesiones de seguimiento (opcional)"
+        ],
+        "faq": [
+          {
+            "q": "¿Para qué tipo de equipos es útil?",
+            "a": "Para equipos de producto, startups y pymes que van a tomar una decisión técnica importante, o que sienten que su plataforma frena al negocio, y quieren una opinión independiente."
+          },
+          {
+            "q": "¿Trabajan con nuestro equipo o lo sustituyen?",
+            "a": "Trabajamos con tu equipo. El objetivo es que tomes mejores decisiones y ganes autonomía, no crear dependencia."
+          },
+          {
+            "q": "¿Cuánto dura un proyecto de consultoría?",
+            "a": "Un diagnóstico puntual suele resolverse en pocas semanas; el acompañamiento continuo se pacta por periodos. Lo definimos según lo que necesites."
+          },
+          {
+            "q": "¿Recomiendan siempre sus propios servicios?",
+            "a": "No. Si lo que necesitas es una herramienta existente o que otro proveedor haga el trabajo, te lo decimos."
+          }
+        ],
+        "cta": {
+          "title": "¿Una decisión técnica que quieres contrastar?",
+          "text": "Cuéntanos el contexto y te decimos si podemos ayudarte y cómo."
+        }
+      }
+    }
+  }
+}
