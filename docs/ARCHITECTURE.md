@@ -279,4 +279,9 @@ Bugs reales encontrados por las pruebas durante la fase (todos corregidos y cubi
 5. **404 sin contenido en el servidor** (ver arriba).
 6. `fill-mode: both` del revelado pisaba el feedback de pulsación (`.press:active`) de las tarjetas → `backwards`.
 
+Corrección posterior a la fase (informe: «no funcionan los botones de tema e idioma»). Dos causas independientes:
+
+7. **Idioma y tema escondidos entre 640 y 1023 px.** Al mover la navegación al sheet hasta 1024 px (punto 1) también se ocultaron esos dos controles del header. Ahora se muestran desde 640 px (`sm`) y solo por debajo viven únicamente dentro del sheet. Test de regresión a 1000 px en `smoke.spec.ts`.
+8. **`next dev` abierto por `127.0.0.1` o por la IP de la red local no hidrataba** (Next bloquea los recursos de desarrollo de orígenes distintos de `localhost`): la página se veía pero ningún botón respondía. `allowedDevOrigins` en `next.config.ts` (solo afecta a `next dev`; `next start` y producción no cambian).
+
 Pendiente de contenido (lo lista `pnpm check:placeholders`): historia real de la empresa, equipo, proyectos, redes, datos legales (`[COMPLETAR]`), plazos y puerto seguro de la política de divulgación, confirmación del stack y de los tiempos orientativos del proceso, y revisión legal de las tres plantillas.

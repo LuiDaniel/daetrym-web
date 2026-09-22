@@ -31,7 +31,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 lg:flex">
+          {/* Idioma y tema visibles desde 640 px; por debajo, dentro del menú lateral. */}
+          <div className="hidden items-center gap-2 sm:flex">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>

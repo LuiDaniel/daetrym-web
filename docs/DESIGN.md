@@ -124,7 +124,7 @@ conserva opacidad/color. Todo gesto tiene alternativa de teclado.
 
 **FAQ (`Faq`).** La altura se anima con un spring (interrumpible: pulsar a mitad de apertura parte de la altura actual). La respuesta cerrada es `inert`. Con reduced motion la altura cambia al instante y solo se funde la opacidad.
 
-**Header y breakpoints.** El header completo aparece desde 1024 px (`lg`); por debajo, el sheet lateral (móvil y tablet). Las rejillas de tarjetas pasan de 1 a 2 columnas a 640 px (`sm`) y a 3–4 a 1024 px.
+**Header y breakpoints.** La navegación completa aparece desde 1024 px (`lg`); por debajo, el sheet lateral (móvil y tablet). Idioma, tema y CTA se quedan en el header desde 640 px (`sm`) porque son controles de uso frecuente y caben; por debajo de 640 px viven solo dentro del sheet. Las rejillas de tarjetas pasan de 1 a 2 columnas a 640 px (`sm`) y a 3–4 a 1024 px.
 
 **Documentos largos (`LegalDocument`).** Sin animaciones: índice fijo en escritorio, tablas que en móvil pasan a tarjetas con la cabecera como etiqueta (sin scroll horizontal), y los datos pendientes resaltados con `<mark>`.
 

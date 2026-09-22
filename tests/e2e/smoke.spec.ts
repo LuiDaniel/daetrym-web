@@ -1,6 +1,12 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { isSheetLayout, sheetVisibleWidth, waitForHydration, watchForProblems } from './helpers';
+import {
+  isCompactHeader,
+  isSheetLayout,
+  sheetVisibleWidth,
+  waitForHydration,
+  watchForProblems,
+} from './helpers';
 
 test.describe('carga y seguridad', () => {
   test('la Home carga sin violaciones de CSP ni errores', async ({ page }) => {
@@ -64,10 +70,11 @@ test.describe('idioma', () => {
 
   test('el selector cambia de idioma y lo recuerda', async ({ page }) => {
     test.skip(
-      isSheetLayout(page),
+      isCompactHeader(page),
       'En móvil el selector vive dentro del menú (ver test del menú).',
     );
     await page.goto('/es');
+    await waitForHydration(page);
     await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 
     await page.getByRole('button', { name: /english/i }).click();
@@ -92,8 +99,9 @@ test.describe('idioma', () => {
 
 test.describe('tema', () => {
   test('es oscuro por defecto y el modo claro persiste sin destello', async ({ page }) => {
-    test.skip(isSheetLayout(page), 'En móvil el toggle vive dentro del menú.');
+    test.skip(isCompactHeader(page), 'En móvil el toggle vive dentro del menú.');
     await page.goto('/es');
+    await waitForHydration(page);
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
     await page.getByRole('button', { name: /modo claro/i }).click();
@@ -102,6 +110,25 @@ test.describe('tema', () => {
     // Tras recargar, el script inline fija el tema ANTES de hidratar (sin destello oscuro).
     await page.reload({ waitUntil: 'commit' });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  });
+});
+
+// Regresión: entre 640 y 1023 px el header muestra el menú lateral, pero idioma y tema deben
+// seguir a la vista y funcionando (se habían escondido hasta 1024 px y "no respondían").
+test.describe('controles de idioma y tema en anchos intermedios', () => {
+  test.use({ viewport: { width: 1000, height: 800 } });
+
+  test('el idioma y el tema están en el header y responden', async ({ page }) => {
+    await page.goto('/es');
+    await waitForHydration(page);
+    const header = page.getByRole('banner');
+
+    await header.getByRole('button', { name: /modo claro/i }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+
+    await header.getByRole('button', { name: /english/i }).click();
+    await expect(page).toHaveURL(/\/en$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   });
 });
 

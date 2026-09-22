@@ -87,5 +87,10 @@ export const comingSoonRoutes = [
 export const SHEET_BREAKPOINT = 1024;
 export const isSheetLayout = (page: Page) => page.viewportSize()!.width < SHEET_BREAKPOINT;
 
+/** Por debajo de 640 px, idioma y tema salen del header y viven solo dentro del menú lateral. */
+export const COMPACT_HEADER_BREAKPOINT = 640;
+export const isCompactHeader = (page: Page) =>
+  page.viewportSize()!.width < COMPACT_HEADER_BREAKPOINT;
+
 /** Ancho visible del sheet lateral: 88 % del viewport con un máximo de 26 rem (416 px). Ver components/ui/side-sheet.tsx. */
 export const sheetVisibleWidth = (viewportWidth: number) => Math.min(viewportWidth * 0.88, 416);

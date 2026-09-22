@@ -3,7 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 import {
   allContentRoutes,
   comingSoonRoutes,
-  isSheetLayout,
+  isCompactHeader,
   waitForHydration,
   watchForProblems,
 } from './helpers';
@@ -301,7 +301,7 @@ test.describe('Servicios', () => {
   });
 
   test('el selector de idioma conserva el servicio (misma ruta, otro idioma)', async ({ page }) => {
-    test.skip(isSheetLayout(page), 'En móvil el selector vive en el menú.');
+    test.skip(isCompactHeader(page), 'En móvil el selector vive en el menú.');
     await page.goto('/es/servicios/custom-software');
     await waitForHydration(page);
     await page.getByRole('button', { name: /english/i }).click();
