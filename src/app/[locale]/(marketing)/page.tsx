@@ -11,6 +11,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { BookCallButton } from '@/components/sections/book-call-button';
+import { JsonLd } from '@/components/seo/json-ld';
 import { Card } from '@/components/ui/card';
 import { CardGrid, FeatureCard, ProjectCard, ServiceCard } from '@/components/sections/cards';
 import { CtaBand } from '@/components/sections/cta-band';
@@ -33,6 +34,7 @@ import type { Locale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 import { getFeaturedProjects } from '@/lib/content/projects';
 import { buildAlternates } from '@/lib/seo/alternates';
+import { faqPageJsonLd } from '@/lib/seo/json-ld';
 import { faqSchema } from '@/schemas/page-content';
 
 type Props = { params: Promise<{ locale: Locale }> };
@@ -78,6 +80,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={faqPageJsonLd(faqItems)} />
       <PageHero
         size="display"
         eyebrow={t('hero.eyebrow')}

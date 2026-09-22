@@ -18,12 +18,20 @@ const isDev = process.env.NODE_ENV !== 'production';
  */
 export function proxy(request: NextRequest) {
   const nonce = generateNonce();
+  // Origen de la analítica (Fase 5): a diferencia de Turnstile, no es fijo — depende de si es Umami
+  // cloud, autoalojado, o Plausible — así que se calcula de la propia variable de entorno.
+  const analyticsOrigin = env.NEXT_PUBLIC_ANALYTICS_SCRIPT_URL
+    ? new URL(env.NEXT_PUBLIC_ANALYTICS_SCRIPT_URL).origin
+    : undefined;
   const csp = buildCsp({
     nonce,
     isDev,
     // Turnstile (formularios, Fase 4): su iframe y su verificación en cliente necesitan este origen.
     frameSrc: ['https://challenges.cloudflare.com'],
-    connectSrc: ['https://challenges.cloudflare.com'],
+    connectSrc: [
+      'https://challenges.cloudflare.com',
+      ...(analyticsOrigin ? [analyticsOrigin] : []),
+    ],
   });
 
   const requestHeaders = new Headers(request.headers);

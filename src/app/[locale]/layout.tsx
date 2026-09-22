@@ -4,13 +4,17 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { MotionProvider } from '@/components/motion/motion-provider';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SkipLink } from '@/components/layout/skip-link';
 import { WhatsAppButton } from '@/components/layout/whatsapp-button';
+import { Analytics } from '@/components/seo/analytics';
+import { JsonLd } from '@/components/seo/json-ld';
 import { siteConfig } from '@/config/site';
 import { routing, type Locale } from '@/i18n/routing';
+import { organizationJsonLd, websiteJsonLd } from '@/lib/seo/json-ld';
 import { THEME_SCRIPT } from '@/lib/security/theme-script';
 import { instrumentSerif, inter, jetbrainsMono } from '../fonts';
 import '@/styles/globals.css';
@@ -34,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { default: t('title'), template: t('titleTemplate') },
     description: t('description'),
     applicationName: siteConfig.name,
+    manifest: '/manifest.webmanifest',
     openGraph: {
       type: 'website',
       siteName: siteConfig.name,
@@ -93,6 +98,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
         />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd(locale)]} />
       </head>
       <body>
         <NextIntlClientProvider messages={clientMessages}>
@@ -106,6 +112,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             <WhatsAppButton locale={locale as Locale} />
           </MotionProvider>
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

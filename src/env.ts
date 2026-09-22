@@ -85,6 +85,17 @@ export const env = createEnv({
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: isProd
       ? z.string().min(1)
       : z.string().min(1).default('1x00000000000000000000AA'),
+
+    /**
+     * Analítica sin cookies (Umami o Plausible; D3). Ambas opcionales: sin las dos,
+     * `components/seo/analytics.tsx` no renderiza nada — no hace falta cuenta para desarrollar.
+     * `NEXT_PUBLIC_ANALYTICS_SCRIPT_URL` es la URL completa del script (el proxy la añade a
+     * `connect-src` de la CSP, ver src/proxy.ts) y `NEXT_PUBLIC_ANALYTICS_WEBSITE_ID` el identificador
+     * del sitio (Umami: `data-website-id`; en Plausible sería el dominio — ver el comentario del
+     * componente para adaptarlo).
+     */
+    NEXT_PUBLIC_ANALYTICS_SCRIPT_URL: z.url().optional(),
+    NEXT_PUBLIC_ANALYTICS_WEBSITE_ID: z.string().min(1).optional(),
   },
 
   runtimeEnv: {
@@ -103,6 +114,8 @@ export const env = createEnv({
     NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
     NEXT_PUBLIC_CAL_URL: process.env.NEXT_PUBLIC_CAL_URL,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+    NEXT_PUBLIC_ANALYTICS_SCRIPT_URL: process.env.NEXT_PUBLIC_ANALYTICS_SCRIPT_URL,
+    NEXT_PUBLIC_ANALYTICS_WEBSITE_ID: process.env.NEXT_PUBLIC_ANALYTICS_WEBSITE_ID,
   },
 
   emptyStringAsUndefined: true,

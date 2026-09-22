@@ -11,6 +11,13 @@ export async function waitForHydration(page: Page) {
 /** Registra violaciones de CSP y errores de consola: el sitio debe cargar SIN ninguna. */
 export async function watchForProblems(page: Page) {
   const problems: string[] = [];
+  // `<SpeedInsights />` pide este script en cada página; Vercel lo sirve solo en su propia
+  // infraestructura (inyectado en el edge), así que en local/CI siempre da 404 + error de MIME
+  // type — no es un fallo del sitio. Se responde con un script vacío para igualar lo que pasa
+  // en producción real, en vez de aflojar la aserción de consola limpia.
+  await page.route('**/_vercel/speed-insights/script.js', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
+  );
   await page.addInitScript(() => {
     document.addEventListener('securitypolicyviolation', (event) => {
       const w = window as unknown as { __csp?: string[] };

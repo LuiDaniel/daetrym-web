@@ -10,10 +10,14 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { TableOfContents } from '@/components/ui/table-of-contents';
 import { blogCategoryHues } from '@/config/blog';
 import { blogSlugs, isBlogSlug } from '@/config/content-slugs';
+import { siteConfig } from '@/config/site';
+import { getPathname } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { getPost, getRelatedPosts, type BlogPost } from '@/lib/content/blog';
 import { Mdx } from '@/lib/content/mdx';
 import { buildAlternates } from '@/lib/seo/alternates';
+import { blogPostingJsonLd, breadcrumbListJsonLd } from '@/lib/seo/json-ld';
+import { JsonLd } from '@/components/seo/json-ld';
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -55,8 +59,30 @@ export default async function BlogPostPage({ params }: Props) {
   const publishedLabel = `${formatDate(format, post.frontmatter.date)} · ${t('readingTime', { minutes: post.readingMinutes })}`;
   const hue = blogCategoryHues[post.frontmatter.category];
 
+  const origin = siteConfig.url.replace(/\/$/, '');
+  const href = { pathname: '/blog/[slug]' as const, params: { slug } };
+  const url = `${origin}${getPathname({ locale, href })}`;
+
   return (
     <>
+      <JsonLd
+        data={[
+          blogPostingJsonLd({
+            title: post.frontmatter.title,
+            description: post.frontmatter.description,
+            url,
+            datePublished: post.frontmatter.date,
+            imageUrl: post.frontmatter.image ? `${origin}${post.frontmatter.image}` : undefined,
+          }),
+          breadcrumbListJsonLd([
+            {
+              name: t('detail.rootLabel'),
+              url: `${origin}${getPathname({ locale, href: '/blog' })}`,
+            },
+            { name: post.frontmatter.title, url },
+          ]),
+        ]}
+      />
       <PageHero
         title={post.frontmatter.title}
         lead={post.frontmatter.description}

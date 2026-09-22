@@ -20,7 +20,11 @@ export async function WhatsAppButton({ locale }: { locale: Locale }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${t('whatsapp')} (${t('opensInNewTab')})`}
-      className="press fixed right-4 bottom-4 z-40 grid size-13 place-items-center rounded-full material-thick text-green-400 sm:right-6 sm:bottom-6"
+      // `text-accent-text` (no `text-green-400`, fijo): ese paso concreto de la escala solo cumple
+      // 3:1 sobre `material-thick` en tema oscuro — en claro, ese material es casi blanco y el icono
+      // quedaba en 1.75:1. `accent-text` ya es el par correcto por tema (verificado en
+      // `pnpm check:contrast`).
+      className="press fixed right-4 bottom-4 z-40 grid size-13 place-items-center rounded-full material-thick text-accent-text sm:right-6 sm:bottom-6"
     >
       <MessageCircle className="size-6" strokeWidth={1.75} fill="currentColor" />
     </a>

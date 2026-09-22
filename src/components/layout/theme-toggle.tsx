@@ -3,27 +3,13 @@
 import { motion } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useSyncExternalStore } from 'react';
 import { THEME_STORAGE_KEY } from '@/lib/security/theme-script';
+import { useTheme, type Theme } from '@/lib/use-theme';
 import { spring } from '@/styles/motion';
-
-type Theme = 'dark' | 'light';
-
-function subscribe(onChange: () => void) {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  return () => observer.disconnect();
-}
-
-const getSnapshot = (): Theme =>
-  document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-
-/** El servidor siempre renderiza oscuro (tema por defecto); el cliente corrige tras hidratar. */
-const getServerSnapshot = (): Theme => 'dark';
 
 export function ThemeToggle() {
   const t = useTranslations('theme');
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const theme = useTheme();
   const next: Theme = theme === 'dark' ? 'light' : 'dark';
 
   function toggle() {

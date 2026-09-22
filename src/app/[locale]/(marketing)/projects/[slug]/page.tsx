@@ -8,10 +8,14 @@ import { Badge } from '@/components/ui/badge';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { projectHues } from '@/config/projects';
 import { isProjectSlug, projectSlugs } from '@/config/content-slugs';
+import { siteConfig } from '@/config/site';
+import { getPathname } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { getProject } from '@/lib/content/projects';
 import { Mdx } from '@/lib/content/mdx';
 import { buildAlternates } from '@/lib/seo/alternates';
+import { breadcrumbListJsonLd } from '@/lib/seo/json-ld';
+import { JsonLd } from '@/components/seo/json-ld';
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -41,8 +45,21 @@ export default async function ProjectPage({ params }: Props) {
   const common = await getTranslations({ locale, namespace: 'common' });
   const hue = projectHues[project.frontmatter.category];
 
+  const origin = siteConfig.url.replace(/\/$/, '');
+  const href = { pathname: '/projects/[slug]' as const, params: { slug } };
+  const url = `${origin}${getPathname({ locale, href })}`;
+
   return (
     <>
+      <JsonLd
+        data={breadcrumbListJsonLd([
+          {
+            name: t('detail.rootLabel'),
+            url: `${origin}${getPathname({ locale, href: '/projects' })}`,
+          },
+          { name: project.frontmatter.title, url },
+        ])}
+      />
       <PageHero
         title={project.frontmatter.title}
         lead={project.frontmatter.summary}

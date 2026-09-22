@@ -17,11 +17,14 @@ import { Faq } from '@/components/ui/faq';
 import { Steps } from '@/components/ui/steps';
 import { isServiceSlug, serviceHues, serviceSlugs } from '@/config/services';
 import type { Hue } from '@/config/hues';
-import { Link } from '@/i18n/navigation';
+import { getPathname, Link } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { buildAlternates } from '@/lib/seo/alternates';
+import { breadcrumbListJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo/json-ld';
+import { siteConfig } from '@/config/site';
 import { serviceContentSchema } from '@/schemas/page-content';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
+import { JsonLd } from '@/components/seo/json-ld';
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -42,9 +45,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ServicePage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   if (!isServiceSlug(slug)) notFound();
-  return <ServiceView slug={slug} />;
+
+  const messages = await getMessages({ locale });
+  const content = serviceContentSchema.parse(messages.services.items[slug]);
+  const t = await getTranslations({ locale, namespace: 'services' });
+  const origin = siteConfig.url.replace(/\/$/, '');
+  const href = { pathname: '/services/[slug]' as const, params: { slug } };
+  const url = `${origin}${getPathname({ locale, href })}`;
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          serviceJsonLd({ name: content.name, description: content.tagline, url }),
+          breadcrumbListJsonLd([
+            {
+              name: t('detail.rootLabel'),
+              url: `${origin}${getPathname({ locale, href: '/services' })}`,
+            },
+            { name: content.name, url },
+          ]),
+          ...(content.faq.length > 0 ? [faqPageJsonLd(content.faq)] : []),
+        ]}
+      />
+      <ServiceView slug={slug} />
+    </>
+  );
 }
 
 /**
