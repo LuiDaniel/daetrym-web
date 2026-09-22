@@ -20,5 +20,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function Page() {
   const t = useTranslations('nav');
-  return <ComingSoon title={t('resources')} />;
+  return <ComingSoon title={t('resources')} hue="blue" glow={['blue', 'amber']} />;
 }

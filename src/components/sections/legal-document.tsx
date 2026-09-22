@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { DraftNotice } from '@/components/ui/draft-notice';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { RichText } from '@/components/ui/rich-text';
+import { hueClass, type Hue } from '@/config/hues';
+import { cn } from '@/lib/cn';
 import type { DocumentSection } from '@/schemas/page-content';
 
 type Block = DocumentSection['blocks'][number];
@@ -20,19 +22,24 @@ type LegalDocumentProps = {
   draft?: { title: string; body: string };
   /** Contenido extra tras el aviso, p. ej. un enlace a otra página. */
   children?: ReactNode;
+  /**
+   * Tono del documento (sobretítulo, marcadores de lista, índice activo). Restringido a esto: sin
+   * `SectionGlow` — es texto largo para leer, prioriza la legibilidad sobre la decoración.
+   */
+  hue?: Hue;
 };
 
 function BlockView({ block, values }: { block: Block; values: Record<string, string> }) {
   switch (block.type) {
     case 'p':
       return (
-        <p className="mt-4 text-body text-fg-muted first:mt-0">
+        <p className="mt-4 text-prose text-fg-muted first:mt-0">
           <RichText text={block.text} values={values} />
         </p>
       );
     case 'ul':
       return (
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-body text-fg-muted marker:text-accent-text first:mt-0">
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-prose text-fg-muted marker:text-h-fg first:mt-0">
           {block.items.map((item, itemIndex) => (
             <li key={`${itemIndex}:${item}`} className="pl-1">
               <RichText text={item} values={values} />
@@ -100,11 +107,12 @@ export function LegalDocument({
   updated,
   draft,
   children,
+  hue,
 }: LegalDocumentProps) {
   const t = useTranslations('common');
 
   return (
-    <div className="container-page page-top pb-24">
+    <div className={cn('container-page page-top pb-24', hue && hueClass[hue])}>
       <header className="max-w-3xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1 id="page-title" className={eyebrow ? 'mt-3 text-h1' : 'text-h1'}>
@@ -131,7 +139,7 @@ export function LegalDocument({
               <li key={section.id}>
                 <a
                   href={`#${section.id}`}
-                  className="block rounded-sm py-1.5 text-small text-fg-muted transition-colors hover:text-fg lg:pl-4"
+                  className="block rounded-sm py-1.5 text-small text-fg-muted transition-colors hover:text-h-fg lg:pl-4"
                 >
                   {section.title}
                 </a>

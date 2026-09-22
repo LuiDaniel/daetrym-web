@@ -11,10 +11,12 @@ import { SplitLayout } from '@/components/sections/split-layout';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Checklist } from '@/components/ui/checklist';
+import { hueClass, type Hue } from '@/config/hues';
 import { IconBadge } from '@/components/ui/icon-badge';
 import { Steps } from '@/components/ui/steps';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
+import { cn } from '@/lib/cn';
 import { buildAlternates } from '@/lib/seo/alternates';
 import { useMessages } from 'next-intl';
 
@@ -38,7 +40,20 @@ const scopeIcons = {
   training: GraduationCap,
 } as const;
 const scopeKeys = ['pentest', 'codeAudit', 'hardening', 'incident', 'training'] as const;
+/** Un tono por tipo de trabajo (intención: rojo para respuesta a incidentes, no decoración). */
+const scopeHues: Record<(typeof scopeKeys)[number], Hue> = {
+  pentest: 'green',
+  codeAudit: 'cyan',
+  hardening: 'amber',
+  incident: 'red',
+  training: 'violet',
+};
 const methodologyKeys = ['owasp', 'nist', 'ptes'] as const;
+const methodologyHues: Record<(typeof methodologyKeys)[number], Hue> = {
+  owasp: 'blue',
+  nist: 'cyan',
+  ptes: 'violet',
+};
 
 export default function CybersecurityPage() {
   const t = useTranslations('cybersecurity');
@@ -52,18 +67,26 @@ export default function CybersecurityPage() {
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         lead={t('hero.lead')}
+        hue="green"
+        glow={['green', 'blue']}
         actions={
           <>
             <Button asChild size="lg">
               <Link href="/request-quote">{common('requestQuote')}</Link>
             </Button>
-            <BookCallButton size="lg" />
+            <BookCallButton size="lg" hue="green" />
           </>
         }
       />
 
       {/* Autorización por escrito: la regla que no se negocia. */}
-      <Section id="authorization" labelledBy="authorization-title" tone="raised">
+      <Section
+        id="authorization"
+        labelledBy="authorization-title"
+        tone="raised"
+        hue="green"
+        glow={['green', 'amber']}
+      >
         <SplitLayout
           aside={
             <div>
@@ -78,14 +101,14 @@ export default function CybersecurityPage() {
             </div>
           }
         >
-          <Card className="reveal border-accent/40 bg-surface-2">
+          <Card surface="glass" className="reveal border-h-line">
             <Checklist items={messages.cybersecurity.authorization.points} />
           </Card>
           <p className="mt-6 text-body text-fg-muted">
             {t('authorization.disclosureText')}{' '}
             <Link
               href="/security"
-              className="text-accent-text underline decoration-hairline-strong underline-offset-4 hover:decoration-current"
+              className="text-h-fg underline decoration-hairline-strong underline-offset-4 hover:decoration-current"
             >
               {t('authorization.disclosureLink')}
             </Link>
@@ -94,7 +117,7 @@ export default function CybersecurityPage() {
       </Section>
 
       {/* Alcance */}
-      <Section labelledBy="scope-title">
+      <Section labelledBy="scope-title" hue="green">
         <SectionHeader
           id="scope-title"
           eyebrow={t('scope.eyebrow')}
@@ -103,7 +126,7 @@ export default function CybersecurityPage() {
         />
         <CardGrid columns={3}>
           {scopeKeys.map((key) => (
-            <Card key={key} className="reveal flex flex-col gap-4">
+            <Card key={key} className={cn('reveal flex flex-col gap-4', hueClass[scopeHues[key]])}>
               <IconBadge icon={scopeIcons[key]} />
               <h3 className="text-title">{t(`scope.items.${key}.title`)}</h3>
               <p className="text-body text-fg-muted">{t(`scope.items.${key}.text`)}</p>
@@ -112,10 +135,7 @@ export default function CybersecurityPage() {
                 <ul className="space-y-1.5 text-small text-fg-muted">
                   {messages.cybersecurity.scope.items[key].includes.map((item) => (
                     <li key={item} className="flex gap-2">
-                      <span
-                        aria-hidden
-                        className="mt-2 size-1 shrink-0 rounded-full bg-accent-text"
-                      />
+                      <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-h-fg" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -138,7 +158,12 @@ export default function CybersecurityPage() {
       </Section>
 
       {/* Metodologías */}
-      <Section tone="raised" labelledBy="methodologies-title">
+      <Section
+        tone="raised"
+        labelledBy="methodologies-title"
+        hue="green"
+        glow={['green', 'violet']}
+      >
         <SectionHeader
           id="methodologies-title"
           eyebrow={t('methodologies.eyebrow')}
@@ -147,9 +172,13 @@ export default function CybersecurityPage() {
         />
         <CardGrid columns={3}>
           {methodologyKeys.map((key) => (
-            <Card key={key} className="reveal flex flex-col gap-3 bg-surface-2">
+            <Card
+              key={key}
+              surface="glass"
+              className={cn('reveal flex flex-col gap-3', hueClass[methodologyHues[key]])}
+            >
               <h3 className="text-h3">{t(`methodologies.items.${key}.name`)}</h3>
-              <p className="font-mono text-small text-accent-text">
+              <p className="font-mono text-small text-h-fg">
                 {t(`methodologies.items.${key}.subtitle`)}
               </p>
               <p className="text-body text-fg-muted">{t(`methodologies.items.${key}.text`)}</p>
@@ -162,7 +191,7 @@ export default function CybersecurityPage() {
       </Section>
 
       {/* Fases PTES */}
-      <Section labelledBy="phases-title">
+      <Section labelledBy="phases-title" hue="green">
         <SplitLayout
           aside={
             <SectionHeader

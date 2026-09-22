@@ -23,6 +23,7 @@ import { DraftNotice } from '@/components/ui/draft-notice';
 import { IconBadge } from '@/components/ui/icon-badge';
 import { socialLinks } from '@/config/social';
 import { team } from '@/config/team';
+import type { Hue } from '@/config/hues';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { buildAlternates } from '@/lib/seo/alternates';
@@ -56,6 +57,15 @@ const valueKeys = [
   'ethics',
   'learning',
 ] as const;
+/** Un tono por valor: recorre la paleta (intención, no decoración). */
+const valueHues: Record<(typeof valueKeys)[number], Hue> = {
+  security: 'green',
+  honesty: 'blue',
+  clarity: 'cyan',
+  responsibility: 'violet',
+  ethics: 'amber',
+  learning: 'magenta',
+};
 
 export default function AboutPage() {
   const t = useTranslations('about');
@@ -69,18 +79,20 @@ export default function AboutPage() {
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         lead={t('hero.lead')}
+        hue="magenta"
+        glow={['magenta', 'green']}
         actions={
           <>
             <Button asChild size="lg">
               <Link href="/request-quote">{common('requestQuote')}</Link>
             </Button>
-            <BookCallButton size="lg" />
+            <BookCallButton size="lg" hue="magenta" />
           </>
         }
       />
 
       {/* Historia */}
-      <Section labelledBy="story-title">
+      <Section labelledBy="story-title" hue="magenta">
         <SplitLayout
           aside={
             <SectionHeader id="story-title" eyebrow={t('story.eyebrow')} title={t('story.title')} />
@@ -96,17 +108,17 @@ export default function AboutPage() {
       </Section>
 
       {/* Misión y visión */}
-      <Section tone="raised" labelledBy="mission-title">
+      <Section tone="raised" labelledBy="mission-title" hue="magenta" glow={['magenta', 'blue']}>
         <h2 id="mission-title" className="sr-only">
           {t('mission.eyebrow')}
         </h2>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-          <Card className="reveal bg-surface-2">
+          <Card surface="glass" className="reveal">
             <IconBadge icon={Target} />
             <h3 className="mt-5 text-h3">{t('mission.missionTitle')}</h3>
             <p className="mt-3 text-lead text-fg-muted">{t('mission.missionText')}</p>
           </Card>
-          <Card className="reveal bg-surface-2">
+          <Card surface="glass" className="reveal">
             <IconBadge icon={Telescope} />
             <h3 className="mt-5 text-h3">{t('mission.visionTitle')}</h3>
             <p className="mt-3 text-lead text-fg-muted">{t('mission.visionText')}</p>
@@ -115,7 +127,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Valores */}
-      <Section labelledBy="values-title">
+      <Section labelledBy="values-title" hue="magenta">
         <SectionHeader id="values-title" eyebrow={t('values.eyebrow')} title={t('values.title')} />
         <CardGrid columns={3}>
           {valueKeys.map((key) => (
@@ -124,13 +136,14 @@ export default function AboutPage() {
               icon={valueIcons[key]}
               title={t(`values.items.${key}.title`)}
               text={t(`values.items.${key}.text`)}
+              hue={valueHues[key]}
             />
           ))}
         </CardGrid>
       </Section>
 
       {/* Equipo (ejemplo) */}
-      <Section tone="raised" labelledBy="team-title">
+      <Section tone="raised" labelledBy="team-title" hue="magenta" glow={['magenta', 'cyan']}>
         <SectionHeader
           id="team-title"
           eyebrow={t('team.eyebrow')}
@@ -138,20 +151,20 @@ export default function AboutPage() {
           lead={t('team.lead')}
         />
         {hasPlaceholderTeam && (
-          <DraftNotice gated={false} className="mt-8 max-w-3xl">
+          <DraftNotice gated={false} className="mt-6 max-w-3xl">
             {t('team.notice')}
           </DraftNotice>
         )}
-        <CardGrid columns={4} className="mt-8">
+        <CardGrid columns={4} className="mt-6">
           {team.map((member) => (
-            <TeamCard key={member.id} member={member} className="bg-surface-2" />
+            <TeamCard key={member.id} member={member} surface="glass" />
           ))}
         </CardGrid>
 
         {socialLinks.length > 0 && (
-          <div className="mt-12">
+          <div className="mt-10">
             <h3 className="text-title">{t('social.title')}</h3>
-            <ul className="mt-4 flex flex-wrap gap-3">
+            <ul className="mt-3.5 flex flex-wrap gap-2.5">
               {socialLinks.map((link) => (
                 <li key={link.key}>
                   <Button asChild variant="secondary" size="sm">

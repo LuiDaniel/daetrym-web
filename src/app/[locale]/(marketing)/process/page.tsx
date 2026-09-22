@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Checklist } from '@/components/ui/checklist';
 import { Steps } from '@/components/ui/steps';
 import { processStepIds } from '@/config/process';
+import type { Hue } from '@/config/hues';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { buildAlternates } from '@/lib/seo/alternates';
@@ -34,6 +35,11 @@ const collaborationIcons = {
   visibility: LayoutDashboard,
 } as const;
 const collaborationKeys = ['cadence', 'channel', 'visibility'] as const;
+const collaborationHues: Record<(typeof collaborationKeys)[number], Hue> = {
+  cadence: 'blue',
+  channel: 'cyan',
+  visibility: 'violet',
+};
 
 export default function ProcessPage() {
   const t = useTranslations('process');
@@ -48,17 +54,19 @@ export default function ProcessPage() {
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         lead={t('hero.lead')}
+        hue="blue"
+        glow={['blue', 'cyan']}
         actions={
           <>
             <Button asChild size="lg">
               <Link href="/request-quote">{common('requestQuote')}</Link>
             </Button>
-            <BookCallButton size="lg" />
+            <BookCallButton size="lg" hue="blue" />
           </>
         }
       />
 
-      <Section labelledBy="stages-title" className="pt-0 sm:pt-0">
+      <Section labelledBy="stages-title" hue="blue" className="pt-0 sm:pt-0">
         <h2 id="stages-title" className="sr-only">
           {t('labels.stagesTitle')}
         </h2>
@@ -71,7 +79,7 @@ export default function ProcessPage() {
               extra: (
                 <div className="space-y-4">
                   <p className="flex items-start gap-2 text-small text-fg-muted">
-                    <Clock aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-text" />
+                    <Clock aria-hidden className="mt-0.5 size-4 shrink-0 text-h-fg" />
                     <span>{`${t('labels.duration')}: ${step.duration}`}</span>
                   </p>
                   <div>
@@ -85,7 +93,7 @@ export default function ProcessPage() {
         </div>
       </Section>
 
-      <Section tone="raised" labelledBy="collaboration-title">
+      <Section tone="raised" labelledBy="collaboration-title" hue="blue" glow={['blue', 'magenta']}>
         <SectionHeader
           id="collaboration-title"
           eyebrow={t('collaboration.eyebrow')}
@@ -98,7 +106,8 @@ export default function ProcessPage() {
               icon={collaborationIcons[key]}
               title={t(`collaboration.items.${key}.title`)}
               text={t(`collaboration.items.${key}.text`)}
-              className="bg-surface-2"
+              hue={collaborationHues[key]}
+              surface="glass"
             />
           ))}
         </CardGrid>

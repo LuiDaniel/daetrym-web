@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { NextIntlClientProvider } from 'next-intl';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/i18n/navigation', () => ({
@@ -16,6 +17,10 @@ import { Banner } from '@/components/ui/banner';
 import { Field, Input } from '@/components/ui/field';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MetricCard, PostCard } from '@/components/sections/cards';
+import { ComingSoon } from '@/components/sections/coming-soon';
+import { Section, SectionHeader } from '@/components/sections/section';
+import { SectionGlow } from '@/components/sections/section-glow';
+import es from '@/messages/es/index';
 
 afterEach(cleanup);
 
@@ -124,5 +129,90 @@ describe('Tarjetas nuevas', () => {
     );
     expect(screen.getByRole('link', { name: 'Título' })).toBeTruthy();
     expect(screen.getByText('Seguridad')).toBeTruthy();
+  });
+});
+
+describe('SectionGlow (resplandor por sección, Paso 2)', () => {
+  it('pinta los dos tonos pedidos, cada uno a --glow-alpha, y nada más', () => {
+    const { container } = render(<SectionGlow hues={['cyan', 'magenta']} />);
+    const bg = (container.firstElementChild as HTMLElement).style.background;
+    expect(bg).toContain('var(--c-cyan)');
+    expect(bg).toContain('var(--c-magenta)');
+    expect(bg).toContain('var(--glow-alpha)');
+    // Solo esos dos tonos: ningún otro nombre de la paleta se cuela.
+    for (const other of ['green', 'blue', 'violet', 'amber', 'red']) {
+      expect(bg).not.toContain(`--c-${other})`);
+    }
+  });
+
+  it('es puramente decorativo: aria-hidden y sin interceptar el puntero', () => {
+    const { container } = render(<SectionGlow hues={['green', 'blue']} />);
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.getAttribute('aria-hidden')).toBe('true');
+    expect(el.className).toContain('pointer-events-none');
+  });
+});
+
+describe('Section / SectionHeader (tono y resplandor por sección, Paso 2)', () => {
+  it('sin hue ni glow: no añade clase .hue-* ni resplandor', () => {
+    const { container } = render(
+      <Section labelledBy="t">
+        <SectionHeader id="t" title="Título" />
+      </Section>,
+    );
+    const section = container.querySelector('section')!;
+    expect(section.className).not.toMatch(/hue-\w+/);
+    expect(section.querySelectorAll('[aria-hidden="true"]').length).toBe(0);
+  });
+
+  it('con hue: la sección lleva la clase .hue-<tono> (se hereda a los hijos)', () => {
+    const { container } = render(
+      <Section labelledBy="t" hue="violet">
+        <SectionHeader id="t" title="Título" />
+      </Section>,
+    );
+    expect(container.querySelector('section')!.className).toContain('hue-violet');
+  });
+
+  it('con glow: renderiza el SectionGlow con los dos tonos pedidos', () => {
+    const { container } = render(
+      <Section labelledBy="t" hue="amber" glow={['amber', 'red']}>
+        <SectionHeader id="t" title="Título" />
+      </Section>,
+    );
+    const glow = container.querySelector('section > [aria-hidden="true"]') as HTMLElement;
+    expect(glow.style.background).toContain('var(--c-amber)');
+    expect(glow.style.background).toContain('var(--c-red)');
+  });
+});
+
+describe('ComingSoon (Paso 2: preparado para blog/proyectos)', () => {
+  function renderComingSoon(props: Parameters<typeof ComingSoon>[0]) {
+    return render(
+      <NextIntlClientProvider
+        locale="es"
+        messages={{ comingSoon: es.comingSoon, common: es.common }}
+      >
+        <ComingSoon {...props} />
+      </NextIntlClientProvider>,
+    );
+  }
+
+  it('sin hue: usa el verde de marca por defecto', () => {
+    const { container } = renderComingSoon({ title: 'Blog' });
+    expect(container.querySelector('section')!.className).toContain('hue-green');
+  });
+
+  it('con hue y glow (el que tendrán blog/proyectos en la Fase 3): los aplica', () => {
+    const { container } = renderComingSoon({
+      title: 'Blog',
+      hue: 'cyan',
+      glow: ['cyan', 'magenta'],
+    });
+    const section = container.querySelector('section')!;
+    expect(section.className).toContain('hue-cyan');
+    const glow = section.querySelector('[aria-hidden="true"]') as HTMLElement;
+    expect(glow.style.background).toContain('var(--c-cyan)');
+    expect(glow.style.background).toContain('var(--c-magenta)');
   });
 });

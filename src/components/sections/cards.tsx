@@ -33,16 +33,22 @@ export function FeatureCard({
   title,
   text,
   hue,
+  surface,
   className,
 }: {
   icon: LucideIcon;
   title: string;
   text: string;
   hue?: Hue;
+  /** `glass` en bandas `tone="raised"`; `panel` (por defecto) en el resto. */
+  surface?: 'panel' | 'glass';
   className?: string;
 }) {
   return (
-    <Card className={cn('reveal flex flex-col gap-3', hue && hueClass[hue], className)}>
+    <Card
+      surface={surface}
+      className={cn('reveal flex flex-col gap-3', hue && hueClass[hue], className)}
+    >
       <IconBadge icon={icon} />
       <h3 className="text-title">{title}</h3>
       <p className="text-body text-fg-muted">{text}</p>
@@ -148,12 +154,20 @@ function initials(name: string) {
 }
 
 /** Perfil de equipo con monograma (sin fotos por ahora). */
-export function TeamCard({ member, className }: { member: TeamMember; className?: string }) {
+export function TeamCard({
+  member,
+  surface,
+  className,
+}: {
+  member: TeamMember;
+  surface?: 'panel' | 'glass';
+  className?: string;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations('common');
 
   return (
-    <Card className={cn('reveal flex flex-col gap-3', className)}>
+    <Card surface={surface} className={cn('reveal flex flex-col gap-3', className)}>
       <div className="flex items-center justify-between gap-3">
         <span
           aria-hidden

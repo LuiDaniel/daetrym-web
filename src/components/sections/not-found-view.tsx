@@ -3,6 +3,7 @@ import { AccentText } from '@/components/ui/accent-text';
 import { Button } from '@/components/ui/button';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { Link } from '@/i18n/navigation';
+import { SectionGlow } from './section-glow';
 
 const suggestions = [
   { key: 'services', href: '/services' },
@@ -19,7 +20,11 @@ export function NotFoundView() {
   const t = useTranslations();
 
   return (
-    <section aria-labelledby="page-title" className="hue-amber container-page page-top pb-20">
+    <section
+      aria-labelledby="page-title"
+      className="hue-amber container-page page-top relative isolate pb-20"
+    >
+      <SectionGlow hues={['amber', 'violet']} />
       <div className="max-w-xl">
         <Eyebrow>{t('errors.notFound.code')}</Eyebrow>
         <h1 id="page-title" className="mt-3 text-h1">
@@ -40,7 +45,7 @@ export function NotFoundView() {
               <li key={item.key}>
                 <Link
                   href={item.href}
-                  className="text-body text-accent-text underline decoration-hairline-strong underline-offset-4 hover:decoration-current"
+                  className="text-body text-h-fg underline decoration-hairline-strong underline-offset-4 hover:decoration-current"
                 >
                   {t(`nav.${item.key}`)}
                 </Link>

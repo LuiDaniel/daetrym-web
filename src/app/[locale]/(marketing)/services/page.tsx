@@ -27,7 +27,13 @@ export default function ServicesPage() {
 
   return (
     <>
-      <PageHero eyebrow={t('eyebrow')} title={t('title')} lead={t('lead')} />
+      <PageHero
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        lead={t('lead')}
+        hue="violet"
+        glow={['violet', 'amber']}
+      />
 
       <Section labelledBy="services-list-title" className="pt-0 sm:pt-0">
         <h2 id="services-list-title" className="sr-only">

@@ -5,7 +5,7 @@ import { fillTokens, parseInline } from '@/lib/inline-markup';
 type StaticPathname = Exclude<AppPathname, `${string}[${string}`>;
 
 const linkClass =
-  'text-accent-text underline decoration-hairline-strong underline-offset-4 transition-colors hover:decoration-current';
+  'text-h-fg underline decoration-hairline-strong underline-offset-4 transition-colors hover:decoration-current';
 
 function isAppPathname(href: string): href is StaticPathname {
   return href in routing.pathnames && !href.includes('[');

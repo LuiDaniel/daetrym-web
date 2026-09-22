@@ -15,7 +15,8 @@ import { Card } from '@/components/ui/card';
 import { Checklist } from '@/components/ui/checklist';
 import { Faq } from '@/components/ui/faq';
 import { Steps } from '@/components/ui/steps';
-import { isServiceSlug, serviceSlugs } from '@/config/services';
+import { isServiceSlug, serviceHues, serviceSlugs } from '@/config/services';
+import type { Hue } from '@/config/hues';
 import { Link } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { buildAlternates } from '@/lib/seo/alternates';
@@ -46,18 +47,38 @@ export default async function ServicePage({ params }: Props) {
   return <ServiceView slug={slug} />;
 }
 
+/**
+ * Segundo tono del resplandor de cada servicio: distinto en el hero y en "otros servicios" para que
+ * ninguna de las dos combinaciones de la página se repita (ver docs/DESIGN.md).
+ */
+const heroGlowPartner: Record<(typeof serviceSlugs)[number], Hue> = {
+  'web-apps': 'blue',
+  'custom-software': 'magenta',
+  cybersecurity: 'blue',
+  consulting: 'magenta',
+};
+const relatedGlowPartner: Record<(typeof serviceSlugs)[number], Hue> = {
+  'web-apps': 'violet',
+  'custom-software': 'cyan',
+  cybersecurity: 'amber',
+  consulting: 'blue',
+};
+
 function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
   const t = useTranslations('services');
   const common = useTranslations('common');
   const messages = useMessages();
   const content = serviceContentSchema.parse(messages.services.items[slug]);
   const others = serviceSlugs.filter((other) => other !== slug);
+  const hue = serviceHues[slug];
 
   return (
     <>
       <PageHero
         title={content.name}
         lead={content.tagline}
+        hue={hue}
+        glow={[hue, heroGlowPartner[slug]]}
         breadcrumbs={
           <Breadcrumbs
             items={[{ label: t('detail.rootLabel'), href: '/services' }, { label: content.name }]}
@@ -68,13 +89,13 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
             <Button asChild size="lg">
               <Link href="/request-quote">{common('requestQuote')}</Link>
             </Button>
-            <BookCallButton size="lg" />
+            <BookCallButton size="lg" hue={hue} />
           </>
         }
       />
 
       {/* Problema */}
-      <Section labelledBy="problem-title">
+      <Section labelledBy="problem-title" hue={hue}>
         <SplitLayout
           aside={
             <SectionHeader
@@ -99,7 +120,7 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
       </Section>
 
       {/* Solución */}
-      <Section tone="raised" labelledBy="solution-title">
+      <Section tone="raised" labelledBy="solution-title" hue={hue}>
         <SplitLayout
           aside={
             <SectionHeader
@@ -110,7 +131,7 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
             />
           }
         >
-          <Card className="reveal bg-surface-2">
+          <Card surface="glass" className="reveal">
             <Checklist items={content.solution.points} />
           </Card>
           {slug === 'cybersecurity' && (
@@ -122,7 +143,7 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
       </Section>
 
       {/* Proceso */}
-      <Section labelledBy="process-title">
+      <Section labelledBy="process-title" hue={hue}>
         <SplitLayout
           aside={
             <SectionHeader
@@ -143,7 +164,7 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
       </Section>
 
       {/* Entregables */}
-      <Section tone="raised" labelledBy="deliverables-title">
+      <Section tone="raised" labelledBy="deliverables-title" hue={hue}>
         <SplitLayout
           aside={
             <SectionHeader
@@ -153,14 +174,14 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
             />
           }
         >
-          <Card className="reveal bg-surface-2">
+          <Card surface="glass" className="reveal">
             <Checklist items={content.deliverables} />
           </Card>
         </SplitLayout>
       </Section>
 
       {/* FAQ */}
-      <Section labelledBy="faq-title">
+      <Section labelledBy="faq-title" hue={hue}>
         <SplitLayout
           aside={
             <SectionHeader
@@ -175,7 +196,12 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
       </Section>
 
       {/* Otros servicios */}
-      <Section tone="raised" labelledBy="related-title">
+      <Section
+        tone="raised"
+        labelledBy="related-title"
+        hue={hue}
+        glow={[hue, relatedGlowPartner[slug]]}
+      >
         <SectionHeader id="related-title" title={t('detail.relatedTitle')} />
         <CardGrid columns={3}>
           {others.map((other) => (
@@ -184,7 +210,6 @@ function ServiceView({ slug }: { slug: (typeof serviceSlugs)[number] }) {
               slug={other}
               name={messages.services.items[other].name}
               summary={messages.services.items[other].summary}
-              className="bg-surface-2"
             />
           ))}
         </CardGrid>

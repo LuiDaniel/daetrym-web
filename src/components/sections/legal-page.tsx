@@ -1,4 +1,5 @@
 import { useFormatter, useMessages } from 'next-intl';
+import type { Hue } from '@/config/hues';
 import { siteConfig } from '@/config/site';
 import { legalDocumentSchema, securityPolicySchema } from '@/schemas/page-content';
 import { LegalDocument } from './legal-document';
@@ -7,6 +8,13 @@ const values = {
   legalName: siteConfig.legalName,
   email: siteConfig.contact.email,
   securityEmail: siteConfig.contact.securityEmail,
+};
+
+/** Un tono por documento: ayuda a distinguirlos de un vistazo (sobretítulo, marcadores, índice). */
+const legalHues: Record<'privacy' | 'terms' | 'cookies', Hue> = {
+  privacy: 'blue',
+  terms: 'violet',
+  cookies: 'amber',
 };
 
 /** Fecha de última revisión de los documentos legales, formateada según el idioma. */
@@ -32,11 +40,12 @@ export function LegalPage({ docKey }: { docKey: 'privacy' | 'terms' | 'cookies' 
       values={values}
       updated={updated}
       draft={messages.legal.draft}
+      hue={legalHues[docKey]}
     />
   );
 }
 
-/** Política de divulgación responsable (/security). */
+/** Política de divulgación responsable (/security): mismo tono que /cybersecurity. */
 export function SecurityPolicyPage() {
   const messages = useMessages();
   const updated = useUpdated();
@@ -51,6 +60,7 @@ export function SecurityPolicyPage() {
       values={values}
       updated={updated}
       draft={policy.draft}
+      hue="green"
     />
   );
 }
