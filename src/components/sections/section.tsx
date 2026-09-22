@@ -3,6 +3,7 @@ import { AccentText } from '@/components/ui/accent-text';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { hueClass, type Hue } from '@/config/hues';
 import { cn } from '@/lib/cn';
+import { SectionGlow } from './section-glow';
 
 type SectionProps = {
   /** id del encabezado de la sección: se usa como aria-labelledby (nombre del landmark). */
@@ -10,8 +11,13 @@ type SectionProps = {
   id?: string;
   /** `raised`: banda con un tinte sutil sobre el fondo para separar secciones sin sombras. */
   tone?: 'default' | 'raised';
-  /** Tono de la sección (sobretítulo, enlaces, iconos). Verde de marca por defecto. */
+  /** Tono de la sección (sobretítulo, enlaces, iconos que no fijan su propio tono). Verde por defecto. */
   hue?: Hue;
+  /**
+   * Resplandor de fondo de la sección (dos tonos; ver `SectionGlow`). Varía entre secciones a
+   * propósito — ninguna combinación se repite en la Home (docs/DESIGN.md).
+   */
+  glow?: [Hue, Hue];
   className?: string;
   children: ReactNode;
 };
@@ -21,6 +27,7 @@ export function Section({
   id,
   tone = 'default',
   hue,
+  glow,
   className,
   children,
 }: SectionProps) {
@@ -29,12 +36,13 @@ export function Section({
       id={id}
       aria-labelledby={labelledBy}
       className={cn(
-        'section-y',
+        'section-y relative isolate',
         tone === 'raised' && 'border-y border-hairline bg-band',
         hue && hueClass[hue],
         className,
       )}
     >
+      {glow && <SectionGlow hues={glow} />}
       <div className="container-page">{children}</div>
     </section>
   );

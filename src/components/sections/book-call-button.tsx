@@ -4,7 +4,7 @@ import { Button, type ButtonProps } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
 import { Link } from '@/i18n/navigation';
 
-type BookCallButtonProps = Pick<ButtonProps, 'size' | 'variant' | 'className'>;
+type BookCallButtonProps = Pick<ButtonProps, 'size' | 'variant' | 'className' | 'hue'>;
 
 /**
  * "Agendar llamada": si hay una URL de agenda (NEXT_PUBLIC_CAL_URL) abre Cal.com u otra en una

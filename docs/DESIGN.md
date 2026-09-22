@@ -68,16 +68,46 @@ de tonos son para identidad y estado, no para acciones.
 - Regla verificada por el script: cada `--c-<tono>-fg` cumple 4.5:1 sobre el fondo liso, sobre cada
   resplandor y sobre cada material translúcido; el propio `--c-<tono>` (uso gráfico, no texto) cumple 3:1.
 
-### Fondos y resplandores
+### Balance de color (corrección tras revisión)
+
+Primera pasada del rediseño: el verde dominaba casi todo (todos los botones, el mismo resplandor
+verde+violeta detrás de cada pantalla) y el resto de la paleta casi no aparecía fuera de las tarjetas de
+servicio. Reglas aplicadas para repartir el color con intención:
+
+1. **Botones.** `primary` (verde sólido) es SOLO el CTA principal de la pantalla — uno, como mucho dos
+   (p. ej. el CTA fijo del header + el de un hero visible a la vez siguen contando como dos, no como
+   "todo verde"). `secondary`/`ghost` son de vidrio neutro con **borde o texto del tono del contexto**,
+   nunca verde por defecto salvo que ese sea el tono real: `Button` (`buttonVariants`) usa
+   `text-h-fg`/`border-h-line`, que toman el tono de la `.hue-*` ambiente (la `Section` que lo envuelve)
+   o del prop `hue` explícito cuando no hay una `Section` con tono alrededor (p. ej. `BookCallButton` en
+   el hero y en `CtaBand`, que no están dentro de una `Section` con `hue`).
+2. **Resplandores de fondo, por sección — no una combinación fija.** Cada `Section`/`PageHero`/`CtaBand`
+   admite `glow?: [Hue, Hue]` (`SectionGlow`, `src/components/sections/section-glow.tsx`): dos manchas
+   radiales grandes en esquinas opuestas, con los DOS tonos pedidos. **Ninguna combinación se repite en
+   la Home** — hero verde+cian, servicios violeta+ámbar, "por qué" cian+azul, proceso magenta+verde,
+   proyectos violeta+cian, tecnologías azul+ámbar, FAQ cian+magenta, próximamente azul+magenta, CTA final
+   verde+magenta. Es un cambio de arquitectura respecto a la primera pasada: antes era un `body::before`
+   fijo al viewport (`position: fixed`), así que TODA la página veía siempre el mismo verde+cian+violeta
+   sin importar la sección; ahora cada resplandor vive DENTRO de su sección y scrollea con el contenido.
+3. **Iconos, bordes activos, enlaces y micro-acentos.** Cada `Section` puede fijar su propio `hue` (tiñe
+   el sobretítulo, el h2 vía `AccentText`/`Eyebrow`, y cualquier elemento que use `text-h-fg`/`border-h-line`
+   sin fijar su propio tono — se hereda por CSS, no hace falta repetirlo en cada hijo). Las tarjetas
+   (`ServiceCard`, `FeatureCard`, `ProjectCard`…) siguen fijando SU PROPIO tono según su categoría real
+   (servicio, principio, tipo de proyecto), que gana sobre el tono ambiente de la sección.
+   **Excepción deliberada:** el foco (`--focus-ring`) se queda siempre en verde en todo el sitio — es una
+   señal de sistema (accesibilidad), no un acento de contenido, y debe ser predecible en cualquier pantalla.
 
 - Oscuro por defecto: `--bg: #050807` (tinte verdoso, no negro puro). Claro real: `--bg: #f6f8fa` (gris
   suave, no blanco plano); `--surface-1/2` son blanco puro para las tarjetas sólidas.
-- Tres resplandores radiales fijos al viewport (`body::before`, ver `globals.css`): verde, cian y violeta,
-  generados con `radial-gradient` — **sin imágenes**. Dan profundidad al vidrio sin decorar la página.
-  Con puntero fino y sin `prefers-reduced-motion` derivan ~60 s de forma casi imperceptible; en móvil y
-  con movimiento reducido quedan fijos (batería y respeto a la preferencia).
-- El contraste se verifica con cada resplandor compuesto individualmente sobre el fondo (el peor caso
-  real: los tres están en esquinas distintas y en pantalla no llegan a superponerse).
+- Intensidad de los resplandores: `--glow-alpha` (tokens.css, distinta por tema: más alta en oscuro,
+  donde hay más margen de contraste, más baja en claro). Verificada por `pnpm check:contrast`, que
+  compone cada uno de los siete tonos individualmente sobre el fondo (peor caso real: los dos círculos
+  de un `SectionGlow` están en esquinas opuestas y con radio 70% apenas llegan a solaparse).
+- Sin animación de deriva (a diferencia de la primera pasada): al vivir dentro de cada sección y no
+  fijos al viewport, la variedad ya viene del recorrido por la página al hacer scroll, no de movimiento.
+- **Páginas aún no rediseñadas (Paso 2):** sus secciones no pasan `glow` todavía, así que no muestran
+  resplandor de fondo hasta que se les asigne uno (antes tenían el fondo fijo global, ahora ninguno);
+  no es una regresión visible porque su contenido sigue siendo mayormente superficies sólidas de la Fase 2.
 
 ## Tipografía
 
@@ -138,9 +168,19 @@ header, un sheet); un `backdrop-filter` anidado no ve nada nuevo detrás y solo 
 ## Padding y radios (Primer: densidad cuidada)
 
 - Padding interno de tarjeta: `--pad-card` = `clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem)` (20–24 px).
-- Radios: `--radius-sm` 6 px (controles, botones) · `--radius-md` 8 px (botones grandes, iconos) ·
-  `--radius-lg` 12 px (tarjetas) · `--radius-xl` 16 px (paneles grandes, sheets).
-- Botones: 32/36/40 px de alto (`sm`/`md`/`lg`), radio pequeño (`rounded-md`) — no la píldora de la Fase 1.
+- **Dos radios, dos propósitos** (corregido tras revisión: el botón del header se veía cuadrado junto a
+  la píldora que lo contiene):
+  - **Píldora (`rounded-full`, Tailwind, 9999px):** todo lo que vive DENTRO del header flotante —
+    el propio contenedor, el botón de CTA del header, el disparador del menú móvil — y los dos controles
+    que son «segmentado/toggle» por naturaleza y aparecen tanto en el header como en el sheet:
+    `LanguageSwitcher` y `ThemeToggle`. Estos dos son pastilla en cualquier contexto porque su FORMA es
+    parte de su identidad, no del lugar donde están.
+  - **Radio pequeño** (`--radius-sm` 6 px · `--radius-md` 8 px · `--radius-lg` 12 px tarjetas ·
+    `--radius-xl` 16 px paneles/sheets): el resto de los componentes del sitio — el `Button` genérico
+    (`variant="primary"|"secondary"|"ghost"`) fuera del header, tarjetas, badges, inputs. Un `Button`
+    dentro del header pasa `className="rounded-full"` explícito (ver `site-header.tsx`); en cualquier
+    otro sitio conserva su radio pequeño por defecto.
+- Botones: 32/36/40 px de alto (`sm`/`md`/`lg`).
 - Iconos de línea fina, 16–20 px, `strokeWidth` 1.5–1.75 (nunca el grosor por defecto de Lucide).
 - Ancho de contenido `--content-width`: 70 rem (antes 72 rem); ritmo entre secciones más ajustado
   (`.section-y`: 48–80 px, antes 56–96 px) — compacto en tamaño, generoso en aire alrededor.

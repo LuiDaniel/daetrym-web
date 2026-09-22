@@ -3,6 +3,7 @@ import { AccentText } from '@/components/ui/accent-text';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { hueClass, type Hue } from '@/config/hues';
 import { cn } from '@/lib/cn';
+import { SectionGlow } from './section-glow';
 
 type PageHeroProps = {
   eyebrow?: string;
@@ -21,11 +22,14 @@ type PageHeroProps = {
   size?: 'display' | 'h1';
   /** Tono del sobretítulo y de los detalles (verde de marca por defecto). */
   hue?: Hue;
+  /** Resplandor de fondo del hero (dos tonos; ver `SectionGlow`). */
+  glow?: [Hue, Hue];
 };
 
 /**
  * Cabecera de página. Es el elemento LCP: nada aquí se revela con animación ni depende de JavaScript.
- * Los resplandores de color son globales (body::before) y pasan por detrás del header de vidrio.
+ * El resplandor de color es local a esta sección (scrollea con el contenido, no fijo al viewport) y
+ * pasa por detrás del header de vidrio.
  */
 export function PageHero({
   eyebrow,
@@ -37,9 +41,11 @@ export function PageHero({
   breadcrumbs,
   size = 'h1',
   hue,
+  glow,
 }: PageHeroProps) {
   return (
-    <section aria-labelledby="page-title" className={cn('relative', hue && hueClass[hue])}>
+    <section aria-labelledby="page-title" className={cn('relative isolate', hue && hueClass[hue])}>
+      {glow && <SectionGlow hues={glow} />}
       <div
         className={cn(
           'container-page page-top pb-12 sm:pb-16',

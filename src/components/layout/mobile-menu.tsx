@@ -30,7 +30,7 @@ export function MobileMenu() {
         aria-label={t('header.openMenu')}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="press inline-flex size-9 items-center justify-center rounded-md material-thin text-fg lg:hidden"
+        className="press inline-flex size-9 items-center justify-center rounded-full material-thin text-fg lg:hidden"
       >
         <Menu aria-hidden className="size-5" strokeWidth={1.5} />
       </button>

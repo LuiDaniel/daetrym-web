@@ -44,7 +44,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === 'dark' ? t('toLight') : t('toDark')}
-      className="press relative inline-flex size-8 items-center justify-center rounded-md material-thin text-fg"
+      className="press relative inline-flex size-8 items-center justify-center rounded-full material-thin text-fg"
     >
       <motion.span
         aria-hidden

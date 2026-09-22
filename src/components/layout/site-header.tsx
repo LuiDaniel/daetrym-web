@@ -36,7 +36,8 @@ export function SiteHeader() {
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
-          <Button asChild size="sm" className="hidden sm:inline-flex">
+          {/* rounded-full: dentro del header flotante, todo adopta el radio de píldora del contenedor. */}
+          <Button asChild size="sm" className="hidden rounded-full sm:inline-flex">
             <Link href="/request-quote">{t('common.requestQuote')}</Link>
           </Button>
           <MobileMenu />

@@ -2,8 +2,9 @@
  * Verifica los contrastes WCAG 2.2 AA de los tokens de src/styles/tokens.css.
  *
  * Además de las superficies sólidas, cubre el vidrio: cada material translúcido se compone sobre los
- * fondos más desfavorables (el fondo liso y cada resplandor de color en su punto más intenso) y los textos,
- * las etiquetas de cada tono (.hue-*) y su tinte se miden sobre todo eso.
+ * fondos más desfavorables — el fondo liso y, por cada uno de los siete tonos, el resplandor de
+ * SECCIÓN de ese tono a su intensidad real (`--glow-alpha`; ver `SectionGlow`) — y los textos, las
+ * etiquetas de cada tono (`.hue-*`) y su tinte se miden sobre todo eso.
  * Uso: pnpm check:contrast  (falla con exit 1 si algún par no cumple)
  */
 import { readFileSync } from 'node:fs';
@@ -51,12 +52,16 @@ type Base = { name: string; rgb: Rgba };
 for (const theme of ['dark', 'light'] as const) {
   const bg = color(theme, '--bg');
 
-  // Lienzo: fondo liso + cada resplandor en su punto más intenso. Los tres son radiales y están en
-  // esquinas distintas del viewport (ver globals.css): en pantalla no llegan a superponerse.
-  const glows = ['--glow-1', '--glow-2', '--glow-3'].map((g) => color(theme, g));
+  // Lienzo: fondo liso + el resplandor de sección de cada tono a su intensidad real (--glow-alpha).
+  // Cada `SectionGlow` pinta dos tonos en esquinas opuestas de SU sección con radio 70%: en pantalla
+  // casi no llegan a solaparse, así que el peor caso real es un solo tono a la vez.
+  const glowAlpha = parseFloat(resolve(theme, '--glow-alpha')) / 100;
   const canvases: Base[] = [
     { name: '--bg', rgb: bg },
-    ...glows.map((glow, i) => ({ name: `--bg + --glow-${i + 1}`, rgb: composite(glow, bg) })),
+    ...hues.map((hue) => ({
+      name: `--bg + resplandor ${hue}`,
+      rgb: composite({ ...color(theme, `--c-${hue}`), a: glowAlpha }, bg),
+    })),
   ];
   const band = composite(color(theme, '--band-bg'), bg);
 

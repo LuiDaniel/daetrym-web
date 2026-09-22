@@ -79,12 +79,13 @@ export default function HomePage() {
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         lead={t('hero.lead')}
+        glow={['green', 'cyan']}
         actions={
           <>
             <Button asChild size="lg">
               <Link href="/request-quote">{common('requestQuote')}</Link>
             </Button>
-            <BookCallButton size="lg" />
+            <BookCallButton size="lg" hue="cyan" />
           </>
         }
         footnote={
@@ -118,7 +119,7 @@ export default function HomePage() {
       />
 
       {/* Servicios */}
-      <Section labelledBy="services-title">
+      <Section labelledBy="services-title" hue="violet" glow={['violet', 'amber']}>
         <SectionHeader
           id="services-title"
           eyebrow={t('services.eyebrow')}
@@ -141,7 +142,7 @@ export default function HomePage() {
       </Section>
 
       {/* Por qué DaeTrym */}
-      <Section tone="raised" labelledBy="why-title">
+      <Section tone="raised" labelledBy="why-title" hue="cyan" glow={['cyan', 'blue']}>
         <SectionHeader
           id="why-title"
           eyebrow={t('why.eyebrow')}
@@ -162,7 +163,7 @@ export default function HomePage() {
       </Section>
 
       {/* Proceso resumido */}
-      <Section labelledBy="process-title">
+      <Section labelledBy="process-title" hue="magenta" glow={['magenta', 'green']}>
         <SectionHeader
           id="process-title"
           eyebrow={t('process.eyebrow')}
@@ -190,7 +191,7 @@ export default function HomePage() {
       </Section>
 
       {/* Proyectos destacados (ejemplo) */}
-      <Section tone="raised" labelledBy="projects-title">
+      <Section tone="raised" labelledBy="projects-title" hue="violet" glow={['violet', 'cyan']}>
         <SectionHeader
           id="projects-title"
           eyebrow={t('projects.eyebrow')}
@@ -217,7 +218,7 @@ export default function HomePage() {
       </Section>
 
       {/* Tecnologías */}
-      <Section labelledBy="stack-title">
+      <Section labelledBy="stack-title" hue="blue" glow={['blue', 'amber']}>
         <SectionHeader
           id="stack-title"
           eyebrow={t('stack.eyebrow')}
@@ -241,7 +242,7 @@ export default function HomePage() {
       </Section>
 
       {/* FAQ */}
-      <Section tone="raised" labelledBy="faq-title">
+      <Section tone="raised" labelledBy="faq-title" hue="cyan" glow={['cyan', 'magenta']}>
         <SplitLayout
           aside={<SectionHeader id="faq-title" eyebrow={t('faq.eyebrow')} title={t('faq.title')} />}
         >
@@ -250,7 +251,7 @@ export default function HomePage() {
       </Section>
 
       {/* Próximamente / lista de espera */}
-      <Section labelledBy="soon-title">
+      <Section labelledBy="soon-title" hue="blue" glow={['blue', 'magenta']}>
         <SectionHeader
           id="soon-title"
           eyebrow={t('soon.eyebrow')}
