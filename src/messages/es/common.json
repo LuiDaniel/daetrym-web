@@ -18,7 +18,10 @@
     "lastUpdated": "Última actualización: {date}",
     "draftNoticeTitle": "Pendiente de revisión",
     "backToHome": "Volver al inicio",
-    "opensInNewTab": "se abre en una pestaña nueva"
+    "opensInNewTab": "se abre en una pestaña nueva",
+    "content": {
+      "headingAnchor": "Enlace directo a esta sección"
+    }
   },
   "nav": {
     "services": "Servicios",

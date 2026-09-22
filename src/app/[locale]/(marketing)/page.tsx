@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { useMessages, useTranslations } from 'next-intl';
+import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { BookCallButton } from '@/components/sections/book-call-button';
 import { Card } from '@/components/ui/card';
 import { CardGrid, FeatureCard, ProjectCard, ServiceCard } from '@/components/sections/cards';
@@ -23,7 +23,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DraftNotice } from '@/components/ui/draft-notice';
 import { Faq } from '@/components/ui/faq';
-import { featuredProjects } from '@/config/projects';
 import { hueClass, type Hue } from '@/config/hues';
 import { processStepIds } from '@/config/process';
 import { serviceSlugs } from '@/config/services';
@@ -32,6 +31,7 @@ import { stack, stackGroups, stackHues } from '@/config/stack';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
+import { getFeaturedProjects } from '@/lib/content/projects';
 import { buildAlternates } from '@/lib/seo/alternates';
 import { faqSchema } from '@/schemas/page-content';
 
@@ -65,11 +65,16 @@ const whyHues: Record<(typeof whyKeys)[number], Hue> = {
 const processHues: Hue[] = ['green', 'cyan', 'blue', 'violet', 'magenta', 'amber'];
 
 export default function HomePage() {
+  const locale = useLocale() as Locale;
   const t = useTranslations('home');
   const common = useTranslations('common');
+  const projectsT = useTranslations('projects');
   const messages = useMessages();
   const faqItems = faqSchema.parse(messages.home.faq.items);
-  const hasPlaceholderProjects = featuredProjects.some((project) => project.placeholder);
+  const featuredProjects = getFeaturedProjects(locale);
+  const hasPlaceholderProjects = featuredProjects.some(
+    (project) => project.frontmatter.placeholder,
+  );
   const mailto = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(t('soon.mailSubject'))}`;
 
   return (
@@ -206,9 +211,14 @@ export default function HomePage() {
         <CardGrid columns={3} className="mt-6">
           {featuredProjects.map((project) => (
             <ProjectCard
-              key={project.id}
-              project={project}
-              categoryLabel={t(`projects.categories.${project.category}`)}
+              key={project.slug}
+              href={{ pathname: '/projects/[slug]', params: { slug: project.slug } }}
+              category={project.frontmatter.category}
+              categoryLabel={projectsT(`categories.${project.frontmatter.category}`)}
+              title={project.frontmatter.title}
+              summary={project.frontmatter.summary}
+              tags={project.frontmatter.tags}
+              placeholder={project.frontmatter.placeholder}
             />
           ))}
         </CardGrid>

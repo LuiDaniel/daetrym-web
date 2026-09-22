@@ -188,6 +188,20 @@
   --c-red-fg: #fca5a5;
   --c-red-tint: rgb(248 113 113 / 0.14);
   --c-red-line: rgb(248 113 113 / 0.34);
+
+  /* Resaltado de sintaxis (Fase 3, ver src/lib/content/shiki-theme.ts): el tema de Shiki solo
+     referencia estas variables, así que el color de cada token sale de la MISMA paleta de arriba. */
+  --shiki-color-text: var(--fg-muted);
+  --shiki-color-background: transparent;
+  --shiki-token-comment: var(--fg-subtle);
+  --shiki-token-string: var(--c-green-fg);
+  --shiki-token-constant: var(--c-amber-fg);
+  --shiki-token-keyword: var(--c-violet-fg);
+  --shiki-token-function: var(--c-cyan-fg);
+  --shiki-token-parameter: var(--fg-muted);
+  --shiki-token-punctuation: var(--fg-subtle);
+  --shiki-token-tag: var(--c-blue-fg);
+  --shiki-token-link: var(--c-cyan-fg);
 }
 
 /* ---------- 2b. Claro (real: fondo suave, vidrio claro, resplandores tenues) ---------- */
@@ -265,6 +279,18 @@
   --c-red-fg: #b91c1c;
   --c-red-tint: rgb(220 38 38 / 0.1);
   --c-red-line: rgb(220 38 38 / 0.32);
+
+  --shiki-color-text: var(--fg-muted);
+  --shiki-color-background: transparent;
+  --shiki-token-comment: var(--fg-subtle);
+  --shiki-token-string: var(--c-green-fg);
+  --shiki-token-constant: var(--c-amber-fg);
+  --shiki-token-keyword: var(--c-violet-fg);
+  --shiki-token-function: var(--c-cyan-fg);
+  --shiki-token-parameter: var(--fg-muted);
+  --shiki-token-punctuation: var(--fg-subtle);
+  --shiki-token-tag: var(--c-blue-fg);
+  --shiki-token-link: var(--c-cyan-fg);
 }
 
 /* ---------- 3. Constantes (no dependen del tema) ---------- */

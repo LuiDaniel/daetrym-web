@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/card';
 import { IconBadge } from '@/components/ui/icon-badge';
 import { hueClass, type Hue } from '@/config/hues';
 import { pick } from '@/config/localized';
-import { projectHues, type FeaturedProject } from '@/config/projects';
+import { projectHues, type ProjectCategory } from '@/config/projects';
 import { serviceHues, serviceIcons, type ServiceSlug } from '@/config/services';
 import type { TeamMember } from '@/config/team';
 import { Link } from '@/i18n/navigation';
@@ -105,42 +105,62 @@ export function ServiceCard({
   );
 }
 
+/**
+ * Tarjeta de proyecto: enlaza al caso completo (mismo patrón de «enlace extendido» que `ServiceCard`/
+ * `PostCard`). El contenido ya llega resuelto al idioma actual (viene de /content vía
+ * src/lib/content/projects.ts, no de un `Localized` que haya que `pick()`).
+ */
 export function ProjectCard({
-  project,
+  href,
+  category,
   categoryLabel,
+  title,
+  summary,
+  tags,
+  placeholder,
   className,
 }: {
-  project: FeaturedProject;
+  href: ComponentProps<typeof Link>['href'];
+  category: ProjectCategory;
   categoryLabel: string;
+  title: string;
+  summary: string;
+  tags: string[];
+  placeholder?: boolean;
   className?: string;
 }) {
-  const locale = useLocale() as Locale;
   const t = useTranslations('common');
 
   return (
-    <Card
-      surface="glass"
+    <article
       className={cn(
-        'reveal relative flex flex-col gap-3',
-        hueClass[projectHues[project.category]],
+        hueClass[projectHues[category]],
+        'press group relative flex flex-col gap-3 rounded-lg material-regular p-(--pad-card) transition-[transform,background-color,border-color] duration-100 ease-out hover:border-h-line hover:bg-glass-hover has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-(--focus-ring)',
         className,
       )}
     >
       <HueEdge />
       <div className="flex flex-wrap items-center gap-1.5">
         <Badge variant="hue">{categoryLabel}</Badge>
-        {project.placeholder && <Badge variant="placeholder">{t('example')}</Badge>}
+        {placeholder && <Badge variant="placeholder">{t('example')}</Badge>}
       </div>
-      <h3 className="text-title">{pick(project.title, locale)}</h3>
-      <p className="text-body text-fg-muted">{pick(project.summary, locale)}</p>
+      <h3 className="text-title">
+        <Link
+          href={href}
+          className="after:absolute after:inset-0 after:rounded-lg focus-visible:outline-none"
+        >
+          {title}
+        </Link>
+      </h3>
+      <p className="text-body text-fg-muted">{summary}</p>
       <ul className="mt-auto flex flex-wrap gap-1.5 pt-1">
-        {project.tags.map((tag) => (
+        {tags.map((tag) => (
           <li key={tag}>
             <Badge>{tag}</Badge>
           </li>
         ))}
       </ul>
-    </Card>
+    </article>
   );
 }
 

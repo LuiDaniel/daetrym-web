@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
+import { blogSlugs, projectSlugs } from '@/config/content-slugs';
 import { processStepIds } from '@/config/process';
 import { serviceSlugs } from '@/config/services';
-import { featuredProjects } from '@/config/projects';
 import { team } from '@/config/team';
 import { routing } from '@/i18n/routing';
+import { getAllPosts, getPost, getRelatedPosts } from '@/lib/content/blog';
+import { extractHeadings } from '@/lib/content/headings';
+import { getAllProjects } from '@/lib/content/projects';
+import { estimateReadingMinutes } from '@/lib/content/reading-time';
+import { buildBlogRss } from '@/lib/content/rss';
 import { parseInline } from '@/lib/inline-markup';
+import { isKnownPath } from '@/lib/routes';
 import en from '@/messages/en/index';
 import es from '@/messages/es/index';
 import {
@@ -129,23 +135,154 @@ describe('paridad ES/EN del contenido estructurado', () => {
 });
 
 describe('datos de ejemplo (placeholders)', () => {
-  it('cada perfil y proyecto de ejemplo está marcado y tiene textos en todos los idiomas', () => {
+  it('cada perfil de ejemplo tiene textos en todos los idiomas', () => {
     for (const member of team) {
       for (const locale of routing.locales) {
         expect(member.role[locale].length).toBeGreaterThan(0);
         expect(member.bio[locale].length).toBeGreaterThan(0);
       }
     }
-    for (const project of featuredProjects) {
-      for (const locale of routing.locales) {
-        expect(project.title[locale].length).toBeGreaterThan(0);
-        expect(project.summary[locale].length).toBeGreaterThan(0);
+  });
+
+  it('los datos de ejemplo de src/config no incluyen cifras inventadas (porcentajes, importes ni recuentos de clientes)', () => {
+    const text = strings([team]).join(' ');
+    expect(text).not.toMatch(/\d+\s?%|\$\s?\d|€\s?\d|\d+\+?\s+(clientes|clients)/i);
+  });
+});
+
+/** Extrae `/rutas` de enlaces Markdown `[texto](/ruta#ancla)`, sin la almohadilla. */
+function internalLinks(body: string): string[] {
+  return [...body.matchAll(/\]\((\/[^)\s#]+)/g)].map((match) => match[1]!);
+}
+
+describe('capa de contenido /content (Fase 3)', () => {
+  describe.each(routing.locales)('blog (%s)', (locale) => {
+    const posts = getAllPosts(locale);
+
+    it('un fichero .mdx por slug registrado, ni de más ni de menos', () => {
+      expect(posts.map((post) => post.slug).sort()).toEqual([...blogSlugs].sort());
+    });
+
+    it('todo el contenido de ejemplo lleva placeholder: true', () => {
+      for (const post of posts) expect(post.frontmatter.placeholder).toBe(true);
+    });
+
+    it('no incluye resultados de negocio inventados (importes, clientes o mejoras en %)', () => {
+      // Un blog técnico sí puede decir «100% estable»: no es una cifra de negocio. Lo que no
+      // debe aparecer es una mejora/ahorro en % ni importes ni recuentos de clientes.
+      const text = posts.map((post) => post.body).join(' ');
+      expect(text).not.toMatch(
+        /\d+%\s*(faster|reduction|improvement|increase|growth|más rápido|reducción|mejora)|\$\s?\d|€\s?\d|\d+\+?\s+(clientes|clients)/i,
+      );
+    });
+
+    it('extrae los h2/h3 en orden, con id único por post', () => {
+      for (const post of posts) {
+        expect(post.headings.length).toBeGreaterThan(0);
+        expect(post.headings.every((h) => h.level === 2 || h.level === 3)).toBe(true);
+        const ids = post.headings.map((h) => h.id);
+        expect(new Set(ids).size).toBe(ids.length);
       }
+    });
+
+    it('el tiempo de lectura es un entero positivo', () => {
+      for (const post of posts) {
+        expect(Number.isInteger(post.readingMinutes)).toBe(true);
+        expect(post.readingMinutes).toBeGreaterThan(0);
+      }
+    });
+
+    it('cada post tiene al menos un relacionado (comparten categoría o etiqueta)', () => {
+      for (const post of posts) {
+        expect(getRelatedPosts(locale, post).length).toBeGreaterThan(0);
+      }
+    });
+
+    it('un post nunca aparece como su propio relacionado', () => {
+      for (const post of posts) {
+        expect(getRelatedPosts(locale, post).some((r) => r.slug === post.slug)).toBe(false);
+      }
+    });
+  });
+
+  describe.each(routing.locales)('proyectos (%s)', (locale) => {
+    const projects = getAllProjects(locale);
+
+    it('un fichero .mdx por slug registrado, ni de más ni de menos', () => {
+      expect(projects.map((project) => project.slug).sort()).toEqual([...projectSlugs].sort());
+    });
+
+    it('todos llevan placeholder: true y al menos uno lleva featured: true', () => {
+      for (const project of projects) expect(project.frontmatter.placeholder).toBe(true);
+      expect(projects.some((project) => project.frontmatter.featured)).toBe(true);
+    });
+
+    it('no incluye cifras inventadas', () => {
+      const text = projects.map((project) => project.body).join(' ');
+      expect(text).not.toMatch(/\d+\s?%|\$\s?\d|€\s?\d|\d+\+?\s+(clientes|clients)/i);
+    });
+  });
+
+  it('paridad ES/EN: los mismos slugs, categoría y placeholder en los dos idiomas', () => {
+    for (const slug of blogSlugs) {
+      const esPost = getPost('es', slug)!;
+      const enPost = getPost('en', slug)!;
+      expect(enPost.frontmatter.category).toBe(esPost.frontmatter.category);
+      expect(enPost.frontmatter.placeholder).toBe(esPost.frontmatter.placeholder);
     }
   });
 
-  it('los datos de ejemplo no incluyen cifras inventadas (porcentajes, importes ni recuentos de clientes)', () => {
-    const text = strings([team, featuredProjects]).join(' ');
-    expect(text).not.toMatch(/\d+\s?%|\$\s?\d|€\s?\d|\d+\+?\s+(clientes|clients)/i);
+  it('los enlaces internos de cada post/caso resuelven en SU idioma (nunca el segmento del otro)', () => {
+    // El bug real que motivó este test: un post en español enlazaba a /cybersecurity (el segmento
+    // en inglés) en vez de /ciberseguridad. isKnownPath ya distingue los segmentos por idioma.
+    const broken: string[] = [];
+    for (const locale of routing.locales) {
+      const entries = [...getAllPosts(locale), ...getAllProjects(locale)];
+      for (const entry of entries) {
+        for (const link of internalLinks(entry.body)) {
+          if (!isKnownPath(`/${locale}${link}`)) broken.push(`${locale}/${entry.slug} → ${link}`);
+        }
+      }
+    }
+    expect(broken).toEqual([]);
+  });
+
+  it('extractHeadings ignora las líneas que empiezan por # dentro de un bloque de código', () => {
+    const markdown = [
+      '## Título real',
+      '',
+      '```bash',
+      '# esto es un comentario, no un título',
+      '```',
+      '',
+      '### Otro título',
+    ].join('\n');
+    const headings = extractHeadings(markdown);
+    expect(headings.map((h) => h.text)).toEqual(['Título real', 'Otro título']);
+  });
+
+  it('extractHeadings numera los títulos repetidos igual que rehype-slug (github-slugger)', () => {
+    const markdown = ['## Resumen', '', 'texto', '', '## Resumen'].join('\n');
+    const headings = extractHeadings(markdown);
+    expect(headings.map((h) => h.id)).toEqual(['resumen', 'resumen-1']);
+  });
+
+  it('estimateReadingMinutes redondea hacia arriba y nunca da 0', () => {
+    expect(estimateReadingMinutes('una palabra')).toBeGreaterThanOrEqual(1);
+    expect(estimateReadingMinutes(Array(400).fill('palabra').join(' '))).toBeGreaterThan(1);
+  });
+
+  it('buildBlogRss escapa entidades XML y no rompe con comillas o &', () => {
+    const posts = getAllPosts('es');
+    const xml = buildBlogRss({
+      locale: 'es',
+      posts,
+      title: 'Título con & "comillas"',
+      description: 'Descripción',
+    });
+    expect(xml).toContain('<?xml version="1.0" encoding="UTF-8"?>');
+    expect(xml).toContain('&amp;');
+    expect(xml).not.toMatch(/<title>[^<]*&(?!amp;|lt;|gt;|quot;|apos;)/);
+    for (const post of posts) expect(xml).toContain(post.frontmatter.title);
   });
 });

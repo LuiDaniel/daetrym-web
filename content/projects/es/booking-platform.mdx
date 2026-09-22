@@ -1,0 +1,24 @@
+---
+title: 'Plataforma de reservas y gestión'
+summary: 'Aplicación web para gestionar reservas, agendas y pagos, con roles de acceso y trazabilidad de cambios.'
+category: 'web'
+tags: ['Next.js', 'PostgreSQL', 'OWASP ASVS']
+featured: true
+placeholder: true
+---
+
+## El reto
+
+Un negocio de servicios con varias sedes gestionaba sus reservas en hojas de cálculo compartidas y un calendario de terceros sin control de acceso por rol: cualquier persona con el enlace podía ver o modificar cualquier reserva, sin registro de quién había cambiado qué. Los cobros se conciliaban a mano al final del mes, lo que retrasaba la detección de errores.
+
+## El enfoque
+
+Diseñamos el modelo de datos alrededor de tres roles (recepción, gestión de sede y administración), cada uno con permisos explícitos verificados tanto en la interfaz como en el servidor — nunca solo en el cliente. Cada cambio sobre una reserva (creación, modificación, cancelación) queda registrado con quién lo hizo y cuándo, consultable desde el propio panel sin acceso directo a la base de datos.
+
+Los pagos se integran con la pasarela ya usada por el negocio en lugar de sustituirla, para no forzar una migración de datos financieros históricos. Las validaciones de disponibilidad (evitar reservas duplicadas sobre el mismo recurso) se hacen a nivel de base de datos con restricciones de exclusión, no solo en la lógica de la aplicación, para que se cumplan incluso ante peticiones simultáneas.
+
+Antes de la entrega, se revisó el modelo de amenazas del flujo de pagos y de la gestión de sesiones siguiendo OWASP ASVS (nivel 2), con especial atención a la fijación de sesión y a la exposición de datos de clientes entre sedes.
+
+## El resultado
+
+El equipo dejó de coordinar reservas por chat y hojas de cálculo paralelas: cada sede ve solo lo que le corresponde, y la conciliación de pagos se apoya en un registro consultable en vez de reconstruirse a mano. El sistema sigue en uso y evoluciona con nuevas sedes sin cambios en el modelo de permisos.

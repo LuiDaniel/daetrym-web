@@ -1,0 +1,32 @@
+{
+  "projects": {
+    "meta": {
+      "title": "Proyectos",
+      "description": "Casos de ejemplo de aplicaciones web, software a medida y auditorías de seguridad."
+    },
+    "eyebrow": "Proyectos",
+    "title": "Cómo es nuestro trabajo, caso por caso",
+    "lead": "El reto, el enfoque y el resultado de cada proyecto — sin cifras ni clientes inventados.",
+    "notice": "Casos de ejemplo, sin datos de clientes reales: sustitúyelos por proyectos propios antes de publicar (content/projects).",
+    "categories": {
+      "web": "Aplicación web",
+      "software": "Software a medida",
+      "security": "Ciberseguridad"
+    },
+    "filter": {
+      "label": "Filtrar por categoría",
+      "all": "Todos"
+    },
+    "index": {
+      "listTitle": "Casos"
+    },
+    "empty": "No hay proyectos en esta categoría todavía.",
+    "detail": {
+      "rootLabel": "Proyectos"
+    },
+    "cta": {
+      "title": "¿Construimos el tuyo?",
+      "lead": "Cuéntanos el problema y te proponemos cómo abordarlo."
+    }
+  }
+}

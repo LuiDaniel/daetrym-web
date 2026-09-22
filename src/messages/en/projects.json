@@ -1,0 +1,32 @@
+{
+  "projects": {
+    "meta": {
+      "title": "Projects",
+      "description": "Example case studies in web applications, custom software and security audits."
+    },
+    "eyebrow": "Projects",
+    "title": "How we work, case by case",
+    "lead": "The challenge, the approach and the outcome of each project — no invented figures or clients.",
+    "notice": "Example cases, with no real client data: replace them with your own projects before publishing (content/projects).",
+    "categories": {
+      "web": "Web application",
+      "software": "Custom software",
+      "security": "Cybersecurity"
+    },
+    "filter": {
+      "label": "Filter by category",
+      "all": "All"
+    },
+    "index": {
+      "listTitle": "Cases"
+    },
+    "empty": "No projects in this category yet.",
+    "detail": {
+      "rootLabel": "Projects"
+    },
+    "cta": {
+      "title": "Should we build yours?",
+      "lead": "Tell us the problem and we'll propose how to tackle it."
+    }
+  }
+}

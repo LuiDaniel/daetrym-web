@@ -1,0 +1,69 @@
+---
+title: 'CSP estricta con nonces en Next.js: lo que aprendimos construyendo este sitio'
+description: 'Por qué una Content-Security-Policy sin "unsafe-inline" obliga a elegir entre generación estática y nonces, y cómo lo resolvimos en este mismo sitio.'
+date: '2026-09-14'
+category: 'engineering'
+tags: ['Next.js', 'CSP', 'OWASP']
+placeholder: true
+---
+
+Una `Content-Security-Policy` (CSP) estricta es una de las defensas más eficaces contra XSS: le dice al navegador qué scripts puede ejecutar y cuáles ignorar, aunque un atacante consiga inyectar HTML en la página. El problema aparece cuando se intenta combinar con un framework moderno como Next.js, que necesita ejecutar algunos scripts inline propios para hidratar la aplicación.
+
+Esto es lo que encontramos construyendo este mismo sitio, y la decisión que tomamos.
+
+## El conflicto real
+
+Una CSP estricta de verdad excluye `'unsafe-inline'` del `script-src`. Sin él, cualquier `<script>` sin firmar que el navegador encuentre se bloquea — incluidos los que Next.js inyecta para pasar el estado inicial de React Server Components al cliente.
+
+Probamos primero manteniendo páginas estáticas (generadas en build, sin coste de servidor por petición) y calculando los hashes SHA-256 de esos scripts para añadirlos a la CSP. No funcionó: Next genera contenido dinámico en cada payload (IDs, timestamps de caché), así que el hash cambia entre builds y a veces entre peticiones. Necesitábamos otro enfoque.
+
+## La alternativa: nonce por petición
+
+Un **nonce** ("number used once") es un valor aleatorio que se genera en cada petición y se añade tanto a la cabecera CSP como al atributo `nonce` de cada script permitido. El navegador solo ejecuta los scripts cuyo nonce coincide con el de la cabecera de esa respuesta concreta — y como cambia en cada petición, no se puede predecir ni reutilizar.
+
+El coste: un nonce por petición **obliga a renderizar dinámicamente**. Ya no se puede generar la página una vez en build y servirla desde caché, porque cada visitante necesita un nonce distinto incrustado en su propio HTML.
+
+```ts {6-7}
+// src/proxy.ts (simplificado)
+export function proxy(request: NextRequest) {
+  const nonce = generateNonce();
+  const csp = buildCsp({ nonce, isDev });
+
+  const headers = new Headers(request.headers);
+  headers.set('x-nonce', nonce);
+  headers.set('Content-Security-Policy', csp);
+
+  return NextResponse.next({ request: { headers } });
+}
+```
+
+El nonce viaja como cabecera de petición hasta el layout, que lo lee con `headers()` y lo pasa al único script inline que necesitamos (el que fija el tema antes de la primera pintura, para evitar un parpadeo oscuro/claro):
+
+```tsx
+const nonce = (await headers()).get('x-nonce') ?? undefined;
+// …
+<script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />;
+```
+
+## Lo que se gana y lo que se pierde
+
+|                           | Hashes + estático                  | Nonce + dinámico                       |
+| ------------------------- | ---------------------------------- | -------------------------------------- |
+| CSP sin `unsafe-inline`   | Solo si el script es 100 % estable | Sí, siempre                            |
+| Generación estática / ISR | Sí                                 | No                                     |
+| Caché de CDN por página   | Sí                                 | No (cada respuesta es única)           |
+| Complejidad               | Recalcular hashes en cada build    | Un valor por petición, sin build extra |
+
+Elegimos nonces porque para este sitio la seguridad de las cabeceras pesa más que ahorrar el render por petición — sigue siendo rápido en Vercel sin necesidad de caché de página completa, y `'strict-dynamic'` en la CSP hace que los scripts que Next carga dinámicamente hereden la confianza del script con nonce que los solicitó, sin tener que enumerar cada uno.
+
+## Verificarlo, no solo confiar en ello
+
+Una CSP mal configurada falla en silencio: la página se ve bien y nadie nota que en realidad está aceptando `unsafe-inline`. En nuestros tests end-to-end comprobamos en un navegador real que:
+
+- No se registra ninguna violación de CSP en consola durante la carga.
+- El nonce cambia entre peticiones distintas.
+- Todo `<script>` de la página lleva el atributo `nonce`.
+
+## En resumen
+
+Si tu sitio necesita una CSP estricta de verdad, la pregunta no es "¿hashes o nonces?" en abstracto — es si puedes vivir sin generación estática. Nosotros no pudimos evitarlo del todo, así que elegimos el camino que no depende de que nada permanezca "suficientemente estable" entre builds.

@@ -1,0 +1,24 @@
+---
+title: 'Booking and management platform'
+summary: 'Web application to manage bookings, schedules and payments, with access roles and change tracking.'
+category: 'web'
+tags: ['Next.js', 'PostgreSQL', 'OWASP ASVS']
+featured: true
+placeholder: true
+---
+
+## The challenge
+
+A multi-location service business ran its bookings through shared spreadsheets and a third-party calendar with no role-based access control: anyone with the link could view or edit any booking, with no record of who had changed what. Payments were reconciled by hand at month's end, which delayed catching errors.
+
+## The approach
+
+We designed the data model around three roles (front desk, location management, and admin), each with explicit permissions checked both in the interface and on the server — never only on the client. Every change to a booking (creation, edit, cancellation) is logged with who made it and when, queryable from the panel itself without direct database access.
+
+Payments integrate with the gateway the business already used, rather than replacing it, to avoid forcing a migration of historical financial data. Availability checks (preventing double-bookings of the same resource) are enforced at the database level with exclusion constraints, not only in application logic, so they hold even under concurrent requests.
+
+Before delivery, we reviewed the threat model for the payment flow and session handling against OWASP ASVS (level 2), paying particular attention to session fixation and cross-location customer data exposure.
+
+## The outcome
+
+The team stopped coordinating bookings over chat and parallel spreadsheets: each location sees only what applies to it, and payment reconciliation relies on a queryable log instead of being rebuilt by hand. The system remains in use and grows to new locations without changes to the permission model.

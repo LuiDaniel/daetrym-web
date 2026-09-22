@@ -33,7 +33,7 @@ export async function watchForProblems(page: Page) {
   };
 }
 
-/** Rutas públicas de la fase 2 (las secciones «en construcción» se prueban aparte). */
+/** Rutas públicas de las fases 2 y 3 (las secciones «en construcción» se prueban aparte). */
 export const contentRoutes = {
   es: [
     '/es',
@@ -49,6 +49,13 @@ export const contentRoutes = {
     '/es/legal/terminos',
     '/es/legal/cookies',
     '/es/seguridad',
+    '/es/blog',
+    '/es/blog/pentest-authorization-basics',
+    '/es/blog/nextjs-strict-csp-nonces',
+    '/es/proyectos',
+    '/es/proyectos/booking-platform',
+    '/es/proyectos/api-audit',
+    '/es/proyectos/inventory-system',
   ],
   en: [
     '/en',
@@ -64,6 +71,13 @@ export const contentRoutes = {
     '/en/legal/terms',
     '/en/legal/cookies',
     '/en/security',
+    '/en/blog',
+    '/en/blog/pentest-authorization-basics',
+    '/en/blog/nextjs-strict-csp-nonces',
+    '/en/projects',
+    '/en/projects/booking-platform',
+    '/en/projects/api-audit',
+    '/en/projects/inventory-system',
   ],
 } as const;
 
@@ -71,13 +85,9 @@ export const allContentRoutes = [...contentRoutes.es, ...contentRoutes.en];
 
 /** Secciones provisionales que llegan en fases posteriores. */
 export const comingSoonRoutes = [
-  '/es/proyectos',
-  '/es/blog',
   '/es/contacto',
   '/es/solicitar-propuesta',
   '/es/recursos',
-  '/en/projects',
-  '/en/blog',
   '/en/contact',
   '/en/request-quote',
   '/en/resources',

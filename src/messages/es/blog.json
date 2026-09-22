@@ -1,0 +1,33 @@
+{
+  "blog": {
+    "meta": {
+      "title": "Blog",
+      "description": "Artículos sobre ciberseguridad y desarrollo de software: lo que aprendemos construyendo y probando aplicaciones."
+    },
+    "eyebrow": "Blog",
+    "title": "Ciberseguridad e ingeniería, sin relleno",
+    "lead": "Lo que aprendemos construyendo y poniendo a prueba software, explicado con la misma franqueza con la que trabajamos.",
+    "categories": {
+      "cybersecurity": "Ciberseguridad",
+      "engineering": "Ingeniería"
+    },
+    "filter": {
+      "label": "Filtrar por categoría",
+      "all": "Todos"
+    },
+    "index": {
+      "listTitle": "Artículos"
+    },
+    "empty": "No hay artículos en esta categoría todavía.",
+    "readingTime": "{minutes} min de lectura",
+    "rss": "RSS",
+    "relatedTitle": "Artículos relacionados",
+    "detail": {
+      "rootLabel": "Blog"
+    },
+    "cta": {
+      "title": "¿Tienes un proyecto en mente?",
+      "lead": "Hablemos de lo que necesitas construir o poner a prueba."
+    }
+  }
+}

@@ -1,0 +1,22 @@
+---
+title: 'Internal inventory and traceability system'
+summary: 'Custom software that replaces scattered spreadsheets with a single system, integrated with existing tools.'
+category: 'software'
+tags: ['API', 'PostgreSQL', 'RBAC']
+featured: true
+placeholder: true
+---
+
+## The challenge
+
+An operations team tracked inventory across several separate spreadsheets, one per warehouse, with no single source of truth. Every transfer of stock between warehouses had to be logged by hand in both files, which caused frequent mismatches and made it nearly impossible to answer "how much stock do we actually have right now?" with any confidence.
+
+## The approach
+
+We built a centralized system with a single stock model per warehouse, where every movement (inbound, outbound, transfer, adjustment) is recorded as an event with its own history — a quantity is never overwritten directly, it's derived from its movements. That makes it possible to reconstruct the inventory state as of any past date, useful both for internal audit and for pinpointing when a mismatch first appeared.
+
+Access is organized with role-based access control (RBAC): who can log movements, who can manually adjust stock (with a mandatory reason), and who can only view it. The system exposes its own API so the purchasing and invoicing tools the team already used could integrate with it instead of being replaced, avoiding a single big-bang migration.
+
+## The outcome
+
+The team moved to a single source of truth, with movement history available to resolve mismatches in minutes instead of hours. The API let the system connect to existing tools without disrupting day-to-day work during the transition.

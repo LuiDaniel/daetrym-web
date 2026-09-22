@@ -56,13 +56,8 @@
       "eyebrow": "Projects",
       "title": "What our work looks like",
       "lead": "Three examples of the kind of projects we take on.",
-      "notice": "Example cases: replace them with real projects before publishing (src/config/projects.ts).",
-      "cta": "View all projects",
-      "categories": {
-        "web": "Web application",
-        "software": "Custom software",
-        "security": "Cybersecurity"
-      }
+      "notice": "Example cases, with no real client data: replace them with your own projects before publishing (content/projects).",
+      "cta": "View all projects"
     },
     "stack": {
       "eyebrow": "Technology",

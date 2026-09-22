@@ -18,7 +18,10 @@
     "lastUpdated": "Last updated: {date}",
     "draftNoticeTitle": "Pending review",
     "backToHome": "Back to home",
-    "opensInNewTab": "opens in a new tab"
+    "opensInNewTab": "opens in a new tab",
+    "content": {
+      "headingAnchor": "Direct link to this section"
+    }
   },
   "nav": {
     "services": "Services",

@@ -56,13 +56,8 @@
       "eyebrow": "Proyectos",
       "title": "Cómo es nuestro trabajo",
       "lead": "Tres ejemplos del tipo de proyectos que abordamos.",
-      "notice": "Casos de ejemplo: sustitúyelos por proyectos reales antes de publicar (src/config/projects.ts).",
-      "cta": "Ver todos los proyectos",
-      "categories": {
-        "web": "Aplicación web",
-        "software": "Software a medida",
-        "security": "Ciberseguridad"
-      }
+      "notice": "Casos de ejemplo, sin datos de clientes reales: sustitúyelos por proyectos propios antes de publicar (content/projects).",
+      "cta": "Ver todos los proyectos"
     },
     "stack": {
       "eyebrow": "Tecnologías",

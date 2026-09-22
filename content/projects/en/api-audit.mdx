@@ -1,0 +1,33 @@
+---
+title: 'Security audit of an API'
+summary: 'Penetration testing and code review of a business API, with a prioritized report and retest.'
+category: 'security'
+tags: ['OWASP WSTG', 'CVSS', 'PTES']
+featured: true
+placeholder: true
+---
+
+## Scope
+
+An internal REST API, used by several client applications to manage business data, had never gone through an independent security audit. The goal: a gray-box test (with access to the API documentation and a staging environment equivalent to production) following the OWASP Web Security Testing Guide methodology, plus a manual review of the authentication and authorization flows.
+
+Before starting, we signed the scope agreement with the usual rules: staging environment only, no denial-of-service attacks, with an on-call contact available for the whole window. How we approach that part is covered in our post on [authorization before a pentest](/blog/pentest-authorization-basics).
+
+## Findings
+
+The review turned up several issues typical of an API that grew quickly without a dedicated security review:
+
+- **Insufficient object-level access control** (OWASP API1): some endpoints checked that the user was authenticated, but not that the requested resource actually belonged to them.
+- **Excessive data exposure** in responses that returned more fields than the client application used, including some internal ones.
+- **Missing rate limiting** on the authentication endpoint, allowing unrestricted brute-force attempts.
+- **Incomplete security headers**: missing `Strict-Transport-Security` on some routes and a CORS policy more permissive than necessary.
+
+Each finding was documented with its severity (CVSS), the exact steps to reproduce it, and a concrete remediation recommendation — not just "fix the validation," but the specific change to make.
+
+## Retest
+
+After the in-house team applied fixes, we retested the critical and high-severity findings to confirm they were resolved and that the fix hadn't introduced a new issue. The final report tracks the status of every finding (fixed, mitigated, accepted) as a reference for future audits.
+
+## Outcome
+
+The development team got a prioritized, actionable list instead of a generic report, and could plan critical fixes before the next release. Object-level access control and the missing rate limit on authentication were fixed before the retest; the rest was documented with a remediation plan.

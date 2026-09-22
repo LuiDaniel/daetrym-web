@@ -58,6 +58,8 @@ const CLIENT_NAMESPACES = [
   'theme',
   'language',
   'errors',
+  'blog',
+  'projects',
 ] as const;
 
 export default async function LocaleLayout({ children, params }: Props) {

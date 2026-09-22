@@ -1,0 +1,33 @@
+{
+  "blog": {
+    "meta": {
+      "title": "Blog",
+      "description": "Articles on cybersecurity and software engineering: what we learn building and testing applications."
+    },
+    "eyebrow": "Blog",
+    "title": "Cybersecurity and engineering, no filler",
+    "lead": "What we learn building and testing software, explained with the same directness we work with.",
+    "categories": {
+      "cybersecurity": "Cybersecurity",
+      "engineering": "Engineering"
+    },
+    "filter": {
+      "label": "Filter by category",
+      "all": "All"
+    },
+    "index": {
+      "listTitle": "Articles"
+    },
+    "empty": "No articles in this category yet.",
+    "readingTime": "{minutes} min read",
+    "rss": "RSS",
+    "relatedTitle": "Related articles",
+    "detail": {
+      "rootLabel": "Blog"
+    },
+    "cta": {
+      "title": "Have a project in mind?",
+      "lead": "Let's talk about what you need to build or put to the test."
+    }
+  }
+}

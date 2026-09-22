@@ -1,0 +1,33 @@
+---
+title: 'Auditoría de seguridad de una API'
+summary: 'Pruebas de penetración y revisión de código de una API de negocio, con informe priorizado y reprueba.'
+category: 'security'
+tags: ['OWASP WSTG', 'CVSS', 'PTES']
+featured: true
+placeholder: true
+---
+
+## Alcance
+
+Una API REST interna, usada por varias aplicaciones cliente para gestionar datos de negocio, nunca había pasado por una auditoría de seguridad independiente. El objetivo: una prueba de caja gris (con acceso a la documentación de la API y a un entorno de pruebas equivalente a producción) siguiendo la metodología OWASP Web Security Testing Guide, más una revisión manual de las rutas de autenticación y autorización.
+
+Antes de empezar, se firmó el acuerdo de alcance con las reglas habituales: solo el entorno de pruebas, sin ataques de denegación de servicio, con un contacto de guardia disponible durante toda la ventana. El detalle de cómo trabajamos esta parte está en nuestra entrada sobre [autorización antes de un pentest](/blog/pentest-authorization-basics).
+
+## Hallazgos
+
+La revisión encontró varios problemas típicos de una API que creció rápido sin una revisión de seguridad dedicada:
+
+- **Control de acceso a nivel de objeto** (OWASP API1) insuficiente: algunos endpoints validaban que el usuario estuviera autenticado, pero no que el recurso solicitado le perteneciera.
+- **Exposición de datos excesiva** en respuestas que devolvían más campos de los que la aplicación cliente usaba, incluidos algunos internos.
+- **Límite de tasa ausente** en el endpoint de autenticación, lo que permitía intentos de fuerza bruta sin restricción.
+- **Cabeceras de seguridad incompletas**: sin `Strict-Transport-Security` en algunas rutas y con una política de CORS más permisiva de lo necesario.
+
+Cada hallazgo se documentó con su severidad (CVSS), los pasos exactos para reproducirlo y una recomendación concreta de corrección — no solo "arreglar la validación", sino el cambio específico a aplicar.
+
+## Reprueba
+
+Tras la corrección por parte del equipo interno, se repitieron las pruebas sobre los hallazgos críticos y altos para confirmar que quedaban resueltos y que la corrección no introducía un problema nuevo. El informe final incluye el estado de cada hallazgo (corregido, mitigado, aceptado) para que quede como referencia en futuras auditorías.
+
+## Resultado
+
+El equipo de desarrollo obtuvo una lista priorizada y accionable en vez de un informe genérico, y pudo planificar las correcciones críticas antes del siguiente lanzamiento. El control de acceso a nivel de objeto y el límite de tasa en autenticación se corrigieron antes de la reprueba; el resto quedó documentado con un plan de trabajo.

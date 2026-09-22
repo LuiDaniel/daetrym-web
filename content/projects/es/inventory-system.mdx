@@ -1,0 +1,22 @@
+---
+title: 'Sistema interno de inventario y trazabilidad'
+summary: 'Software a medida que sustituye hojas de cálculo dispersas por un sistema único, integrado con las herramientas existentes.'
+category: 'software'
+tags: ['API', 'PostgreSQL', 'RBAC']
+featured: true
+placeholder: true
+---
+
+## El reto
+
+Un equipo de operaciones llevaba el inventario en varias hojas de cálculo distintas, una por almacén, sin una fuente única de verdad. Cada traslado de material entre almacenes se registraba a mano en ambos ficheros, lo que generaba descuadres frecuentes y hacía casi imposible responder con certeza a "¿cuánto stock tenemos ahora mismo?".
+
+## El enfoque
+
+Se construyó un sistema centralizado con un único modelo de existencias por almacén, donde cada movimiento (entrada, salida, traslado, ajuste) queda registrado como un evento con su propio historial — nunca se sobrescribe una cantidad directamente, se calcula a partir de sus movimientos. Esto hace posible reconstruir el estado del inventario en cualquier fecha pasada, útil tanto para auditoría interna como para detectar cuándo empezó a aparecer un descuadre.
+
+El acceso se organiza por control basado en roles (RBAC): quién puede registrar movimientos, quién puede ajustar existencias manualmente (con motivo obligatorio) y quién solo puede consultar. El sistema expone una API propia para que las herramientas de compras y de facturación que el equipo ya usaba pudieran integrarse sin sustituirlas, en vez de forzar una migración completa de golpe.
+
+## El resultado
+
+El equipo pasó a trabajar sobre una única fuente de verdad, con el histórico de movimientos disponible para resolver descuadres en minutos en vez de horas. La API permitió conectar el sistema con las herramientas existentes sin interrumpir el trabajo diario durante la transición.

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { blogSlugs, projectSlugs } from '@/config/content-slugs';
 import { serviceSlugs } from '@/config/services';
 import { routing } from '@/i18n/routing';
 import { isKnownPath } from '@/lib/routes';
@@ -41,10 +42,27 @@ describe('isKnownPath', () => {
     expect(isKnownPath('/en/services/web-apps/extra')).toBe(false);
   });
 
-  it('las rutas dinámicas sin validador cuentan como inexistentes (fallan cerrado hasta la Fase 3)', () => {
+  it('valida el slug del blog y de los proyectos (Fase 3)', () => {
+    for (const slug of blogSlugs) expect(isKnownPath(`/en/blog/${slug}`)).toBe(true);
+    for (const slug of projectSlugs) {
+      expect(isKnownPath(`/es/proyectos/${slug}`)).toBe(true);
+      expect(isKnownPath(`/en/projects/${slug}`)).toBe(true);
+    }
+  });
+
+  it('un slug que no existe falla cerrado (sigue devolviendo la 404 de marca)', () => {
     expect(isKnownPath('/es/proyectos/algo')).toBe(false);
     expect(isKnownPath('/en/blog/un-post')).toBe(false);
     expect(isKnownPath('/en/projects/algo')).toBe(false);
+  });
+
+  it('deja pasar la imagen OG que Next genera junto a cada página (un segmento más, con sufijo hash)', () => {
+    const slug = blogSlugs[0]!;
+    expect(isKnownPath(`/en/blog/${slug}/opengraph-image-1ybbry`)).toBe(true);
+    expect(isKnownPath(`/en/blog/opengraph-image-v2by4x`)).toBe(true);
+    expect(isKnownPath(`/es/proyectos/${projectSlugs[0]}/opengraph-image-abc123`)).toBe(true);
+    // Pero no cualquier segmento de más: solo los nombres de convención de Next.
+    expect(isKnownPath(`/en/blog/${slug}/algo-mas`)).toBe(false);
   });
 
   it('deja pasar las rutas sin prefijo de idioma (las redirige next-intl)', () => {
