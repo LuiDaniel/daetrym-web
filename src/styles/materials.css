@@ -8,6 +8,7 @@
  *   material-thick    menús, sheets y modales: más opaco y con más blur (grande = más espeso).
  *   material-panel    tarjetas secundarias: translúcidas sin blur (barato; se puede usar en cantidad).
  *   material-solid    contenido de lectura larga (legales, blog): superficie sólida para legibilidad.
+ *   material-thumb-badge  etiqueta sobre una miniatura: siempre oscura, no depende del tema (ver abajo).
  *
  * Presupuesto de blur: como máximo el header + unos pocos elementos `regular` a la vez en pantalla
  * (en móvil, las tarjetas van en una columna). Si hay dudas, `material-panel`.
@@ -50,11 +51,27 @@
   border: 1px solid var(--hairline);
 }
 
+/*
+ * Píldora oscura para etiquetas superpuestas en una miniatura (proyecto/post): SIEMPRE oscura, sea
+ * cual sea el tema del sitio — a diferencia del resto de materiales, no cambia con data-theme, porque
+ * tiene que leerse sobre CUALQUIER imagen o degradado, no sobre el fondo de la página. Ver tokens.css
+ * (`--thumb-scrim-*`) y `ThumbBadge` en ui/badge.tsx. Alpha verificado en `pnpm check:contrast`.
+ */
+@utility material-thumb-badge {
+  background: var(--thumb-scrim-bg);
+  -webkit-backdrop-filter: blur(var(--blur-thin)) saturate(140%);
+  backdrop-filter: blur(var(--blur-thin)) saturate(140%);
+  border-color: var(--thumb-scrim-border);
+}
+
 /* Sin soporte de backdrop-filter: superficie opaca para mantener la legibilidad. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .material-regular,
   .material-thick {
     background: var(--glass-solid);
+  }
+  .material-thumb-badge {
+    background: rgb(0 0 0 / 1);
   }
 }
 
@@ -65,6 +82,11 @@
   .material-thick,
   .material-panel {
     background: var(--glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .material-thumb-badge {
+    background: rgb(0 0 0 / 1);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -80,5 +102,11 @@
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-color: var(--hairline-strong);
+  }
+  .material-thumb-badge {
+    background: rgb(0 0 0 / 1);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: rgb(255 255 255 / 0.4);
   }
 }

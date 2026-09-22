@@ -8,6 +8,7 @@ import { Section, SectionHeader } from '@/components/sections/section';
 import { Badge } from '@/components/ui/badge';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { TableOfContents } from '@/components/ui/table-of-contents';
+import { blogCategoryHues } from '@/config/blog';
 import { blogSlugs, isBlogSlug } from '@/config/content-slugs';
 import { routing, type Locale } from '@/i18n/routing';
 import { getPost, getRelatedPosts, type BlogPost } from '@/lib/content/blog';
@@ -15,9 +16,6 @@ import { Mdx } from '@/lib/content/mdx';
 import { buildAlternates } from '@/lib/seo/alternates';
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
-
-/** Un tono por categoría: verde (ciberseguridad, igual que el servicio) y cian (ingeniería). */
-const hueByCategory = { cybersecurity: 'green', engineering: 'cyan' } as const;
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) => blogSlugs.map((slug) => ({ locale, slug })));
@@ -55,7 +53,7 @@ export default async function BlogPostPage({ params }: Props) {
   const common = await getTranslations({ locale, namespace: 'common' });
   const format = await getFormatter({ locale });
   const publishedLabel = `${formatDate(format, post.frontmatter.date)} · ${t('readingTime', { minutes: post.readingMinutes })}`;
-  const hue = hueByCategory[post.frontmatter.category];
+  const hue = blogCategoryHues[post.frontmatter.category];
 
   return (
     <>
@@ -102,8 +100,10 @@ export default async function BlogPostPage({ params }: Props) {
                 title={item.frontmatter.title}
                 excerpt={item.frontmatter.description}
                 category={t(`categories.${item.frontmatter.category}`)}
+                categoryKey={item.frontmatter.category}
                 meta={`${formatDate(format, item.frontmatter.date)} · ${t('readingTime', { minutes: item.readingMinutes })}`}
-                hue={hueByCategory[item.frontmatter.category]}
+                hue={blogCategoryHues[item.frontmatter.category]}
+                image={item.frontmatter.image}
                 className="reveal"
               />
             ))}

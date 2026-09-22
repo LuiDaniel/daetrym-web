@@ -6,17 +6,20 @@ import { CardGrid, PostCard } from '@/components/sections/cards';
 import { CategoryFilter, type FilterOption } from '@/components/ui/category-filter';
 import type { Hue } from '@/config/hues';
 import type { Link } from '@/i18n/navigation';
+import type { BlogCategory } from '@/schemas/content';
 
 export type BlogListItem = {
   slug: string;
   href: ComponentProps<typeof Link>['href'];
   title: string;
   excerpt: string;
-  /** Valor interno de la categoría (para filtrar), no el texto ya traducido. */
-  category: string;
+  /** Valor interno de la categoría (para filtrar y para el icono de la miniatura), no el texto traducido. */
+  category: BlogCategory;
   categoryLabel: string;
   meta: string;
   hue: Hue;
+  /** Ruta local en /public (16:9); sin ella, la tarjeta muestra un degradado + icono. */
+  image?: string;
 };
 
 /**
@@ -61,8 +64,10 @@ export function BlogList({
               title={post.title}
               excerpt={post.excerpt}
               category={post.categoryLabel}
+              categoryKey={post.category}
               meta={post.meta}
               hue={post.hue}
+              image={post.image}
               className="reveal"
             />
           ))}

@@ -313,54 +313,73 @@
   --h-fg: var(--c-green-fg);
   --h-tint: var(--c-green-tint);
   --h-line: var(--c-green-line);
+  --thumb-fg: var(--color-green-300);
+
+  /*
+   * Píldora oscura para etiquetas superpuestas en una miniatura (proyecto/post, Fase 3.1): SIEMPRE
+   * oscura, sea cual sea el tema del sitio, porque debe leerse sobre cualquier imagen o degradado de
+   * fondo. Alpha verificado en pnpm check:contrast contra el peor caso (una miniatura casi blanca).
+   */
+  --thumb-scrim-bg: rgb(0 0 0 / 0.8);
+  --thumb-scrim-border: rgb(255 255 255 / 0.16);
 }
 
 /* ---------- 4. Tonos por hue ---------- */
 /* Uso: <div class="hue-violet"> … <span class="bg-h-tint text-h-fg border-h-line"> … </span></div>
    Asignación con intención (no decorativa):
      cian → desarrollo web · violeta → software a medida · verde → ciberseguridad · ámbar → consultoría
-     magenta → destacados editoriales · azul → información / severidad baja · rojo → crítico */
+     magenta → destacados editoriales · azul → información / severidad baja · rojo → crítico
+   `--thumb-fg` (→ `text-thumb-fg`): el mismo tono en su versión "para chip oscuro" (paso 300 de la
+   escala), SIEMPRE clara sea cual sea el tema — para texto/iconos sobre la píldora oscura de
+   `material-thumb-badge` o el degradado de una miniatura sin imagen (ver ThumbBadge en ui/badge.tsx). */
 .hue-green {
   --h: var(--c-green);
   --h-fg: var(--c-green-fg);
   --h-tint: var(--c-green-tint);
   --h-line: var(--c-green-line);
+  --thumb-fg: var(--color-green-300);
 }
 .hue-cyan {
   --h: var(--c-cyan);
   --h-fg: var(--c-cyan-fg);
   --h-tint: var(--c-cyan-tint);
   --h-line: var(--c-cyan-line);
+  --thumb-fg: var(--color-cyan-300);
 }
 .hue-blue {
   --h: var(--c-blue);
   --h-fg: var(--c-blue-fg);
   --h-tint: var(--c-blue-tint);
   --h-line: var(--c-blue-line);
+  --thumb-fg: var(--color-blue-300);
 }
 .hue-violet {
   --h: var(--c-violet);
   --h-fg: var(--c-violet-fg);
   --h-tint: var(--c-violet-tint);
   --h-line: var(--c-violet-line);
+  --thumb-fg: var(--color-violet-300);
 }
 .hue-magenta {
   --h: var(--c-magenta);
   --h-fg: var(--c-magenta-fg);
   --h-tint: var(--c-magenta-tint);
   --h-line: var(--c-magenta-line);
+  --thumb-fg: var(--color-magenta-300);
 }
 .hue-amber {
   --h: var(--c-amber);
   --h-fg: var(--c-amber-fg);
   --h-tint: var(--c-amber-tint);
   --h-line: var(--c-amber-line);
+  --thumb-fg: var(--color-amber-300);
 }
 .hue-red {
   --h: var(--c-red);
   --h-fg: var(--c-red-fg);
   --h-tint: var(--c-red-tint);
   --h-line: var(--c-red-line);
+  --thumb-fg: var(--color-red-300);
 }
 
 /* ---------- 5. Mapeo a Tailwind v4 (utilidades bg-*, text-*, border-*, font-*) ---------- */
@@ -395,6 +414,7 @@
   --color-h-fg: var(--h-fg);
   --color-h-tint: var(--h-tint);
   --color-h-line: var(--h-line);
+  --color-thumb-fg: var(--thumb-fg);
 
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

@@ -39,6 +39,8 @@ export default function ProjectsIndexPage() {
     categoryLabel: t(`categories.${project.frontmatter.category}`),
     tags: project.frontmatter.tags,
     placeholder: project.frontmatter.placeholder,
+    image: project.frontmatter.image,
+    demoUrl: project.frontmatter.demoUrl,
   }));
 
   const categories: FilterOption[] = projectCategories.map((category) => ({

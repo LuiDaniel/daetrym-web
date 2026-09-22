@@ -219,6 +219,8 @@ export default function HomePage() {
               summary={project.frontmatter.summary}
               tags={project.frontmatter.tags}
               placeholder={project.frontmatter.placeholder}
+              image={project.frontmatter.image}
+              demoUrl={project.frontmatter.demoUrl}
             />
           ))}
         </CardGrid>

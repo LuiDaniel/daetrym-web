@@ -16,6 +16,10 @@ export type ProjectListItem = {
   categoryLabel: string;
   tags: string[];
   placeholder: boolean;
+  /** Ruta local en /public (16:9); sin ella, la tarjeta muestra un degradado + icono. */
+  image?: string;
+  /** Enlace a una demo pública en vivo; si aparece, la tarjeta muestra un botón "Ver demo". */
+  demoUrl?: string;
 };
 
 /** Índice de proyectos con filtro por categoría (Fase 3). Mismo patrón que `BlogList`. */
@@ -60,6 +64,8 @@ export function ProjectList({
               summary={project.summary}
               tags={project.tags}
               placeholder={project.placeholder}
+              image={project.image}
+              demoUrl={project.demoUrl}
               className="reveal"
             />
           ))}

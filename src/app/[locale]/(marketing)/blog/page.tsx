@@ -7,6 +7,7 @@ import { PageHero } from '@/components/sections/page-hero';
 import { Section } from '@/components/sections/section';
 import { blogCategories } from '@/schemas/content';
 import type { FilterOption } from '@/components/ui/category-filter';
+import { blogCategoryHues } from '@/config/blog';
 import type { Locale } from '@/i18n/routing';
 import { getAllPosts } from '@/lib/content/blog';
 import { buildAlternates } from '@/lib/seo/alternates';
@@ -23,8 +24,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const hueByCategory = { cybersecurity: 'green', engineering: 'cyan' } as const;
-
 export default function BlogIndexPage() {
   const locale = useLocale() as Locale;
   const t = useTranslations('blog');
@@ -39,7 +38,8 @@ export default function BlogIndexPage() {
     category: post.frontmatter.category,
     categoryLabel: t(`categories.${post.frontmatter.category}`),
     meta: `${format.dateTime(new Date(`${post.frontmatter.date}T00:00:00Z`), { dateStyle: 'long', timeZone: 'UTC' })} · ${t('readingTime', { minutes: post.readingMinutes })}`,
-    hue: hueByCategory[post.frontmatter.category],
+    hue: blogCategoryHues[post.frontmatter.category],
+    image: post.frontmatter.image,
   }));
 
   const categories: FilterOption[] = blogCategories.map((category) => ({

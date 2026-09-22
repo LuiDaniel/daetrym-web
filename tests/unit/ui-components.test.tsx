@@ -125,7 +125,16 @@ describe('Tarjetas nuevas', () => {
 
   it('PostCard enlaza desde el título (enlace extendido)', () => {
     render(
-      <PostCard href="/blog" title="Título" excerpt="Extracto" category="Seguridad" meta="1 min" />,
+      <NextIntlClientProvider locale="es" messages={{ common: es.common }}>
+        <PostCard
+          href="/blog"
+          title="Título"
+          excerpt="Extracto"
+          category="Seguridad"
+          categoryKey="cybersecurity"
+          meta="1 min"
+        />
+      </NextIntlClientProvider>,
     );
     expect(screen.getByRole('link', { name: 'Título' })).toBeTruthy();
     expect(screen.getByText('Seguridad')).toBeTruthy();

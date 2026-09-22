@@ -1,18 +1,21 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
 import type { ComponentProps, ReactNode } from 'react';
-import { Badge } from '@/components/ui/badge';
+import { Badge, ThumbBadge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { IconBadge } from '@/components/ui/icon-badge';
+import { blogCategoryIcons } from '@/config/blog';
 import { hueClass, type Hue } from '@/config/hues';
 import { pick } from '@/config/localized';
-import { projectHues, type ProjectCategory } from '@/config/projects';
+import { projectHues, projectIcons, type ProjectCategory } from '@/config/projects';
 import { serviceHues, serviceIcons, type ServiceSlug } from '@/config/services';
 import type { TeamMember } from '@/config/team';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
+import type { BlogCategory } from '@/schemas/content';
 
 /**
  * Línea de luz del tono en el borde superior de una tarjeta de vidrio (decorativa). Se apoya en el
@@ -24,6 +27,70 @@ function HueEdge() {
       aria-hidden
       className="pointer-events-none absolute inset-x-5 top-0 h-px bg-linear-to-r from-transparent via-h to-transparent opacity-70"
     />
+  );
+}
+
+/**
+ * Miniatura 16:9 de una tarjeta de proyecto/post: la imagen del frontmatter si existe, o si no un
+ * degradado radial con los dos tonos de la categoría (`--h`/`--h-fg`, del `.hue-*` del contenedor) más un
+ * icono de línea fina, para que nunca se vea vacía. Sangra hasta el borde de la tarjeta (compensa
+ * `--pad-card` con margen negativo) y aloja, superpuestas, las etiquetas de categoría/ejemplo (arriba a
+ * la izquierda) y el botón de demo (abajo a la derecha) — ambas en `ThumbBadge`/`material-thumb-badge`,
+ * siempre oscuras, para leerse sobre cualquier imagen o degradado.
+ */
+function CardThumbnail({
+  image,
+  alt,
+  icon: Icon,
+  badges,
+  demoUrl,
+}: {
+  image?: string;
+  alt: string;
+  icon: LucideIcon;
+  badges: ReactNode;
+  demoUrl?: string;
+}) {
+  const t = useTranslations('common');
+
+  return (
+    <div className="relative -mx-(--pad-card) -mt-(--pad-card) aspect-video overflow-hidden rounded-t-lg">
+      {image ? (
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover"
+        />
+      ) : (
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-surface-3"
+          style={{
+            backgroundImage:
+              'radial-gradient(120% 120% at 10% 0%, color-mix(in srgb, var(--h) 45%, transparent), transparent 65%), radial-gradient(120% 120% at 100% 100%, color-mix(in srgb, var(--h-fg) 35%, transparent), transparent 65%)',
+          }}
+        >
+          <div className="grid size-full place-items-center">
+            <Icon className="size-9 text-h-fg/70" strokeWidth={1.25} />
+          </div>
+        </div>
+      )}
+      <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">{badges}</div>
+      {demoUrl && (
+        <a
+          href={demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="press absolute right-2.5 bottom-2.5 z-10 inline-flex items-center gap-1.5 rounded-full border material-thumb-badge px-2.5 py-1 text-label font-medium text-thumb-fg"
+        >
+          {t('viewDemo')}
+          <ExternalLink aria-hidden className="size-3" />
+          <span className="sr-only">{`(${t('opensInNewTab')})`}</span>
+        </a>
+      )}
+    </div>
   );
 }
 
@@ -117,6 +184,8 @@ export function ProjectCard({
   title,
   summary,
   tags,
+  image,
+  demoUrl,
   placeholder,
   className,
 }: {
@@ -126,6 +195,10 @@ export function ProjectCard({
   title: string;
   summary: string;
   tags: string[];
+  /** Ruta local en /public (16:9); sin ella, degradado + icono de la categoría. */
+  image?: string;
+  /** Enlace a una demo pública en vivo; si aparece, la miniatura muestra un botón "Ver demo". */
+  demoUrl?: string;
   placeholder?: boolean;
   className?: string;
 }) {
@@ -139,11 +212,18 @@ export function ProjectCard({
         className,
       )}
     >
-      <HueEdge />
-      <div className="flex flex-wrap items-center gap-1.5">
-        <Badge variant="hue">{categoryLabel}</Badge>
-        {placeholder && <Badge variant="placeholder">{t('example')}</Badge>}
-      </div>
+      <CardThumbnail
+        image={image}
+        alt=""
+        icon={projectIcons[category]}
+        demoUrl={demoUrl}
+        badges={
+          <>
+            <ThumbBadge variant="hue">{categoryLabel}</ThumbBadge>
+            {placeholder && <ThumbBadge variant="placeholder">{t('example')}</ThumbBadge>}
+          </>
+        }
+      />
       <h3 className="text-title">
         <Link
           href={href}
@@ -249,17 +329,28 @@ export function PostCard({
   title,
   excerpt,
   category,
+  categoryKey,
   meta,
   hue = 'cyan',
+  image,
   className,
 }: {
   href: ComponentProps<typeof Link>['href'];
   title: string;
   excerpt: string;
+  /** Texto ya traducido de la etiqueta. */
   category: string;
+  /**
+   * Valor interno de la categoría (p. ej. `post.frontmatter.category`), para resolver el icono de la
+   * miniatura sin imagen (`blogCategoryIcons`). No es un componente: cruza sin problema el límite
+   * servidor/cliente de `BlogList` (a diferencia de pasar el icono ya resuelto como prop).
+   */
+  categoryKey: BlogCategory;
   /** Fecha y tiempo de lectura, ya formateados. */
   meta: ReactNode;
   hue?: Hue;
+  /** Ruta local en /public (16:9); sin ella, degradado + icono de la categoría. */
+  image?: string;
   className?: string;
 }) {
   return (
@@ -270,10 +361,12 @@ export function PostCard({
         className,
       )}
     >
-      <HueEdge />
-      <Badge variant="hue" className="self-start">
-        {category}
-      </Badge>
+      <CardThumbnail
+        image={image}
+        alt=""
+        icon={blogCategoryIcons[categoryKey]}
+        badges={<ThumbBadge variant="hue">{category}</ThumbBadge>}
+      />
       <h3 className="text-title">
         <Link
           href={href}

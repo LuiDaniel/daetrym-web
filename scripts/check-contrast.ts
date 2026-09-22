@@ -4,7 +4,9 @@
  * Además de las superficies sólidas, cubre el vidrio: cada material translúcido se compone sobre los
  * fondos más desfavorables — el fondo liso y, por cada uno de los siete tonos, el resplandor de
  * SECCIÓN de ese tono a su intensidad real (`--glow-alpha`; ver `SectionGlow`) — y los textos, las
- * etiquetas de cada tono (`.hue-*`) y su tinte se miden sobre todo eso.
+ * etiquetas de cada tono (`.hue-*`) y su tinte se miden sobre todo eso. También cubre la píldora
+ * siempre oscura de las miniaturas de proyecto/post (`--thumb-fg` sobre `--thumb-scrim-bg`) contra el
+ * peor caso: una miniatura casi blanca.
  * Uso: pnpm check:contrast  (falla con exit 1 si algún par no cumple)
  */
 import { readFileSync } from 'node:fs';
@@ -40,7 +42,7 @@ function resolve(theme: keyof typeof themes, name: string, depth = 0): string {
 
 const color = (theme: keyof typeof themes, name: string): Rgba => parseColor(resolve(theme, name));
 
-function check(theme: keyof typeof themes, label: string, fg: Rgba, bg: Rgba, min: number) {
+function check(theme: string, label: string, fg: Rgba, bg: Rgba, min: number) {
   const ratio = contrastRatio(composite(fg, bg), bg);
   checked++;
   if (ratio < min) failures.push({ theme, pair: label, ratio, min });
@@ -174,6 +176,32 @@ for (const theme of ['dark', 'light'] as const) {
       `--on-accent sobre ${bgName}`,
       color(theme, '--on-accent'),
       color(theme, bgName),
+      TEXT,
+    );
+  }
+}
+
+// Miniaturas de proyecto/post (Fase 3.1): `ThumbBadge` y el botón "Ver demo" van en una píldora
+// SIEMPRE oscura (material-thumb-badge, --thumb-scrim-bg), sea cual sea el tema del sitio, porque
+// tienen que leerse sobre CUALQUIER imagen o degradado subido a /public — no solo sobre el fondo del
+// tema. Se comprueba una sola vez (no por tema) contra el peor caso real: una miniatura casi blanca
+// (la mayor luminancia posible detrás del scrim reduce más el contraste del texto claro).
+const constants = readTokens(css, /^:root$/);
+const scrimBg = parseColor(constants['--thumb-scrim-bg']!);
+const nearWhiteBackdrops: Base[] = [
+  { name: 'blanco', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+  { name: '#f6f8fa', rgb: parseColor('#f6f8fa') },
+  { name: '#eaeef2', rgb: parseColor('#eaeef2') },
+];
+for (const backdrop of nearWhiteBackdrops) {
+  const scrimOverBackdrop = composite(scrimBg, backdrop.rgb);
+  for (const hue of hues) {
+    const thumbFg = parseColor(scales[`--color-${hue}-300`]!);
+    check(
+      'thumb',
+      `--thumb-fg (${hue}) sobre --thumb-scrim-bg / ${backdrop.name}`,
+      thumbFg,
+      scrimOverBackdrop,
       TEXT,
     );
   }

@@ -36,8 +36,9 @@
 `tests/unit/tokens.test.ts` comprueba: que lo duplicado entre CSS y TS (`--press-scale`) no diverja,
 que las siete escalas de color (50–900) y sus tonos (`.hue-*`) existan, y que **ningún componente use un
 color hex suelto** (recorre `src/components` y `src/app`; la única excepción es el isotipo SVG).
-`pnpm check:contrast` valida WCAG AA sobre los tokens (1738 pares: superficies sólidas, vidrio compuesto
-sobre cada resplandor, los siete tonos y sus tintes, en ambos temas).
+`pnpm check:contrast` valida WCAG AA sobre los tokens (superficies sólidas, vidrio compuesto sobre cada
+resplandor, los siete tonos y sus tintes en ambos temas, y la píldora siempre oscura de las miniaturas
+de tarjeta contra el peor caso — ver «Miniaturas de tarjeta» más abajo).
 
 ## Color
 
@@ -164,6 +165,46 @@ header, un sheet); un `backdrop-filter` anidado no ve nada nuevo detrás y solo 
   `prefers-contrast: more` (opaco + borde definido) y navegadores sin `backdrop-filter`.
 - **Limitación conocida (sin cambios desde la Fase 1):** el blur no se renderiza en la emulación móvil
   headless de Playwright; sí en el contexto de escritorio con el mismo CSS. Validar en un dispositivo real.
+
+## Miniaturas de tarjeta (proyecto/post, Fase 3.1)
+
+`ProjectCard` y `PostCard` (`src/components/sections/cards.tsx`) llevan una miniatura 16:9 arriba,
+compartida por `CardThumbnail`. Dos campos opcionales de frontmatter la controlan:
+
+| Campo     | En qué contenido  | Formato                                                             |
+| --------- | ----------------- | ------------------------------------------------------------------- |
+| `image`   | proyectos y posts | ruta LOCAL en `/public` (`/^\/[^\s]+\.(png\|jpe?g\|webp\|avif)$/i`) |
+| `demoUrl` | solo proyectos    | URL completa (`z.string().url()`)                                   |
+
+Validados en `src/schemas/content.ts`. `image` es siempre una ruta local, nunca remota — así no hace
+falta tocar el `img-src` de la CSP (ya permite `'self'`/`data:`/`blob:`, ver `src/lib/security/headers.ts`).
+
+**Añadir una imagen a un proyecto o post nuevo:**
+
+1. Coloca el archivo en `public/content/<projects|blog>/<slug>/thumb.<ext>` (crea la carpeta si no
+   existe; usa el slug EN como carpeta si el contenido tiene `translationKey` con slugs distintos por
+   idioma, para no duplicar el archivo).
+2. En el frontmatter del `.mdx`, añade `image: /content/<projects|blog>/<slug>/thumb.jpg` (la ruta es
+   relativa a `public/`, empieza por `/`).
+3. Repite el campo en el `.mdx` del otro idioma si quieres la misma imagen ahí (no se copia sola).
+
+**Añadir un botón "Ver demo" a un proyecto:** añade `demoUrl: https://...` al frontmatter. Aparece como
+un botón de vidrio en la esquina inferior derecha de la miniatura, con `target="_blank"` y el aviso
+`opensInNewTab` para lectores de pantalla.
+
+**Sin `image`:** la miniatura muestra un degradado radial con los dos tonos de la categoría (`--h`/
+`--h-fg` del `.hue-*` de la tarjeta) más el icono de línea fina de esa categoría (`projectIcons` en
+`src/config/projects.ts`, `blogCategoryIcons` en `src/config/blog.ts`) — nunca se ve vacía.
+
+**Etiquetas superpuestas.** La categoría y el distintivo "Ejemplo" viven sobre la miniatura (arriba a la
+izquierda), no encima del título. Usan `ThumbBadge` (`src/components/ui/badge.tsx`), no `Badge`: una
+píldora con `material-thumb-badge` (fondo oscuro semitransparente + blur, SIEMPRE oscura pase lo que
+pase con el tema del sitio, porque tiene que leerse sobre cualquier foto o degradado) y `text-thumb-fg`
+(el mismo tono de la categoría, en su paso 300 — la variante clara que hoy solo se usaba en tema
+oscuro). Los colores de cada categoría son EXACTAMENTE los mismos que ya usaban esas etiquetas antes de
+la miniatura; solo cambió la superficie sobre la que se leen. `pnpm check:contrast` verifica
+`--thumb-fg` de los siete tonos contra `--thumb-scrim-bg` compuesto sobre el peor caso real (una
+miniatura casi blanca) — si tocas cualquiera de esos tokens, vuelve a ejecutarlo.
 
 ## Padding y radios (Primer: densidad cuidada)
 
