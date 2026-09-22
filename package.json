@@ -19,7 +19,7 @@
     "check:placeholders": "tsx scripts/check-placeholders.ts",
     "brand": "tsx scripts/generate-brand.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "tsx scripts/db-migrate-neon.ts",
     "db:studio": "drizzle-kit studio",
     "prepare": "husky"
   },

@@ -37,7 +37,6 @@ export function WaitlistForm({ interestLabels }: { interestLabels: Record<string
     control,
     handleSubmit,
     setValue,
-    reset,
     formState: { errors },
   } = useForm<WaitlistFormValues>({
     resolver: zodResolver(waitlistFormSchema),
@@ -48,9 +47,15 @@ export function WaitlistForm({ interestLabels }: { interestLabels: Record<string
     startTransition(async () => {
       const outcome = await joinWaitlist(values, locale);
       setResult(outcome);
-      if (outcome.ok) reset();
     });
   });
+
+  // Éxito: se sustituye el formulario por la confirmación en vez de vaciarlo y dejarlo visible — un
+  // `reset()` de "intereses" (mínimo un elemento) revalida al instante contra el array ya vacío y
+  // vuelve a mostrar "elige una opción" justo encima del aviso de éxito.
+  if (result?.ok) {
+    return <FormStatusBanner result={result} />;
+  }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>

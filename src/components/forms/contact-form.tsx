@@ -26,7 +26,6 @@ export function ContactForm() {
     control,
     handleSubmit,
     setValue,
-    reset,
     formState: { errors },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -37,9 +36,15 @@ export function ContactForm() {
     startTransition(async () => {
       const outcome = await submitContact(values, locale);
       setResult(outcome);
-      if (outcome.ok) reset();
     });
   });
+
+  // Éxito: se sustituye el formulario por la confirmación en vez de vaciarlo y dejarlo visible — un
+  // `reset()` de un campo con su propio mínimo (la casilla de privacidad, aquí) revalida al instante
+  // contra el valor ya vacío y vuelve a mostrar "obligatorio" justo encima del aviso de éxito.
+  if (result?.ok) {
+    return <FormStatusBanner result={result} />;
+  }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
