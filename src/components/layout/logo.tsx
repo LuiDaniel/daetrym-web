@@ -12,10 +12,10 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       aria-label={t('homeLink')}
-      className={cn('inline-flex items-center gap-2.5 text-fg', className)}
+      className={cn('inline-flex items-center gap-2 text-fg', className)}
     >
-      <LogoMark />
-      <span aria-hidden className="text-lead font-semibold tracking-tight">
+      <LogoMark className="h-6" />
+      <span aria-hidden className="text-title tracking-tight">
         {siteConfig.name}
       </span>
     </Link>

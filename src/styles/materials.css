@@ -1,58 +1,60 @@
 /*
- * Materiales translúcidos (apple-design §12).
- * thin    → chips y controles secundarios (lo más ligero, atrae atención a lo interactivo)
- * regular → header, tarjetas
- * thick   → sheets y modales (superficies grandes = más espesas: más blur y sombra más profunda)
- * Nunca apilar una superficie translúcida clara sobre otra.
+ * Materiales: superficies de vidrio (glassmorphism con criterio).
+ *
+ *   material-thin     controles (botón secundario, segmentado, toggle). Translúcido SIN blur: los controles
+ *                     viven casi siempre dentro de otra superficie con blur (el header, un sheet) y un
+ *                     backdrop-filter anidado no ve nada nuevo y cuesta rendimiento.
+ *   material-regular  vidrio principal: header, tarjetas destacadas, paneles. Con blur.
+ *   material-thick    menús, sheets y modales: más opaco y con más blur (grande = más espeso).
+ *   material-panel    tarjetas secundarias: translúcidas sin blur (barato; se puede usar en cantidad).
+ *   material-solid    contenido de lectura larga (legales, blog): superficie sólida para legibilidad.
+ *
+ * Presupuesto de blur: como máximo el header + unos pocos elementos `regular` a la vez en pantalla
+ * (en móvil, las tarjetas van en una columna). Si hay dudas, `material-panel`.
+ * Borde de 1px translúcido con el borde superior más claro = luz sobre el material.
  */
 @utility material-thin {
-  background: var(--material-thin-bg);
-  -webkit-backdrop-filter: blur(var(--blur-thin)) saturate(160%);
-  backdrop-filter: blur(var(--blur-thin)) saturate(160%);
-  border: 1px solid var(--material-border);
+  background: var(--glass-thin-bg);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-edge);
   box-shadow: var(--shadow-thin);
 }
 
 @utility material-regular {
-  background: var(--material-regular-bg);
-  -webkit-backdrop-filter: blur(var(--blur-regular)) saturate(180%);
-  backdrop-filter: blur(var(--blur-regular)) saturate(180%);
-  border: 1px solid var(--material-border);
-  border-top-color: var(--material-edge);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(160%);
+  backdrop-filter: blur(var(--blur-glass)) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-edge);
   box-shadow: var(--shadow-regular);
 }
 
 @utility material-thick {
-  background: var(--material-thick-bg);
-  -webkit-backdrop-filter: blur(var(--blur-thick)) saturate(180%);
-  backdrop-filter: blur(var(--blur-thick)) saturate(180%);
-  border: 1px solid var(--material-border);
-  border-top-color: var(--material-edge);
+  background: var(--glass-thick-bg);
+  -webkit-backdrop-filter: blur(var(--blur-thick)) saturate(160%);
+  backdrop-filter: blur(var(--blur-thick)) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-edge);
   box-shadow: var(--shadow-thick);
 }
 
-/*
- * Scroll-edge effect: en lugar de una línea de 1px bajo el header, un degradado con blur
- * que se desvanece hacia el contenido. La opacidad la controla el scroll (ver site-header.tsx).
- */
-@utility scroll-edge {
-  position: absolute;
-  inset: 0 0 -1.25rem 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, var(--material-regular-bg) 0%, transparent 100%);
-  -webkit-backdrop-filter: blur(var(--blur-regular)) saturate(180%);
-  backdrop-filter: blur(var(--blur-regular)) saturate(180%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent 100%);
+@utility material-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-edge);
+  box-shadow: var(--shadow-thin);
 }
 
-/* Sin soporte de backdrop-filter: superficie casi sólida para mantener legibilidad. */
+@utility material-solid {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+}
+
+/* Sin soporte de backdrop-filter: superficie opaca para mantener la legibilidad. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .material-thin,
   .material-regular,
-  .material-thick,
-  .scroll-edge {
-    background: var(--material-solid-bg);
+  .material-thick {
+    background: var(--glass-solid);
   }
 }
 
@@ -61,19 +63,20 @@
   .material-thin,
   .material-regular,
   .material-thick,
-  .scroll-edge {
-    background: var(--material-solid-bg);
+  .material-panel {
+    background: var(--glass-solid);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
 }
 
-/* prefers-contrast: more → casi sólido con borde definido. */
+/* prefers-contrast: more → opaco con borde definido. */
 @media (prefers-contrast: more) {
   .material-thin,
   .material-regular,
-  .material-thick {
-    background: var(--material-solid-bg);
+  .material-thick,
+  .material-panel {
+    background: var(--glass-solid);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-color: var(--hairline-strong);

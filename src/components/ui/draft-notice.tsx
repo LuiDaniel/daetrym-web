@@ -1,8 +1,7 @@
-import { TriangleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { ReactNode } from 'react';
 import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/cn';
+import { Banner } from './banner';
 
 type DraftNoticeProps = {
   title?: string;
@@ -21,18 +20,8 @@ export function DraftNotice({ title, children, gated = true, className }: DraftN
   if (gated && !siteConfig.draftNotices) return null;
 
   return (
-    <div
-      role="note"
-      className={cn(
-        'flex gap-3 rounded-lg border border-warning-border bg-warning-bg p-4 text-small text-fg',
-        className,
-      )}
-    >
-      <TriangleAlert aria-hidden className="mt-0.5 size-5 shrink-0 text-warning" />
-      <div className="space-y-1">
-        <p className="font-semibold text-warning">{title ?? t('draftNoticeTitle')}</p>
-        <div className="text-fg-muted">{children}</div>
-      </div>
-    </div>
+    <Banner tone="warning" title={title ?? t('draftNoticeTitle')} className={className}>
+      {children}
+    </Banner>
   );
 }

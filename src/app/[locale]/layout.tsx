@@ -11,7 +11,7 @@ import { SkipLink } from '@/components/layout/skip-link';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { THEME_SCRIPT } from '@/lib/security/theme-script';
-import { inter, jetbrainsMono } from '../fonts';
+import { instrumentSerif, inter, jetbrainsMono } from '../fonts';
 import '@/styles/globals.css';
 
 type Props = {
@@ -76,7 +76,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       lang={locale}
       data-theme="dark"
       suppressHydrationWarning
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
       <head>
         {/* Fija el tema antes del primer pintado. El navegador oculta el nonce tras ejecutarlo. */}

@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { AccentText } from '@/components/ui/accent-text';
 import { Button } from '@/components/ui/button';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { Link } from '@/i18n/navigation';
@@ -18,23 +19,23 @@ export function NotFoundView() {
   const t = useTranslations();
 
   return (
-    <section aria-labelledby="page-title" className="container-page page-top pb-24">
-      <div className="max-w-2xl">
+    <section aria-labelledby="page-title" className="hue-amber container-page page-top pb-20">
+      <div className="max-w-xl">
         <Eyebrow>{t('errors.notFound.code')}</Eyebrow>
-        <h1 id="page-title" className="mt-4 text-h1">
-          {t('errors.notFound.title')}
+        <h1 id="page-title" className="mt-3 text-h1">
+          <AccentText text={t('errors.notFound.title')} />
         </h1>
-        <p className="mt-5 text-lead text-fg-muted">{t('errors.notFound.body')}</p>
+        <p className="mt-4 text-lead text-fg-muted">{t('errors.notFound.body')}</p>
 
-        <div className="mt-9 flex flex-wrap gap-3">
+        <div className="mt-7 flex flex-wrap gap-2.5">
           <Button asChild size="lg">
             <Link href="/">{t('errors.notFound.home')}</Link>
           </Button>
         </div>
 
-        <nav aria-label={t('errors.notFound.suggestions')} className="mt-12">
+        <nav aria-label={t('errors.notFound.suggestions')} className="mt-10">
           <p className="text-eyebrow text-fg-subtle">{t('errors.notFound.suggestions')}</p>
-          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
             {suggestions.map((item) => (
               <li key={item.key}>
                 <Link

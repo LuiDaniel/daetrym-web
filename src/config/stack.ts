@@ -5,7 +5,15 @@
  * PLACEHOLDER — confirmar con el equipo que esta lista refleja las herramientas con las que
  * realmente se trabaja, y ajustarla.
  */
+import type { Hue } from './hues';
+
 export type StackGroup = 'apps' | 'infra' | 'security';
+
+export const stackHues: Record<StackGroup, Hue> = {
+  apps: 'cyan',
+  infra: 'blue',
+  security: 'green',
+};
 
 export const stack: Record<StackGroup, string[]> = {
   apps: ['TypeScript', 'React', 'Next.js', 'Node.js', 'Tailwind CSS'],

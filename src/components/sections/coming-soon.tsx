@@ -14,14 +14,14 @@ export function ComingSoon({ title }: { title: string }) {
   const email = siteConfig.contact.email;
 
   return (
-    <section aria-labelledby="page-title" className="container-page page-top pb-24">
-      <div className="max-w-2xl">
+    <section aria-labelledby="page-title" className="container-page page-top pb-20">
+      <div className="max-w-xl">
         <Eyebrow>{t('comingSoon.eyebrow')}</Eyebrow>
-        <h1 id="page-title" className="mt-4 text-h1">
+        <h1 id="page-title" className="mt-3 text-h1">
           {title}
         </h1>
-        <p className="mt-5 text-lead text-fg-muted">{t('comingSoon.description', { email })}</p>
-        <div className="mt-9 flex flex-wrap gap-3">
+        <p className="mt-4 text-lead text-fg-muted">{t('comingSoon.description', { email })}</p>
+        <div className="mt-7 flex flex-wrap gap-2.5">
           <Button asChild size="lg">
             <a href={`mailto:${email}`}>{email}</a>
           </Button>

@@ -44,7 +44,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === 'dark' ? t('toLight') : t('toDark')}
-      className="press relative inline-flex size-10 items-center justify-center rounded-full text-fg material-thin"
+      className="press relative inline-flex size-8 items-center justify-center rounded-md material-thin text-fg"
     >
       <motion.span
         aria-hidden
@@ -57,7 +57,7 @@ export function ThemeToggle() {
         }}
         transition={spring.snappy}
       >
-        <Moon className="size-[1.125rem]" />
+        <Moon className="size-4" strokeWidth={1.5} />
       </motion.span>
       <motion.span
         aria-hidden
@@ -70,7 +70,7 @@ export function ThemeToggle() {
         }}
         transition={spring.snappy}
       >
-        <Sun className="size-[1.125rem]" />
+        <Sun className="size-4" strokeWidth={1.5} />
       </motion.span>
     </button>
   );

@@ -1,9 +1,12 @@
 import type { ReactNode } from 'react';
+import { AccentText } from '@/components/ui/accent-text';
 import { Eyebrow } from '@/components/ui/eyebrow';
+import { hueClass, type Hue } from '@/config/hues';
 import { cn } from '@/lib/cn';
 
 type PageHeroProps = {
   eyebrow?: string;
+  /** Admite `*palabra*` para el acento editorial (serif cursiva): una palabra por título. */
   title: string;
   lead?: string;
   /** Botones de acción. */
@@ -16,11 +19,13 @@ type PageHeroProps = {
   breadcrumbs?: ReactNode;
   /** `display` solo para la Home; el resto de páginas usa `h1`. */
   size?: 'display' | 'h1';
+  /** Tono del sobretítulo y de los detalles (verde de marca por defecto). */
+  hue?: Hue;
 };
 
 /**
  * Cabecera de página. Es el elemento LCP: nada aquí se revela con animación ni depende de JavaScript.
- * El resplandor es estático y pasa por detrás del header translúcido (que flota sobre el contenido).
+ * Los resplandores de color son globales (body::before) y pasan por detrás del header de vidrio.
  */
 export function PageHero({
   eyebrow,
@@ -31,38 +36,35 @@ export function PageHero({
   visual,
   breadcrumbs,
   size = 'h1',
+  hue,
 }: PageHeroProps) {
   return (
-    <section aria-labelledby="page-title" className="relative isolate overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-136 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_srgb,var(--accent)_20%,transparent),transparent)]"
-      />
+    <section aria-labelledby="page-title" className={cn('relative', hue && hueClass[hue])}>
       <div
         className={cn(
-          'container-page page-top pb-16 sm:pb-20',
+          'container-page page-top pb-12 sm:pb-16',
           visual &&
-            'grid items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16',
+            'grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14',
         )}
       >
         <div>
-          {breadcrumbs && <div className="mb-6">{breadcrumbs}</div>}
+          {breadcrumbs && <div className="mb-5">{breadcrumbs}</div>}
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           <h1
             id="page-title"
             className={cn(
               size === 'display' ? 'text-display' : 'text-h1',
-              eyebrow && 'mt-4',
-              'max-w-4xl',
+              eyebrow && 'mt-3',
+              'max-w-3xl',
             )}
           >
-            {title}
+            <AccentText text={title} />
           </h1>
-          {lead && <p className="mt-6 max-w-2xl text-lead text-fg-muted">{lead}</p>}
-          {actions && <div className="mt-9 flex flex-wrap gap-3">{actions}</div>}
-          {footnote && <div className="mt-6">{footnote}</div>}
+          {lead && <p className="mt-5 max-w-xl text-lead text-fg-muted">{lead}</p>}
+          {actions && <div className="mt-7 flex flex-wrap gap-2.5">{actions}</div>}
+          {footnote && <div className="mt-5">{footnote}</div>}
         </div>
-        {visual && <div className="mx-auto w-full max-w-md lg:max-w-none">{visual}</div>}
+        {visual && <div className="mx-auto w-full max-w-sm lg:max-w-none">{visual}</div>}
       </div>
     </section>
   );

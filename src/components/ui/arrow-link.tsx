@@ -11,7 +11,7 @@ export function ArrowLink({ className, children, ...props }: ComponentProps<type
   return (
     <Link
       className={cn(
-        'group inline-flex items-center gap-2 rounded-sm py-2 text-body font-medium text-accent-text',
+        'group inline-flex items-center gap-1.5 rounded-sm py-1.5 text-body font-medium text-h-fg',
         className,
       )}
       {...props}

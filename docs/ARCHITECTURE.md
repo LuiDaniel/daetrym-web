@@ -203,6 +203,11 @@ Cada fase termina con `pnpm lint` + `typecheck` + `build`, arreglo de errores, r
 - [ ] **Fase 5 – SEO y pulido**: JSON-LD, sitemap/robots multi-idioma, canonical, analítica, manifest; **revisión completa de motion/gestos/tipografía/materiales contra apple-design**; rendimiento y a11y (WCAG 2.2 AA).
 - [ ] **Fase 6 – Pruebas y despliegue**: unitarias y e2e (contacto, propuesta, double opt-in, idioma, menú por teclado, axe); auditoría Lighthouse/securityheaders; `docs/DEPLOY.md`; `docs/SECURITY.md`; README final.
 
+Rediseño visual "Glass + Primer" (fuera del plan de fases original, pedido tras la Fase 2; ver §11):
+
+- [x] **Paso 1**: tokens nuevos (color, tipografía, espaciado, radio, vidrio), componentes base y Home completa (ES/EN, oscuro/claro, móvil/escritorio); `check:contrast` cubre los materiales nuevos; lint/typecheck/build/axe/responsive verificados.
+- [ ] **Paso 2** (solo cuando el usuario lo apruebe): aplicar el estilo a Servicios, Ciberseguridad, Nosotros, Proceso, Blog, Proyectos, legales, 404 y mantenimiento; actualizar los tests que dependan de estilos; commit.
+
 ---
 
 ## 7. Riesgos
@@ -285,3 +290,16 @@ Corrección posterior a la fase (informe: «no funcionan los botones de tema e i
 8. **`next dev` abierto por `127.0.0.1` o por la IP de la red local no hidrataba** (Next bloquea los recursos de desarrollo de orígenes distintos de `localhost`): la página se veía pero ningún botón respondía. `allowedDevOrigins` en `next.config.ts` (solo afecta a `next dev`; `next start` y producción no cambian).
 
 Pendiente de contenido (lo lista `pnpm check:placeholders`): historia real de la empresa, equipo, proyectos, redes, datos legales (`[COMPLETAR]`), plazos y puerto seguro de la política de divulgación, confirmación del stack y de los tiempos orientativos del proceso, y revisión legal de las tres plantillas.
+
+---
+
+## 11. Registro de decisiones (Rediseño "Glass + Primer")
+
+El usuario pidió un rediseño visual completo (2026-09-21): el resultado de apple-design aplicado a color/tipografía/espaciado usaba casi solo verde y negro, letras demasiado grandes y tarjetas con poco padding. Ver `docs/DESIGN.md` para el detalle completo; aquí solo las decisiones que no revertir sin consultar.
+
+- **apple-design se acota al movimiento.** Deja de decidir color, tipografía, espaciado y estilo general; sigue gobernando springs, gestos y `prefers-reduced-motion`. Los valores visuales salen de `docs/DESIGN.md` + `src/styles/`.
+- **Siete escalas de color (50–900)**, no solo verde: cada componente que necesita un tono con intención (servicio, categoría, estado) recibe un `hue?: Hue` y usa las utilidades `bg-h-tint`/`text-h-fg`/`border-h-line` de la clase `.hue-<tono>` que envuelve. El verde de marca sigue siendo el único color de CTAs primarios y foco.
+- **`scripts/check-contrast.ts` se reescribió**: antes de este cambio ya cubría materiales; ahora además compone el vidrio sobre cada resplandor de fondo (no sobre los tres apilados — en pantalla no se superponen, son radiales en esquinas distintas) y sobre los siete tonos y sus tintes. 1738 pares verificados (antes 114).
+- **`tests/unit/tokens.test.ts` gana un guardarraíl**: recorre `src/components` y `src/app` y falla si aparece un color hex suelto fuera de `logo-mark.tsx` (el isotipo de marca, la única excepción legítima).
+- **Nueva fuente**: Instrument Serif (cursiva) como acento editorial de UNA palabra por título (`AccentText`, marcado `*palabra*` en el texto de mensajes). No sustituye a Inter en ningún otro sitio.
+- **Alcance del Paso 1**: solo tokens, componentes base (`Button`, `Card`, `Badge`, `Banner`, `Field`, `Tabs`, `Tooltip`…) y la Home. El resto de páginas (Servicios, Ciberseguridad, Nosotros, Proceso, legales, 404, mantenimiento) sigue con los nombres de utilidad de la Fase 2, que la nueva paleta sigue resolviendo correctamente (ver el aviso al final de `docs/DESIGN.md`) — se completa en el Paso 2, solo cuando el usuario lo apruebe.

@@ -18,7 +18,7 @@ export function Faq({ items, idPrefix }: { items: FaqItem[]; idPrefix: string })
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="divide-y divide-hairline overflow-hidden rounded-lg border border-hairline bg-surface-1">
+    <div className="divide-y divide-hairline overflow-hidden rounded-lg material-panel">
       {items.map((item, index) => {
         const open = openIndex === index;
         const buttonId = `${idPrefix}-question-${index}`;
@@ -33,16 +33,16 @@ export function Faq({ items, idPrefix }: { items: FaqItem[]; idPrefix: string })
                 aria-expanded={open}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(open ? null : index)}
-                className="flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left text-title transition-colors hover:bg-surface-2 focus-visible:outline-offset-[-3px]"
+                className="flex min-h-12 w-full items-center justify-between gap-4 px-5 py-3.5 text-left text-title transition-colors hover:bg-glass-hover focus-visible:outline-offset-[-3px]"
               >
                 <span>{item.q}</span>
                 <motion.span
                   aria-hidden
-                  className="inline-flex shrink-0 text-accent-text"
+                  className="inline-flex shrink-0 text-h-fg"
                   animate={{ rotate: open ? 45 : 0 }}
                   transition={spring.snappy}
                 >
-                  <Plus className="size-5" />
+                  <Plus className="size-4" strokeWidth={1.75} />
                 </motion.span>
               </button>
             </h3>

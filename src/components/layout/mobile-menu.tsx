@@ -30,9 +30,9 @@ export function MobileMenu() {
         aria-label={t('header.openMenu')}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="press inline-flex size-10 items-center justify-center rounded-full text-fg material-thin lg:hidden"
+        className="press inline-flex size-9 items-center justify-center rounded-md material-thin text-fg lg:hidden"
       >
-        <Menu aria-hidden className="size-5" />
+        <Menu aria-hidden className="size-5" strokeWidth={1.5} />
       </button>
 
       <SideSheet
@@ -49,7 +49,7 @@ export function MobileMenu() {
               <li key={item.key}>
                 <Link
                   href={item.href}
-                  className="press block rounded-md py-3 text-h3 text-fg hover:text-accent-text"
+                  className="press block rounded-md px-3 py-2.5 text-h3 text-fg hover:bg-glass-hover"
                 >
                   {t(`nav.${item.key}`)}
                 </Link>

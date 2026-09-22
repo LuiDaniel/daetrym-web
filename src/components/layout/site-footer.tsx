@@ -10,8 +10,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-hairline bg-surface-1">
-      <div className="container-page grid gap-12 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <footer className="mt-20 border-t border-hairline bg-band">
+      <div className="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="flex flex-col gap-4">
           <Logo />
           <p className="max-w-xs text-small text-fg-muted">{t('footer.tagline')}</p>
@@ -19,10 +19,10 @@ export function SiteFooter() {
 
         {footerNav.map((group) => (
           <nav key={group.titleKey} aria-labelledby={`footer-${group.titleKey}`}>
-            <h2 id={`footer-${group.titleKey}`} className="text-label text-fg-subtle">
+            <h2 id={`footer-${group.titleKey}`} className="text-eyebrow text-fg-subtle">
               {t(`footer.${group.titleKey}`)}
             </h2>
-            <ul className="mt-4 flex flex-col gap-2.5">
+            <ul className="mt-3.5 flex flex-col gap-2">
               {group.items.map((item) => (
                 <li key={item.key}>
                   <Link href={item.href} className="text-small text-fg-muted hover:text-fg">

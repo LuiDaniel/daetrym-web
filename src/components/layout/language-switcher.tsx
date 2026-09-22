@@ -37,7 +37,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       role="group"
       aria-label={t('label')}
       aria-busy={pending}
-      className={cn('inline-flex rounded-full p-1 material-thin', className)}
+      className={cn('inline-flex rounded-md material-thin p-0.5', className)}
     >
       {routing.locales.map((code) => {
         const active = code === locale;
@@ -50,7 +50,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             aria-label={t('switchTo', { language: t(`names.${code}`) })}
             onClick={() => select(code)}
             className={cn(
-              'press relative h-8 min-w-10 rounded-full px-2.5 text-label font-semibold uppercase',
+              'press relative h-7 min-w-9 rounded-sm px-2 text-label font-semibold uppercase',
               active ? 'text-on-accent' : 'text-fg-muted hover:text-fg',
             )}
           >
@@ -58,7 +58,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
               <motion.span
                 layoutId="language-pill"
                 transition={spring.snappy}
-                className="absolute inset-0 rounded-full bg-accent"
+                className="absolute inset-0 rounded-sm bg-accent"
               />
             )}
             <span className="relative">{code}</span>

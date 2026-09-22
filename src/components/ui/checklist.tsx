@@ -6,12 +6,12 @@ export function Checklist({ items, className }: { items: readonly string[]; clas
   return (
     <ul className={cn('space-y-3', className)}>
       {items.map((item, index) => (
-        <li key={`${index}:${item}`} className="flex gap-3 text-body text-fg-muted">
+        <li key={`${index}:${item}`} className="flex gap-2.5 text-body text-fg-muted">
           <span
             aria-hidden
-            className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent-tint text-accent-text"
+            className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-h-line bg-h-tint text-h-fg"
           >
-            <Check className="size-3.5" strokeWidth={2.5} />
+            <Check className="size-3" strokeWidth={2.25} />
           </span>
           <span>{item}</span>
         </li>

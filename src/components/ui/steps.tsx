@@ -24,14 +24,14 @@ export function Steps({ items, className }: { items: StepItem[]; className?: str
             <div className="flex flex-col items-center">
               <span
                 aria-hidden
-                className="grid size-10 shrink-0 place-items-center rounded-full border border-hairline-strong bg-surface-2 font-mono text-small text-accent-text"
+                className="grid size-8 shrink-0 place-items-center rounded-md border border-h-line bg-h-tint font-mono text-label text-h-fg"
               >
                 {String(index + 1).padStart(2, '0')}
               </span>
               {!last && <span aria-hidden className="mt-2 w-px flex-1 bg-hairline-strong" />}
             </div>
-            <div className={cn('min-w-0', last ? 'pb-0' : 'pb-10')}>
-              <h3 className="pt-1.5 text-title">
+            <div className={cn('min-w-0', last ? 'pb-0' : 'pb-8')}>
+              <h3 className="pt-1 text-title">
                 <span className="sr-only">{`${item.label}: `}</span>
                 {item.title}
               </h3>

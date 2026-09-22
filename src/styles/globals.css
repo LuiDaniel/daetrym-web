@@ -14,11 +14,34 @@
     scroll-padding-top: calc(var(--header-height) + 1rem);
   }
 
+  /* Sin fondo propio: el color del lienzo es el de <html> y los resplandores van en body::before. */
   body {
     min-height: 100dvh;
-    background: var(--bg);
-    font-size: 1rem;
-    line-height: 1.55;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /*
+   * Resplandores de fondo: tres gradientes radiales (verde, cian, violeta) fijos al viewport, sin
+   * imágenes. Es lo que da profundidad al vidrio. Deriva casi imperceptible solo en escritorio con
+   * puntero fino y sin prefers-reduced-motion (en móvil queda estático: batería y rendimiento).
+   */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -6%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60rem 40rem at 14% 2%, var(--glow-1), transparent 72%),
+      radial-gradient(52rem 38rem at 92% 12%, var(--glow-2), transparent 72%),
+      radial-gradient(62rem 42rem at 55% 104%, var(--glow-3), transparent 72%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    body::before {
+      animation: glow-drift 60s ease-in-out infinite alternate;
+    }
   }
 
   ::selection {
@@ -68,12 +91,12 @@
   /* Primera sección de una página: el header es translúcido y flota sobre el contenido, así que
      el espacio superior debe incluir su altura. */
   .page-top {
-    padding-top: calc(var(--header-height) + clamp(3.5rem, 8vw, 7rem));
+    padding-top: calc(var(--header-height) + clamp(2.5rem, 6vw, 4.5rem));
   }
 
   /* Ritmo vertical entre secciones (fluido, en rem: respeta el tamaño de texto del usuario). */
   .section-y {
-    padding-block: clamp(3.5rem, 7vw, 6rem);
+    padding-block: clamp(3rem, 6vw, 5rem);
   }
 
   /* Skip link (WCAG 2.4.1): invisible hasta recibir foco */
@@ -105,6 +128,15 @@
       transform: none;
       opacity: 0.8;
     }
+  }
+}
+
+@keyframes glow-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-1.5%, 1.2%, 0) scale(1.05);
   }
 }
 

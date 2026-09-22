@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import { AppWindow, Boxes, Compass, ShieldCheck } from 'lucide-react';
+import type { Hue } from './hues';
 
 /**
  * Servicios del sitio. Los slugs son iguales en todos los idiomas (así el selector de idioma conserva
@@ -15,6 +16,14 @@ export const serviceIcons: Record<ServiceSlug, LucideIcon> = {
   'custom-software': Boxes,
   cybersecurity: ShieldCheck,
   consulting: Compass,
+};
+
+/** Un color por servicio (identidad, no decoración): cian, violeta, verde de marca y ámbar. */
+export const serviceHues: Record<ServiceSlug, Hue> = {
+  'web-apps': 'cyan',
+  'custom-software': 'violet',
+  cybersecurity: 'green',
+  consulting: 'amber',
 };
 
 export function isServiceSlug(value: string): value is ServiceSlug {

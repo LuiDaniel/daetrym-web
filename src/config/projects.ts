@@ -1,6 +1,14 @@
+import type { Hue } from './hues';
 import type { Localized } from './localized';
 
 export type ProjectCategory = 'web' | 'software' | 'security';
+
+/** Cada categoría hereda el color del servicio al que corresponde. */
+export const projectHues: Record<ProjectCategory, Hue> = {
+  web: 'cyan',
+  software: 'violet',
+  security: 'green',
+};
 
 export type FeaturedProject = {
   id: string;

@@ -18,8 +18,8 @@ export function NavLink({ href, className, ...props }: NavLinkProps) {
       href={href}
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'rounded-full px-3 py-2 text-small font-medium transition-colors',
-        active ? 'text-fg' : 'text-fg-muted hover:text-fg',
+        'rounded-md px-2.5 py-1.5 text-small font-medium transition-colors',
+        active ? 'bg-glass-hover text-fg' : 'text-fg-muted hover:bg-glass hover:text-fg',
         className,
       )}
       {...props}

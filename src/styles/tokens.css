@@ -1,127 +1,350 @@
 /*
- * DaeTrym — tokens de diseño (única fuente de verdad visual, derivada de apple-design).
- * Valores de marca muestreados de public/brand/logo.png: fondo #040712, verde #01BF63, blanco.
+ * DaeTrym — tokens de diseño: dirección "Glass + Primer" (única fuente de verdad visual).
+ *
+ *   Primer  → densidad cuidada, bordes finos de 1px, jerarquía clara, etiquetas de estado, radios pequeños.
+ *   Glass   → superficies translúcidas con backdrop-filter sobre resplandores de color generados con CSS.
+ *
+ * Estructura del archivo:
+ *   1. Escalas de color 50–900 (marca + secundarios). Constantes, no dependen del tema.
+ *   2. Tokens semánticos por tema (oscuro por defecto, claro real). Lo que usan los componentes.
+ *   3. Constantes (espaciado, blur, tamaños de header).
+ *   4. Tonos por hue (.hue-*): un componente elige un color y sus hijos usan bg-h-tint, text-h-fg…
+ *   5. Mapeo a Tailwind v4.
+ *
  * Los tokens de motion viven en ./motion.ts; los que también necesita CSS (press) se duplican aquí
  * y tests/unit/tokens.test.ts verifica que no diverjan.
- * Contrastes verificados por `pnpm check:contrast`.
+ * Contrastes verificados por `pnpm check:contrast` (incluye vidrio sobre resplandores).
+ * Regla: ningún componente define un color: solo usa estos tokens.
  */
 
-/* ---------- Oscuro (por defecto) ---------- */
+/* ---------- 1. Escalas de color (constantes) ---------- */
+/* Verde = identidad y CTAs (#01bf63 es el 500; #3ddc97 el 400 «claro»; #00713a el 700 «oscuro» para texto sobre claro).
+   Cian, azul, violeta, magenta, ámbar y rojo: paleta secundaria; cada uno con intención (ver .hue-*). */
+@theme static {
+  --color-green-50: #ecfdf4;
+  --color-green-100: #cff8e2;
+  --color-green-200: #a1f0c8;
+  --color-green-300: #6be6ab;
+  --color-green-400: #3ddc97;
+  --color-green-500: #01bf63;
+  --color-green-600: #00a355;
+  --color-green-700: #00713a;
+  --color-green-800: #00592e;
+  --color-green-900: #003d20;
+
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+  --color-cyan-800: #155e75;
+  --color-cyan-900: #164e63;
+
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6fe;
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #6d28d9;
+  --color-violet-800: #5b21b6;
+  --color-violet-900: #4c1d95;
+
+  --color-magenta-50: #fdf4ff;
+  --color-magenta-100: #fae8ff;
+  --color-magenta-200: #f5d0fe;
+  --color-magenta-300: #f0abfc;
+  --color-magenta-400: #e879f9;
+  --color-magenta-500: #d946ef;
+  --color-magenta-600: #c026d3;
+  --color-magenta-700: #a21caf;
+  --color-magenta-800: #86198f;
+  --color-magenta-900: #701a75;
+
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem; /* botones, controles: 6px */
+  --radius-md: 0.5rem; /* botones grandes, iconos: 8px */
+  --radius-lg: 0.75rem; /* tarjetas: 12px */
+  --radius-xl: 1rem; /* paneles grandes, sheets: 16px */
+}
+
+/* ---------- 2a. Oscuro (por defecto) ---------- */
 :root,
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #040712;
-  --surface-1: #0b1020;
-  --surface-2: #121829;
-  --surface-3: #1a2236;
+  /* Fondo muy oscuro con tinte verdoso; el color lo aportan los resplandores (--glow-*) */
+  --bg: #050807;
+  --surface-1: #0a100d;
+  --surface-2: #0f1613;
+  --surface-3: #16201b;
+  --band-bg: rgb(
+    255 255 255 / 0.025
+  ); /* banda de sección alterna: tinte sobre el fondo, no sólido */
 
-  --fg: #ffffff;
-  --fg-muted: rgb(255 255 255 / 0.72);
-  --fg-subtle: rgb(255 255 255 / 0.56);
+  --fg: #f3f8f5;
+  --fg-muted: rgb(243 248 245 / 0.72);
+  --fg-subtle: rgb(243 248 245 / 0.62);
 
   --accent: #01bf63;
-  --accent-hover: #19d477;
-  --accent-pressed: #00a356;
-  --accent-text: #01bf63;
+  --accent-hover: #3ddc97;
+  --accent-pressed: #00a355;
+  --accent-text: var(--color-green-400);
   --on-accent: #04110a;
+  --accent-tint: rgb(1 191 99 / 0.14);
 
-  --accent-tint: rgb(1 191 99 / 0.14); /* fondo de insignias con icono */
-
-  --danger: #ff7a7a;
+  --danger: var(--c-red-fg);
 
   /* Contenido de ejemplo / pendiente de revisión: ámbar, distinto del verde de marca */
-  --warning: #f5c451;
-  --warning-bg: rgb(245 196 81 / 0.1);
-  --warning-border: rgb(245 196 81 / 0.35);
+  --warning: var(--c-amber-fg);
+  --warning-bg: var(--c-amber-tint);
+  --warning-border: var(--c-amber-line);
 
-  --hairline: rgb(255 255 255 / 0.08);
-  --hairline-strong: rgb(255 255 255 / 0.16);
-  --focus-ring: #19d477;
+  --hairline: rgb(255 255 255 / 0.1);
+  --hairline-strong: rgb(255 255 255 / 0.18);
+  --focus-ring: var(--color-green-400);
+  --input-border: rgb(255 255 255 / 0.5); /* borde de campos de formulario: ≥ 3:1 (WCAG 1.4.11) */
 
-  /* Materiales (translúcidos) */
-  --material-thin-bg: rgb(255 255 255 / 0.06);
-  --material-regular-bg: rgb(11 16 32 / 0.62);
-  --material-thick-bg: rgb(18 24 41 / 0.78);
-  --material-solid-bg: #121829; /* fallback: reduced-transparency / sin backdrop-filter */
-  --material-edge: rgb(255 255 255 / 0.12); /* luz sobre el borde superior */
-  --material-border: rgb(255 255 255 / 0.08);
-  --shadow-thin: 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-regular: 0 8px 24px -8px rgb(0 0 0 / 0.5);
-  --shadow-thick: 0 24px 64px -12px rgb(0 0 0 / 0.65), 0 2px 8px rgb(0 0 0 / 0.4);
-  --scrim: rgb(2 4 10 / 0.6);
+  /* Vidrio: blanco al 4–8 %, borde de 1px y borde superior más claro («luz sobre el material») */
+  --glass-bg: rgb(255 255 255 / 0.06);
+  --glass-hover-bg: rgb(255 255 255 / 0.09);
+  --glass-thin-bg: rgb(255 255 255 / 0.06);
+  --glass-thick-bg: rgb(
+    11 17 14 / 0.78
+  ); /* menús, sheets y modales: más espeso (más legible sobre contenido) */
+  --glass-solid: #0f1613; /* degradación: sin backdrop-filter / reduced-transparency */
+  --glass-edge: rgb(255 255 255 / 0.22);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --shadow-thin: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-regular: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 8px 24px -10px rgb(0 0 0 / 0.55);
+  --shadow-thick: 0 24px 64px -12px rgb(0 0 0 / 0.7), 0 2px 8px rgb(0 0 0 / 0.4);
+  --scrim: rgb(2 4 3 / 0.62);
+
+  /* Resplandores de fondo (gradientes radiales CSS, sin imágenes) */
+  --glow-1: rgb(1 191 99 / 0.26); /* verde */
+  --glow-2: rgb(6 182 212 / 0.2); /* cian */
+  --glow-3: rgb(139 92 246 / 0.26); /* violeta */
+
+  --c-green: #3ddc97;
+  --c-green-fg: #6be6ab;
+  --c-green-tint: rgb(61 220 151 / 0.14);
+  --c-green-line: rgb(61 220 151 / 0.34);
+  --c-cyan: #22d3ee;
+  --c-cyan-fg: #67e8f9;
+  --c-cyan-tint: rgb(34 211 238 / 0.14);
+  --c-cyan-line: rgb(34 211 238 / 0.34);
+  --c-blue: #60a5fa;
+  --c-blue-fg: #93c5fd;
+  --c-blue-tint: rgb(96 165 250 / 0.14);
+  --c-blue-line: rgb(96 165 250 / 0.34);
+  --c-violet: #a78bfa;
+  --c-violet-fg: #c4b5fd;
+  --c-violet-tint: rgb(167 139 250 / 0.14);
+  --c-violet-line: rgb(167 139 250 / 0.34);
+  --c-magenta: #e879f9;
+  --c-magenta-fg: #f0abfc;
+  --c-magenta-tint: rgb(232 121 249 / 0.14);
+  --c-magenta-line: rgb(232 121 249 / 0.34);
+  --c-amber: #fbbf24;
+  --c-amber-fg: #fcd34d;
+  --c-amber-tint: rgb(251 191 36 / 0.14);
+  --c-amber-line: rgb(251 191 36 / 0.34);
+  --c-red: #f87171;
+  --c-red-fg: #fca5a5;
+  --c-red-tint: rgb(248 113 113 / 0.14);
+  --c-red-line: rgb(248 113 113 / 0.34);
 }
 
-/* ---------- Claro ---------- */
+/* ---------- 2b. Claro (real: fondo suave, vidrio claro, resplandores tenues) ---------- */
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: #f5f6f8;
+  --bg: #f6f8fa;
   --surface-1: #ffffff;
   --surface-2: #ffffff;
-  --surface-3: #eef0f4;
+  --surface-3: #eaeef2;
+  --band-bg: rgb(31 35 40 / 0.025);
 
-  --fg: #0b1020;
-  --fg-muted: rgb(11 16 32 / 0.72);
-  --fg-subtle: rgb(11 16 32 / 0.6);
+  --fg: #1f2328;
+  --fg-muted: rgb(31 35 40 / 0.74);
+  --fg-subtle: rgb(31 35 40 / 0.66);
 
   --accent: #01bf63;
   /* Con texto oscuro sobre el botón, hover/pressed no pueden oscurecer el verde (AA). */
-  --accent-hover: #19d477;
-  --accent-pressed: #00a356;
-  --accent-text: #00713a;
+  --accent-hover: #3ddc97;
+  --accent-pressed: #00a355;
+  --accent-text: var(--color-green-700);
   --on-accent: #04110a;
+  --accent-tint: rgb(0 163 85 / 0.1);
 
-  --accent-tint: rgb(0 113 58 / 0.1);
+  --danger: var(--c-red-fg);
 
-  --danger: #b3261e;
+  --warning: var(--c-amber-fg);
+  --warning-bg: var(--c-amber-tint);
+  --warning-border: var(--c-amber-line);
 
-  --warning: #8a5a00;
-  --warning-bg: rgb(138 90 0 / 0.08);
-  --warning-border: rgb(138 90 0 / 0.3);
+  --hairline: rgb(31 35 40 / 0.14);
+  --hairline-strong: rgb(31 35 40 / 0.26);
+  --focus-ring: var(--color-green-700);
+  --input-border: rgb(31 35 40 / 0.56);
 
-  --hairline: rgb(4 7 18 / 0.1);
-  --hairline-strong: rgb(4 7 18 / 0.18);
-  --focus-ring: #00713a;
+  --glass-bg: rgb(255 255 255 / 0.62);
+  --glass-hover-bg: rgb(255 255 255 / 0.82);
+  --glass-thin-bg: rgb(255 255 255 / 0.5);
+  --glass-thick-bg: rgb(255 255 255 / 0.88);
+  --glass-solid: #ffffff;
+  --glass-edge: rgb(255 255 255 / 1);
+  --glass-border: rgb(31 35 40 / 0.1);
+  --shadow-thin: 0 1px 2px rgb(31 35 40 / 0.06);
+  --shadow-regular: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 8px 24px -10px rgb(31 35 40 / 0.16);
+  --shadow-thick: 0 24px 64px -12px rgb(31 35 40 / 0.28), 0 2px 8px rgb(31 35 40 / 0.1);
+  --scrim: rgb(31 35 40 / 0.4);
 
-  --material-thin-bg: rgb(4 7 18 / 0.05);
-  --material-regular-bg: rgb(255 255 255 / 0.7);
-  --material-thick-bg: rgb(255 255 255 / 0.82);
-  --material-solid-bg: #ffffff;
-  --material-edge: rgb(255 255 255 / 0.9);
-  --material-border: rgb(4 7 18 / 0.08);
-  --shadow-thin: 0 1px 2px rgb(4 7 18 / 0.08);
-  --shadow-regular: 0 8px 24px -8px rgb(4 7 18 / 0.16);
-  --shadow-thick: 0 24px 64px -12px rgb(4 7 18 / 0.28), 0 2px 8px rgb(4 7 18 / 0.1);
-  --scrim: rgb(4 7 18 / 0.4);
+  --glow-1: rgb(1 191 99 / 0.15);
+  --glow-2: rgb(6 182 212 / 0.14);
+  --glow-3: rgb(139 92 246 / 0.12);
+
+  --c-green: #00713a;
+  --c-green-fg: #00713a;
+  --c-green-tint: rgb(0 163 85 / 0.1);
+  --c-green-line: rgb(0 163 85 / 0.32);
+  --c-cyan: #0e7490;
+  --c-cyan-fg: #155e75;
+  --c-cyan-tint: rgb(8 145 178 / 0.1);
+  --c-cyan-line: rgb(8 145 178 / 0.32);
+  --c-blue: #1d4ed8;
+  --c-blue-fg: #1d4ed8;
+  --c-blue-tint: rgb(37 99 235 / 0.1);
+  --c-blue-line: rgb(37 99 235 / 0.32);
+  --c-violet: #6d28d9;
+  --c-violet-fg: #6d28d9;
+  --c-violet-tint: rgb(124 58 237 / 0.1);
+  --c-violet-line: rgb(124 58 237 / 0.32);
+  --c-magenta: #a21caf;
+  --c-magenta-fg: #86198f;
+  --c-magenta-tint: rgb(192 38 211 / 0.1);
+  --c-magenta-line: rgb(192 38 211 / 0.32);
+  --c-amber: #b45309;
+  --c-amber-fg: #92400e;
+  --c-amber-tint: rgb(217 119 6 / 0.1);
+  --c-amber-line: rgb(217 119 6 / 0.32);
+  --c-red: #b91c1c;
+  --c-red-fg: #b91c1c;
+  --c-red-tint: rgb(220 38 38 / 0.1);
+  --c-red-line: rgb(220 38 38 / 0.32);
 }
 
-/* ---------- Constantes (no dependen del tema) ---------- */
-/* Radios: declarados en @theme (abajo) para que rounded-* de Tailwind los use. */
+/* ---------- 3. Constantes (no dependen del tema) ---------- */
 :root {
-  --blur-thin: 12px;
-  --blur-regular: 20px;
-  --blur-thick: 40px;
+  --blur-glass: 16px;
+  --blur-thick: 24px;
 
-  --header-height: 4rem;
-  --content-width: 72rem;
+  --header-height: 4.75rem; /* alto reservado: margen superior + píldora + aire */
+  --header-width: 66rem;
+  --content-width: 70rem;
   --gutter: clamp(1.25rem, 4vw, 2rem);
+  --pad-card: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); /* 20–24px: padding interno cómodo */
 
   /* Press: respuesta en pointer-down (apple-design §1). Duplicado en motion.ts */
   --press-scale: 0.97;
   --press-duration: 100ms;
+
+  /* Tono por defecto = verde de marca (ver .hue-*) */
+  --h: var(--c-green);
+  --h-fg: var(--c-green-fg);
+  --h-tint: var(--c-green-tint);
+  --h-line: var(--c-green-line);
 }
 
-/* ---------- Mapeo a Tailwind v4 (utilidades bg-*, text-*, border-*, rounded-*) ---------- */
-@theme static {
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 1.75rem;
+/* ---------- 4. Tonos por hue ---------- */
+/* Uso: <div class="hue-violet"> … <span class="bg-h-tint text-h-fg border-h-line"> … </span></div>
+   Asignación con intención (no decorativa):
+     cian → desarrollo web · violeta → software a medida · verde → ciberseguridad · ámbar → consultoría
+     magenta → destacados editoriales · azul → información / severidad baja · rojo → crítico */
+.hue-green {
+  --h: var(--c-green);
+  --h-fg: var(--c-green-fg);
+  --h-tint: var(--c-green-tint);
+  --h-line: var(--c-green-line);
+}
+.hue-cyan {
+  --h: var(--c-cyan);
+  --h-fg: var(--c-cyan-fg);
+  --h-tint: var(--c-cyan-tint);
+  --h-line: var(--c-cyan-line);
+}
+.hue-blue {
+  --h: var(--c-blue);
+  --h-fg: var(--c-blue-fg);
+  --h-tint: var(--c-blue-tint);
+  --h-line: var(--c-blue-line);
+}
+.hue-violet {
+  --h: var(--c-violet);
+  --h-fg: var(--c-violet-fg);
+  --h-tint: var(--c-violet-tint);
+  --h-line: var(--c-violet-line);
+}
+.hue-magenta {
+  --h: var(--c-magenta);
+  --h-fg: var(--c-magenta-fg);
+  --h-tint: var(--c-magenta-tint);
+  --h-line: var(--c-magenta-line);
+}
+.hue-amber {
+  --h: var(--c-amber);
+  --h-fg: var(--c-amber-fg);
+  --h-tint: var(--c-amber-tint);
+  --h-line: var(--c-amber-line);
+}
+.hue-red {
+  --h: var(--c-red);
+  --h-fg: var(--c-red-fg);
+  --h-tint: var(--c-red-tint);
+  --h-line: var(--c-red-line);
 }
 
+/* ---------- 5. Mapeo a Tailwind v4 (utilidades bg-*, text-*, border-*, font-*) ---------- */
 @theme inline {
   --color-bg: var(--bg);
+  --color-band: var(--band-bg);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
@@ -141,9 +364,19 @@
   --color-hairline: var(--hairline);
   --color-hairline-strong: var(--hairline-strong);
   --color-scrim: var(--scrim);
+  --color-input: var(--input-border);
+  --color-glass: var(--glass-bg);
+  --color-glass-hover: var(--glass-hover-bg);
+
+  /* Tono actual (lo fija una clase .hue-*) */
+  --color-h: var(--h);
+  --color-h-fg: var(--h-fg);
+  --color-h-tint: var(--h-tint);
+  --color-h-line: var(--h-line);
 
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono:
     var(--font-jetbrains-mono), ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+  --font-serif: var(--font-instrument-serif), 'Iowan Old Style', Georgia, serif;
 }

@@ -294,9 +294,9 @@ export function SideSheet({
               <Dialog.Title className="text-h3">{title}</Dialog.Title>
               <Dialog.Close
                 aria-label={closeLabel}
-                className="press inline-flex size-10 items-center justify-center rounded-full text-fg material-thin"
+                className="press inline-flex size-8 items-center justify-center rounded-md material-thin text-fg"
               >
-                <X aria-hidden className="size-5" />
+                <X aria-hidden className="size-4" strokeWidth={1.5} />
               </Dialog.Close>
             </div>
             <Dialog.Description className="sr-only">{description}</Dialog.Description>
