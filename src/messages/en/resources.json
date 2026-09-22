@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "meta": {
+      "title": "Resources",
+      "description": "Free web security checklist: essential controls to check before launching or auditing an application."
+    },
+    "eyebrow": "Free resource",
+    "title": "Web security checklist",
+    "lead": "A practical list for reviewing the essential controls before launching or auditing an application. Based on OWASP and NIST.",
+    "notice": "Generic reference content: review it with your own judgment before applying it to a production system.",
+    "form": {
+      "title": "Get it by email",
+      "lead": "We'll send the download link to your inbox. We'll also let you know if we publish something new.",
+      "submit": "Send me the checklist"
+    },
+    "pending": {
+      "title": "Check your email",
+      "body": "We've sent you a link to confirm your email. Once confirmed, you'll get the download link."
+    }
+  }
+}

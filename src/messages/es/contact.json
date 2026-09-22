@@ -1,0 +1,12 @@
+{
+  "contact": {
+    "meta": {
+      "title": "Contacto",
+      "description": "Escríbenos: dudas, un proyecto en mente o cualquier otra consulta. Respondemos en menos de dos días hábiles."
+    },
+    "eyebrow": "Contacto",
+    "title": "Hablemos de tu proyecto",
+    "lead": "Cuéntanos qué necesitas. Respondemos en menos de dos días hábiles.",
+    "alternative": "También puedes escribirnos directamente a <link>{email}</link>."
+  }
+}

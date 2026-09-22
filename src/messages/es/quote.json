@@ -1,0 +1,56 @@
+{
+  "quote": {
+    "meta": {
+      "title": "Solicitar propuesta",
+      "description": "Cuéntanos sobre tu proyecto. Te enviamos una propuesta con alcance, plazos e inversión en unos días."
+    },
+    "eyebrow": "Solicitar propuesta",
+    "title": "Cuéntanos sobre tu proyecto",
+    "lead": "Cuatro pasos rápidos. Te enviamos una propuesta con alcance, plazos e inversión en unos días.",
+    "stepLabel": "Paso {current} de {total}",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "steps": {
+      "type": {
+        "title": "Tipo de proyecto",
+        "projectType": "¿Qué necesitas principalmente?",
+        "services": "¿Qué servicios te interesan? (puedes marcar varios)"
+      },
+      "scope": {
+        "title": "Presupuesto y plazos",
+        "budgetRange": "Presupuesto orientativo",
+        "timeline": "¿Para cuándo lo necesitas?"
+      },
+      "description": {
+        "title": "Cuéntanos más",
+        "hint": "Contexto, objetivos, algo que ya tengas construido… cuanto más detalle, mejor podemos ayudarte."
+      },
+      "contact": {
+        "title": "Tus datos"
+      }
+    },
+    "options": {
+      "projectType": {
+        "web_app": "Aplicación web",
+        "custom_software": "Software a medida",
+        "security": "Ciberseguridad",
+        "consulting": "Consultoría técnica",
+        "other": "Otro"
+      },
+      "budgetRange": {
+        "lt_5k": "Menos de 5.000 USD",
+        "5k_15k": "5.000–15.000 USD",
+        "15k_40k": "15.000–40.000 USD",
+        "gt_40k": "Más de 40.000 USD",
+        "not_sure": "Aún no lo sé"
+      },
+      "timeline": {
+        "asap": "Lo antes posible",
+        "1_3_months": "En 1–3 meses",
+        "3_6_months": "En 3–6 meses",
+        "flexible": "Sin fecha fija"
+      }
+    },
+    "budgetHint": "Orientativo: nos ayuda a proponer el alcance adecuado, no es un compromiso."
+  }
+}

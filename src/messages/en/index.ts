@@ -6,12 +6,18 @@
 import about from './about.json';
 import blog from './blog.json';
 import common from './common.json';
+import contact from './contact.json';
 import cybersecurity from './cybersecurity.json';
+import emails from './emails.json';
 import errors from './errors.json';
+import forms from './forms.json';
 import home from './home.json';
 import legal from './legal.json';
+import newsletter from './newsletter.json';
 import process from './process.json';
 import projects from './projects.json';
+import quote from './quote.json';
+import resources from './resources.json';
 import security from './security.json';
 import services from './services.json';
 
@@ -27,6 +33,12 @@ const messages = {
   ...legal,
   ...security,
   ...errors,
+  ...forms,
+  ...contact,
+  ...quote,
+  ...resources,
+  ...newsletter,
+  ...emails,
 };
 
 export default messages;

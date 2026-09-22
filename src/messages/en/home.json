@@ -113,8 +113,9 @@
           "text": "A practical list for reviewing the essential controls before launching or auditing an application."
         }
       },
-      "cta": "Notify me when it launches",
-      "mailSubject": "Please notify me about the free resources"
+      "interestsLabel": "What are you interested in?",
+      "submit": "Notify me when it launches",
+      "success": "Done. We'll email you as soon as they're ready."
     },
     "cta": {
       "title": "Shall we build something secure together?",

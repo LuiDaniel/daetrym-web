@@ -14,6 +14,7 @@ import { BookCallButton } from '@/components/sections/book-call-button';
 import { Card } from '@/components/ui/card';
 import { CardGrid, FeatureCard, ProjectCard, ServiceCard } from '@/components/sections/cards';
 import { CtaBand } from '@/components/sections/cta-band';
+import { WaitlistForm } from '@/components/forms/waitlist-form';
 import { PageHero } from '@/components/sections/page-hero';
 import { Section, SectionHeader } from '@/components/sections/section';
 import { SecurityLayers } from '@/components/sections/security-layers';
@@ -26,7 +27,6 @@ import { Faq } from '@/components/ui/faq';
 import { hueClass, type Hue } from '@/config/hues';
 import { processStepIds } from '@/config/process';
 import { serviceSlugs } from '@/config/services';
-import { siteConfig } from '@/config/site';
 import { stack, stackGroups, stackHues } from '@/config/stack';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
@@ -75,7 +75,6 @@ export default function HomePage() {
   const hasPlaceholderProjects = featuredProjects.some(
     (project) => project.frontmatter.placeholder,
   );
-  const mailto = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(t('soon.mailSubject'))}`;
 
   return (
     <>
@@ -284,11 +283,14 @@ export default function HomePage() {
             hue="blue"
           />
         </CardGrid>
-        <div className="mt-6">
-          <Button asChild variant="secondary">
-            <a href={mailto}>{t('soon.cta')}</a>
-          </Button>
-        </div>
+        <Card surface="glass" className="mt-6 max-w-lg">
+          <WaitlistForm
+            interestLabels={{
+              tool: t('soon.items.tool.title'),
+              checklist: t('soon.items.checklist.title'),
+            }}
+          />
+        </Card>
       </Section>
 
       <CtaBand title={t('cta.title')} lead={t('cta.lead')} />

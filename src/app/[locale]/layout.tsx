@@ -8,8 +8,9 @@ import { MotionProvider } from '@/components/motion/motion-provider';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SkipLink } from '@/components/layout/skip-link';
+import { WhatsAppButton } from '@/components/layout/whatsapp-button';
 import { siteConfig } from '@/config/site';
-import { routing } from '@/i18n/routing';
+import { routing, type Locale } from '@/i18n/routing';
 import { THEME_SCRIPT } from '@/lib/security/theme-script';
 import { instrumentSerif, inter, jetbrainsMono } from '../fonts';
 import '@/styles/globals.css';
@@ -60,6 +61,11 @@ const CLIENT_NAMESPACES = [
   'errors',
   'blog',
   'projects',
+  // Fase 4: los formularios (contact/quote/newsletter/waitlist) son componentes cliente.
+  'forms',
+  'quote',
+  'resources',
+  'home',
 ] as const;
 
 export default async function LocaleLayout({ children, params }: Props) {
@@ -97,6 +103,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               {children}
             </main>
             <SiteFooter />
+            <WhatsAppButton locale={locale as Locale} />
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

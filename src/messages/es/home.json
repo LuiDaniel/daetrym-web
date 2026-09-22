@@ -113,8 +113,9 @@
           "text": "Una lista práctica para revisar los controles esenciales antes de lanzar o auditar una aplicación."
         }
       },
-      "cta": "Avísame del lanzamiento",
-      "mailSubject": "Quiero que me avisen de los recursos gratuitos"
+      "interestsLabel": "¿Qué te interesa?",
+      "submit": "Avísame del lanzamiento",
+      "success": "Hecho. Te avisaremos por email en cuanto estén listos."
     },
     "cta": {
       "title": "¿Construimos algo seguro juntos?",

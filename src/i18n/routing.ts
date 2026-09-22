@@ -26,6 +26,8 @@ export const routing = defineRouting({
     '/contact': { es: '/contacto', en: '/contact' },
     '/request-quote': { es: '/solicitar-propuesta', en: '/request-quote' },
     '/resources': { es: '/recursos', en: '/resources' },
+    '/newsletter/confirm': '/newsletter/confirm',
+    '/newsletter/unsubscribe': '/newsletter/unsubscribe',
     '/legal/privacy': { es: '/legal/privacidad', en: '/legal/privacy' },
     '/legal/terms': { es: '/legal/terminos', en: '/legal/terms' },
     '/legal/cookies': '/legal/cookies',

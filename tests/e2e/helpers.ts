@@ -56,6 +56,9 @@ export const contentRoutes = {
     '/es/proyectos/booking-platform',
     '/es/proyectos/api-audit',
     '/es/proyectos/inventory-system',
+    '/es/contacto',
+    '/es/solicitar-propuesta',
+    '/es/recursos',
   ],
   en: [
     '/en',
@@ -78,20 +81,13 @@ export const contentRoutes = {
     '/en/projects/booking-platform',
     '/en/projects/api-audit',
     '/en/projects/inventory-system',
+    '/en/contact',
+    '/en/request-quote',
+    '/en/resources',
   ],
 } as const;
 
 export const allContentRoutes = [...contentRoutes.es, ...contentRoutes.en];
-
-/** Secciones provisionales que llegan en fases posteriores. */
-export const comingSoonRoutes = [
-  '/es/contacto',
-  '/es/solicitar-propuesta',
-  '/es/recursos',
-  '/en/contact',
-  '/en/request-quote',
-  '/en/resources',
-];
 
 /** Por debajo de 1024 px el header usa el menú lateral (móvil y tablet); a partir de ahí, la navegación completa. */
 export const SHEET_BREAKPOINT = 1024;

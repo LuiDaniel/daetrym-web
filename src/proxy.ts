@@ -18,7 +18,13 @@ const isDev = process.env.NODE_ENV !== 'production';
  */
 export function proxy(request: NextRequest) {
   const nonce = generateNonce();
-  const csp = buildCsp({ nonce, isDev });
+  const csp = buildCsp({
+    nonce,
+    isDev,
+    // Turnstile (formularios, Fase 4): su iframe y su verificación en cliente necesitan este origen.
+    frameSrc: ['https://challenges.cloudflare.com'],
+    connectSrc: ['https://challenges.cloudflare.com'],
+  });
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);

@@ -16,6 +16,15 @@ env:
   # Valores públicos y ficticios: solo para que la build valide el entorno.
   NEXT_PUBLIC_SITE_URL: https://example.com
   NEXT_PUBLIC_CONTACT_EMAIL: hello@example.com
+  # Fase 4: `next build`/`next typegen` corren con NODE_ENV=production (también en CI), así que
+  # exigen estas variables aunque no haya un despliegue real — ver env.ts y docs/ARCHITECTURE.md §14.
+  # Sin RESEND_API_KEY/UPSTASH_*/DATABASE_URL a propósito: sus rutas sin configurar (log de email,
+  # sin límite de envíos, motor de base de datos embebido) son justo lo que se verifica aquí.
+  IP_HASH_SECRET: dev-only-insecure-secret-do-not-use-in-production
+  EMAIL_FROM: 'DaeTrym (CI) <ci@daetrym.test>'
+  TURNSTILE_SECRET_KEY: 1x0000000000000000000000000000000AA
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+  CRON_SECRET: dev-only-insecure-cron-secret-do-not-use-in-production
 
 jobs:
   quality:

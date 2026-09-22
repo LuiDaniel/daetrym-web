@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  // pglite es WASM + acceso a fs de Node: agrupado por Turbopack rompe su resolución de rutas
+  // internas (usa import.meta.url). Fuera del bundle, usa require() nativo de Node y funciona.
+  serverExternalPackages: ['@electric-sql/pglite'],
   async headers() {
     // La CSP (con nonce por petición) la añade src/proxy.ts; aquí, las cabeceras estáticas.
     return [{ source: '/:path*', headers: securityHeaders({ isDev }) }];

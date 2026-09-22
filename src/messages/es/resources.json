@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "meta": {
+      "title": "Recursos",
+      "description": "Checklist gratuita de seguridad web: controles esenciales antes de lanzar o auditar una aplicación."
+    },
+    "eyebrow": "Recurso gratuito",
+    "title": "Checklist de seguridad web",
+    "lead": "Una lista práctica para revisar los controles esenciales antes de lanzar o auditar una aplicación. Basada en OWASP y NIST.",
+    "notice": "Contenido genérico de referencia: revísalo con tu propio criterio antes de aplicarlo a un sistema en producción.",
+    "form": {
+      "title": "Recíbela por email",
+      "lead": "Te enviamos el enlace de descarga a tu correo. También te avisaremos si publicamos algo nuevo.",
+      "submit": "Enviarme la checklist"
+    },
+    "pending": {
+      "title": "Revisa tu email",
+      "body": "Te hemos enviado un enlace para confirmar tu email. Al confirmarlo, te llega el enlace de descarga."
+    }
+  }
+}

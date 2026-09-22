@@ -1,0 +1,56 @@
+{
+  "quote": {
+    "meta": {
+      "title": "Request a proposal",
+      "description": "Tell us about your project. We'll send you a proposal with scope, timeline, and investment in a few days."
+    },
+    "eyebrow": "Request a proposal",
+    "title": "Tell us about your project",
+    "lead": "Four quick steps. We'll send you a proposal with scope, timeline, and investment in a few days.",
+    "stepLabel": "Step {current} of {total}",
+    "back": "Back",
+    "next": "Next",
+    "steps": {
+      "type": {
+        "title": "Project type",
+        "projectType": "What do you mainly need?",
+        "services": "Which services interest you? (pick as many as apply)"
+      },
+      "scope": {
+        "title": "Budget and timeline",
+        "budgetRange": "Approximate budget",
+        "timeline": "When do you need this?"
+      },
+      "description": {
+        "title": "Tell us more",
+        "hint": "Context, goals, anything you've already built… the more detail, the better we can help."
+      },
+      "contact": {
+        "title": "Your details"
+      }
+    },
+    "options": {
+      "projectType": {
+        "web_app": "Web application",
+        "custom_software": "Custom software",
+        "security": "Cybersecurity",
+        "consulting": "Technical consulting",
+        "other": "Other"
+      },
+      "budgetRange": {
+        "lt_5k": "Under $5,000",
+        "5k_15k": "$5,000–15,000",
+        "15k_40k": "$15,000–40,000",
+        "gt_40k": "Over $40,000",
+        "not_sure": "Not sure yet"
+      },
+      "timeline": {
+        "asap": "As soon as possible",
+        "1_3_months": "In 1–3 months",
+        "3_6_months": "In 3–6 months",
+        "flexible": "No fixed date"
+      }
+    },
+    "budgetHint": "Approximate: it helps us propose the right scope, it's not a commitment."
+  }
+}

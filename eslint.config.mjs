@@ -20,4 +20,13 @@ export default defineConfig([
       ],
     },
   },
+  {
+    // Documentos de email completos (Fase 4): <html>/<head>/<body> son de verdad necesarios — no
+    // son una página de Next, @react-email/render los convierte en el HTML que recibe el cliente
+    // de correo (ver src/lib/email/layout.tsx).
+    files: ['src/lib/email/**/*.tsx'],
+    rules: {
+      '@next/next/no-head-element': 'off',
+    },
+  },
 ]);

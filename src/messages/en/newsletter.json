@@ -1,0 +1,28 @@
+{
+  "newsletter": {
+    "confirm": {
+      "meta": { "title": "Confirm subscription" },
+      "pendingTitle": "Confirm your subscription",
+      "pendingBody": "One last click to confirm you want to receive our updates.",
+      "button": "Confirm subscription",
+      "successTitle": "Subscription confirmed",
+      "successBody": "Done. We'll let you know as soon as we publish something new. If you asked for the checklist, check your email: the download link just arrived.",
+      "alreadyTitle": "Already confirmed",
+      "alreadyBody": "This subscription was already confirmed. There's nothing else to do.",
+      "invalidTitle": "Invalid link",
+      "invalidBody": "This confirmation link is invalid or has expired (links last 48 hours). You can subscribe again from the home page."
+    },
+    "unsubscribe": {
+      "meta": { "title": "Unsubscribe" },
+      "pendingTitle": "Unsubscribe?",
+      "pendingBody": "You'll stop receiving our email updates.",
+      "button": "Confirm unsubscribe",
+      "successTitle": "Unsubscribed",
+      "successBody": "You've been unsubscribed. You won't receive any more updates.",
+      "alreadyTitle": "Already unsubscribed",
+      "alreadyBody": "This subscription was already unsubscribed.",
+      "invalidTitle": "Invalid link",
+      "invalidBody": "This unsubscribe link is invalid. Email us if you need help."
+    }
+  }
+}

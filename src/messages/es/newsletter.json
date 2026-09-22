@@ -1,0 +1,28 @@
+{
+  "newsletter": {
+    "confirm": {
+      "meta": { "title": "Confirmar suscripción" },
+      "pendingTitle": "Confirma tu suscripción",
+      "pendingBody": "Un último clic para confirmar que quieres recibir nuestros avisos.",
+      "button": "Confirmar suscripción",
+      "successTitle": "Suscripción confirmada",
+      "successBody": "Listo. Te avisaremos en cuanto publiquemos contenido nuevo. Si pediste la checklist, revisa tu email: te acaba de llegar el enlace de descarga.",
+      "alreadyTitle": "Ya estaba confirmada",
+      "alreadyBody": "Esta suscripción ya estaba confirmada. No hace falta hacer nada más.",
+      "invalidTitle": "Enlace no válido",
+      "invalidBody": "Este enlace de confirmación no es válido o ha caducado (los enlaces duran 48 horas). Puedes suscribirte de nuevo desde la página de inicio."
+    },
+    "unsubscribe": {
+      "meta": { "title": "Darse de baja" },
+      "pendingTitle": "¿Darte de baja?",
+      "pendingBody": "Dejarás de recibir nuestros avisos por email.",
+      "button": "Confirmar baja",
+      "successTitle": "Baja confirmada",
+      "successBody": "Te hemos dado de baja. Ya no recibirás más avisos.",
+      "alreadyTitle": "Ya estabas de baja",
+      "alreadyBody": "Esta suscripción ya estaba dada de baja.",
+      "invalidTitle": "Enlace no válido",
+      "invalidBody": "Este enlace de baja no es válido. Escríbenos si necesitas ayuda."
+    }
+  }
+}

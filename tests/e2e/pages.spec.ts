@@ -1,12 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import {
-  allContentRoutes,
-  comingSoonRoutes,
-  isCompactHeader,
-  waitForHydration,
-  watchForProblems,
-} from './helpers';
+import { allContentRoutes, isCompactHeader, waitForHydration, watchForProblems } from './helpers';
 
 /** Con menos movimiento no hay revelados: todo está en su estado final y los contrastes son medibles. */
 async function settle(page: Page) {
@@ -210,13 +204,19 @@ test.describe('Home', () => {
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   });
 
-  test('la lista de espera abre el correo con asunto precompletado', async ({ page }) => {
+  test('la lista de espera se envía y muestra confirmación', async ({ page }) => {
     await page.goto('/es');
-    const href = await page
-      .getByRole('link', { name: 'Avísame del lanzamiento' })
-      .getAttribute('href');
-    expect(href).toMatch(/^mailto:[^?]+\?subject=/);
-    expect(decodeURIComponent(href ?? '')).toContain('recursos gratuitos');
+    await waitForHydration(page);
+    const email = `waitlist-${Date.now()}@example.com`;
+
+    await page.getByRole('checkbox').first().click();
+    await page.getByPlaceholder('Email').fill(email);
+    // El widget de Turnstile de este formulario solo se monta tras la primera interacción con el
+    // email (ver components/forms/waitlist-form.tsx) y tarda unos segundos en autorresolverse.
+    await page.waitForTimeout(5000);
+    await page.getByRole('button', { name: 'Avísame del lanzamiento' }).click();
+
+    await expect(page.getByRole('status').first()).toBeVisible({ timeout: 15000 });
   });
 });
 
@@ -512,22 +512,6 @@ test('security.txt: campos obligatorios, Expires válido y política enlazada', 
   for (const [, url] of body.matchAll(/^Policy: (.+)$/gm)) {
     const path = new URL(url!).pathname;
     expect((await request.get(path)).status(), path).toBe(200);
-  }
-});
-
-/* ───────────── Secciones provisionales ───────────── */
-
-test.describe('secciones que llegan en fases posteriores', () => {
-  for (const route of comingSoonRoutes) {
-    test(`${route} no es un 404: muestra «en construcción» con contacto y sin indexar`, async ({
-      page,
-    }) => {
-      const response = await page.goto(route);
-      expect(response?.status()).toBe(200);
-      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-      await expect(page.locator('main a[href^="mailto:"]').first()).toBeVisible();
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-    });
   }
 });
 

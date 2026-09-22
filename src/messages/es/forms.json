@@ -1,0 +1,37 @@
+{
+  "forms": {
+    "fields": {
+      "name": "Nombre",
+      "email": "Email",
+      "company": "Empresa",
+      "companyOptional": "Empresa (opcional)",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "description": "Cuéntanos sobre tu proyecto"
+    },
+    "validation": {
+      "required": "Este campo es obligatorio.",
+      "invalidEmail": "Escribe un email válido.",
+      "tooShort": "Escribe al menos {min} caracteres.",
+      "tooLong": "Como mucho {max} caracteres.",
+      "selectOne": "Elige una opción."
+    },
+    "privacyConsent": "He leído y acepto la <link>política de privacidad</link>.",
+    "turnstile": {
+      "label": "Verificación anti-spam",
+      "error": "No hemos podido verificar que eres una persona. Vuelve a intentarlo."
+    },
+    "submit": "Enviar",
+    "submitting": "Enviando…",
+    "success": {
+      "title": "Enviado",
+      "body": "Gracias, lo hemos recibido. Te hemos enviado una confirmación por email."
+    },
+    "error": {
+      "title": "No se ha podido enviar",
+      "rateLimit": "Demasiados intentos seguidos. Espera unos minutos y vuelve a intentarlo.",
+      "generic": "Ha ocurrido un error inesperado. Vuelve a intentarlo o escríbenos directamente a {email}."
+    },
+    "noscript": "Este formulario necesita JavaScript. Mientras tanto, escríbenos directamente a {email}."
+  }
+}

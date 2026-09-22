@@ -1,0 +1,36 @@
+{
+  "emails": {
+    "contact": {
+      "confirmationSubject": "We've received your message",
+      "confirmationGreeting": "Hi {name},",
+      "confirmationBody": "Thanks for reaching out. We've received your message and will reply within two business days.",
+      "confirmationFooter": "If you weren't expecting this email, you can safely ignore it."
+    },
+    "quote": {
+      "confirmationSubject": "We've received your proposal request",
+      "confirmationGreeting": "Hi {name},",
+      "confirmationBody": "Thanks for telling us about your project. We'll review the details and send you a proposal with scope, timeline, and investment in the next few days.",
+      "confirmationFooter": "If you weren't expecting this email, you can safely ignore it."
+    },
+    "newsletter": {
+      "confirmSubject": "Confirm your DaeTrym subscription",
+      "confirmGreeting": "One last step",
+      "confirmBody": "Confirm your email so we can let you know as soon as we publish the web security checklist and the free scanning tool.",
+      "confirmButton": "Confirm subscription",
+      "confirmExpiry": "This link expires in 48 hours. If you didn't request it, you can ignore this email: no subscription will be created without confirming.",
+      "welcomeSubject": "Subscription confirmed",
+      "welcomeGreeting": "All set!",
+      "welcomeBody": "Your subscription is confirmed. We'll let you know as soon as we publish something new.",
+      "welcomeBodyChecklist": "Your subscription is confirmed. Here's the web security checklist you asked for:",
+      "welcomeDownloadButton": "Download the checklist",
+      "welcomeDownloadExpiry": "The download link expires in one hour, for security.",
+      "unsubscribeFooter": "Don't want these emails anymore?",
+      "unsubscribeLink": "Unsubscribe"
+    },
+    "waitlist": {
+      "confirmationSubject": "We'll let you know when it's live",
+      "confirmationGreeting": "Thank you!",
+      "confirmationBody": "We've noted your email. We'll write to you as soon as the web security checklist and the scanning tool are available."
+    }
+  }
+}

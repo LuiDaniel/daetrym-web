@@ -1,0 +1,37 @@
+{
+  "forms": {
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "companyOptional": "Company (optional)",
+      "subject": "Subject",
+      "message": "Message",
+      "description": "Tell us about your project"
+    },
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email.",
+      "tooShort": "Enter at least {min} characters.",
+      "tooLong": "At most {max} characters.",
+      "selectOne": "Choose an option."
+    },
+    "privacyConsent": "I've read and accept the <link>privacy policy</link>.",
+    "turnstile": {
+      "label": "Anti-spam verification",
+      "error": "We couldn't verify you're human. Please try again."
+    },
+    "submit": "Send",
+    "submitting": "Sending…",
+    "success": {
+      "title": "Sent",
+      "body": "Thanks, we've received it. We've sent you a confirmation by email."
+    },
+    "error": {
+      "title": "Couldn't send it",
+      "rateLimit": "Too many attempts in a row. Wait a few minutes and try again.",
+      "generic": "An unexpected error occurred. Try again or email us directly at {email}."
+    },
+    "noscript": "This form needs JavaScript. In the meantime, email us directly at {email}."
+  }
+}

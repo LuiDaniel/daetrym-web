@@ -1,0 +1,36 @@
+{
+  "emails": {
+    "contact": {
+      "confirmationSubject": "Hemos recibido tu mensaje",
+      "confirmationGreeting": "Hola {name},",
+      "confirmationBody": "Gracias por escribirnos. Hemos recibido tu mensaje y te responderemos en menos de dos días hábiles.",
+      "confirmationFooter": "Si no esperabas este correo, puedes ignorarlo con tranquilidad."
+    },
+    "quote": {
+      "confirmationSubject": "Hemos recibido tu solicitud de propuesta",
+      "confirmationGreeting": "Hola {name},",
+      "confirmationBody": "Gracias por contarnos sobre tu proyecto. Vamos a revisar los detalles y te enviaremos una propuesta con alcance, plazos e inversión en los próximos días.",
+      "confirmationFooter": "Si no esperabas este correo, puedes ignorarlo con tranquilidad."
+    },
+    "newsletter": {
+      "confirmSubject": "Confirma tu suscripción a DaeTrym",
+      "confirmGreeting": "Un último paso",
+      "confirmBody": "Confirma tu email para que te avisemos en cuanto publiquemos la checklist de seguridad web y la herramienta de revisión gratuita.",
+      "confirmButton": "Confirmar suscripción",
+      "confirmExpiry": "Este enlace caduca en 48 horas. Si no lo solicitaste tú, puedes ignorar este correo: no se creará ninguna suscripción sin confirmar.",
+      "welcomeSubject": "Suscripción confirmada",
+      "welcomeGreeting": "¡Listo!",
+      "welcomeBody": "Tu suscripción está confirmada. Te avisaremos en cuanto publiquemos contenido nuevo.",
+      "welcomeBodyChecklist": "Tu suscripción está confirmada. Aquí tienes la checklist de seguridad web que pediste:",
+      "welcomeDownloadButton": "Descargar la checklist",
+      "welcomeDownloadExpiry": "El enlace de descarga caduca en una hora, por seguridad.",
+      "unsubscribeFooter": "¿Ya no quieres recibir estos avisos?",
+      "unsubscribeLink": "Darte de baja"
+    },
+    "waitlist": {
+      "confirmationSubject": "Te avisaremos del lanzamiento",
+      "confirmationGreeting": "¡Gracias!",
+      "confirmationBody": "Hemos anotado tu email. Te escribiremos en cuanto la checklist de seguridad web y la herramienta de revisión estén disponibles."
+    }
+  }
+}

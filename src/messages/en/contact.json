@@ -1,0 +1,12 @@
+{
+  "contact": {
+    "meta": {
+      "title": "Contact",
+      "description": "Get in touch: questions, a project in mind, or anything else. We reply within two business days."
+    },
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project",
+    "lead": "Tell us what you need. We reply within two business days.",
+    "alternative": "You can also email us directly at <link>{email}</link>."
+  }
+}
