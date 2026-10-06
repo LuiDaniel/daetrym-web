@@ -18,7 +18,7 @@ import { CtaBand } from '@/components/sections/cta-band';
 import { WaitlistForm } from '@/components/forms/waitlist-form';
 import { PageHero } from '@/components/sections/page-hero';
 import { Section, SectionHeader } from '@/components/sections/section';
-import { SecurityLayers } from '@/components/sections/security-layers';
+import { HeroLaptop } from '@/components/sections/hero-laptop';
 import { SplitLayout } from '@/components/sections/split-layout';
 import { ArrowLink } from '@/components/ui/arrow-link';
 import { Badge } from '@/components/ui/badge';
@@ -114,12 +114,12 @@ export default function HomePage() {
           </div>
         }
         visual={
-          <SecurityLayers
+          <HeroLaptop
             labels={{
-              design: t('hero.layers.design'),
-              code: t('hero.layers.code'),
-              infrastructure: t('hero.layers.infrastructure'),
-              operations: t('hero.layers.operations'),
+              ariaLabel: t('hero.laptop.label'),
+              editing: t('hero.laptop.editing'),
+              compiling: t('hero.laptop.compiling'),
+              deployed: t('hero.laptop.deployed'),
             }}
           />
         }

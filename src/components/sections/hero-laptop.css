@@ -1,0 +1,382 @@
+/* Laptop del hero de la Home (ver hero-laptop.tsx). Todo va con prefijo .dl- para no chocar con Tailwind. */
+.dl {
+  --dl-accent: #3ff2ff;
+  --dl-mono: var(--font-mono), Consolas, monospace;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 580 / 472;
+  isolation: isolate;
+}
+.dl * {
+  box-sizing: border-box;
+}
+.dl-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 580px;
+  height: 472px;
+  transform-origin: 0 0;
+}
+
+/* ---------- Modelo 3D: tapa y base del mismo tamaño, unidas por la bisagra ---------- */
+.dl-laptop {
+  position: absolute;
+  left: 39px;
+  top: 28px;
+  width: 440px;
+  height: 280px;
+  transform-style: preserve-3d;
+  transform: perspective(2200px) rotateX(-22deg) rotateY(12deg);
+}
+
+/* Tapa: marco de aluminio fino + bisel negro, como un portátil real. */
+.dl-lid {
+  position: absolute;
+  inset: 0;
+  padding: 11px 11px 15px;
+  transform-origin: 50% 100%;
+  transform: rotateX(16deg);
+  border-radius: 15px 15px 5px 5px;
+  background: #07090f;
+  box-shadow:
+    0 0 0 1.5px #3d4660,
+    0 0 0 2.5px #1a1f2c,
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 80px rgba(63, 242, 255, 0.1);
+}
+.dl-cam {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #121828;
+  box-shadow: 0 0 0 1px #262e44;
+}
+.dl-screen {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #0a0f1d;
+  box-shadow: 0 0 24px rgba(63, 242, 255, 0.08);
+}
+/* Reflejo del vidrio */
+.dl-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.02) 34%,
+    transparent 35%
+  );
+}
+.dl-tabs {
+  flex: none;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  background: #0e1426;
+  border-bottom: 1px solid #1b2440;
+  font: 500 10.5px var(--dl-mono);
+  color: #8b9bb4;
+}
+.dl-tabs i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dl-tabs i:nth-child(1) {
+  background: #ff5f57;
+}
+.dl-tabs i:nth-child(2) {
+  background: #febc2e;
+}
+.dl-tabs i:nth-child(3) {
+  background: #28c840;
+}
+.dl-tab {
+  margin-left: 10px;
+  padding: 4px 10px;
+  transform: translateY(3px);
+  border: 1px solid #1b2440;
+  border-bottom-color: #0a0f1d;
+  border-radius: 6px 6px 0 0;
+  background: #0a0f1d;
+  color: #cfe3ff;
+}
+.dl-code {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  padding: 8px 0;
+  font: 12px/18px var(--dl-mono);
+  color: #e6edf3;
+  transition: opacity 0.6s;
+}
+.dl-code.out {
+  opacity: 0;
+}
+.dl-row {
+  display: flex;
+  min-height: 18px;
+  white-space: pre;
+}
+.dl-row.cur {
+  background: rgba(79, 214, 255, 0.06);
+}
+.dl-row .ln {
+  flex: none;
+  width: 34px;
+  padding-right: 12px;
+  text-align: right;
+  color: #3b4866;
+}
+.dl-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  vertical-align: -2px;
+  background: #4fd6ff;
+  box-shadow: 0 0 8px #4fd6ff;
+  animation: dlBlink 1s steps(1) infinite;
+}
+.dl .c-k {
+  color: #c792ea;
+}
+.dl .c-f {
+  color: #82aaff;
+}
+.dl .c-t {
+  color: #4fd6ff;
+}
+.dl .c-a {
+  color: #ffcb6b;
+}
+.dl .c-s {
+  color: #c3e88d;
+}
+.dl .c-n {
+  color: #f78c6c;
+}
+.dl .c-x {
+  color: #e6edf3;
+}
+.dl .c-p {
+  color: #8b9bb4;
+}
+.dl .c-c {
+  color: #546285;
+  font-style: italic;
+}
+.dl-statusbar {
+  flex: none;
+  height: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-top: 1px solid #1b2440;
+  background: #0e1426;
+  font: 10px var(--dl-mono);
+  color: #8b9bb4;
+}
+.dl-status {
+  transition: color 0.3s;
+}
+.dl-status.busy {
+  color: #ffcb6b;
+}
+.dl-status.ok {
+  color: #5cf2a6;
+}
+/* Bisagra */
+.dl-hinge {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  bottom: 0;
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(#2a3144, #11151f);
+}
+
+/* Base: acostada en el plano (rotateX 90°), misma anchura que la tapa. */
+.dl-deck {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 440px;
+  height: 280px;
+  padding: 18px 22px 0;
+  border-radius: 4px 4px 18px 18px;
+  background: linear-gradient(180deg, #2a3145, #20263a 55%, #1b2132);
+  box-shadow:
+    inset 0 0 0 1px #3d4660,
+    inset 0 2px 0 rgba(255, 255, 255, 0.05);
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transform: rotateX(90deg);
+}
+/* Luz de la pantalla que cae sobre el teclado */
+.dl-deck::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(70% 55% at 50% 0%, rgba(63, 242, 255, 0.12), transparent 75%);
+}
+.dl-deck-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 11px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(#4a5470, #262d3e 40%, #161a25);
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+}
+/* Muesca para abrir la tapa */
+.dl-deck-edge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 70px;
+  height: 4px;
+  margin-left: -35px;
+  border-radius: 0 0 5px 5px;
+  background: #151925;
+}
+.dl-deck-side {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  border-radius: 0 0 0 12px;
+  background: linear-gradient(90deg, #2a3144, #171b27);
+  transform-origin: left center;
+  transform: rotateY(90deg);
+}
+
+/* Sombras sobre el "suelo" (debajo de la base, en su eje Z): ambiente difusa + contacto nítido. */
+.dl-shadow,
+.dl-contact,
+.dl-spill {
+  position: absolute;
+  pointer-events: none;
+}
+.dl-shadow {
+  inset: -36px -56px -70px;
+  transform: translateZ(-12px);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.28) 55%,
+    transparent
+  );
+  filter: blur(10px);
+}
+.dl-contact {
+  inset: 6px 4px -6px;
+  transform: translateZ(-11.5px);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  filter: blur(5px);
+}
+/* Reflejo tenue de la pantalla en el suelo, delante del portátil */
+.dl-spill {
+  left: 12%;
+  right: 12%;
+  bottom: -90px;
+  height: 90px;
+  transform: translateZ(-12px);
+  background: radial-gradient(closest-side, rgba(63, 242, 255, 0.1), transparent);
+  filter: blur(14px);
+}
+
+.dl-kb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  border-radius: 6px;
+  background: #121624;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.dl-krow {
+  display: flex;
+  gap: 5px;
+}
+.dl-key {
+  flex: var(--u, 1) 1 0;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: linear-gradient(#1d2335, #141927);
+  box-shadow:
+    0 2px 0 #070a11,
+    0 0 0 1px rgba(63, 242, 255, 0.08),
+    0 0 6px rgba(63, 242, 255, 0.12);
+  font: 700 8px var(--dl-mono);
+  color: rgba(140, 240, 255, 0.5);
+  text-shadow: 0 0 4px rgba(63, 242, 255, 0.55);
+  transition:
+    transform 0.25s ease-out,
+    box-shadow 0.35s ease-out,
+    color 0.35s,
+    background 0.35s;
+}
+.dl-key.down {
+  transform: translateY(1.5px) scale(0.92);
+  background: linear-gradient(#1d3245, #142636);
+  box-shadow:
+    0 0 0 #070a11,
+    0 0 0 1px rgba(63, 242, 255, 0.55),
+    0 0 14px rgba(63, 242, 255, 0.7);
+  color: #eafdff;
+  transition-duration: 0s;
+}
+.dl-pad {
+  position: relative;
+  width: 170px;
+  height: 98px;
+  margin: 18px auto 0;
+  border-radius: 9px;
+  background: linear-gradient(#232a3e, #1c2233);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes dlBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-cursor {
+    animation: none;
+  }
+}

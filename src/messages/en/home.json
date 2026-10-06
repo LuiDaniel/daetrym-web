@@ -10,12 +10,11 @@
       "lead": "We design and build web applications and custom software, and we put what you build — or what you already run — to the test using open methodologies such as OWASP, NIST and PTES.",
       "trust": "Every security test is carried out with written authorization.",
       "trustLink": "How we approach security",
-      "layers": {
-        "label": "Diagram: security is present in every layer, from design to operations",
-        "design": "Design",
-        "code": "Code",
-        "infrastructure": "Infrastructure",
-        "operations": "Operations"
+      "laptop": {
+        "label": "Animation: a laptop writes the code for a secure endpoint and deploys it",
+        "editing": "● editing route.ts",
+        "compiling": "⟳ running tests…",
+        "deployed": "✓ deployed to daetrym.com"
       }
     },
     "services": {

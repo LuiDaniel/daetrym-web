@@ -3,9 +3,11 @@
 Sitio bilingüe (ES/EN) de **DaeTrym / DAETRYM Systems**: ciberseguridad y desarrollo de software.
 Next.js (App Router) + React + TypeScript estricto + Tailwind CSS v4, desplegable en Vercel.
 
-> Estado: **Fase 2 de 6** (contenido estático: Home, Servicios, Ciberseguridad, Nosotros, Proceso, legales,
-> política de divulgación, `security.txt` y 404). Ver el checklist en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
-> Contacto, propuesta, proyectos, blog y recursos son páginas «en construcción» hasta las fases 3 y 4.
+> Estado: **completo (Fases 0–6)**. Contenido, backend con servicios reales (Neon, Resend, Upstash,
+> Turnstile), SEO/pulido y verificación final. Ver el checklist en
+> [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) y la guía de despliegue en
+> [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). Sigue habiendo contenido de ejemplo pendiente de
+> reemplazar (equipo, proyectos, redes, textos legales) — listado por `pnpm check:placeholders`.
 
 ## Requisitos
 
@@ -72,13 +74,14 @@ Todo lo que es **ejemplo o está pendiente** está marcado y se lista con `pnpm 
 - **Activar modo mantenimiento:** `MAINTENANCE_MODE=true` (503 con `Retry-After` en todo el sitio).
 - **Añadir un servicio:** añadir el slug en `src/config/services.ts` y su contenido (`services.items.<slug>`, con la misma forma que los existentes) en **ambos** idiomas; `pnpm test` valida el esquema.
 - **Editar un texto largo (legal, servicios):** en `src/messages/<locale>/*.json`; los enlaces usan `[texto](/ruta)` y los datos de la empresa `{legalName}`, `{email}`, `{securityEmail}`.
-- **Añadir un post/proyecto:** llega en la Fase 3.
+- **Añadir un post/proyecto:** un `.mdx` nuevo en `content/{blog,projects}/<locale>/`, con su slug registrado en `src/config/content-slugs.ts` en los dos idiomas; `pnpm test` valida el frontmatter y los enlaces internos.
+- **Desplegar en Vercel:** guía paso a paso en [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Seguridad
 
 El sitio es parte de la credibilidad de una empresa de ciberseguridad. Ver el resumen de decisiones (CSP con
-nonce por petición, cabeceras, validación de entorno) en `docs/ARCHITECTURE.md`; el modelo de amenazas
-completo (`docs/SECURITY.md`) llega en la Fase 6.
+nonce por petición, cabeceras, validación de entorno, verificación contra el criterio de
+securityheaders.com) en `docs/ARCHITECTURE.md` §16.
 
 ## Aviso legal
 

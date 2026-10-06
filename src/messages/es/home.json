@@ -10,12 +10,11 @@
       "lead": "Diseñamos y desarrollamos aplicaciones web y software a medida, y ponemos a prueba lo que construyes —o lo que ya tienes— con metodologías abiertas como OWASP, NIST y PTES.",
       "trust": "Toda prueba de seguridad se realiza con autorización por escrito.",
       "trustLink": "Cómo trabajamos en seguridad",
-      "layers": {
-        "label": "Diagrama: la seguridad está presente en cada capa, del diseño a la operación",
-        "design": "Diseño",
-        "code": "Código",
-        "infrastructure": "Infraestructura",
-        "operations": "Operación"
+      "laptop": {
+        "label": "Animación: una laptop escribe el código de un endpoint seguro y lo despliega",
+        "editing": "● editando route.ts",
+        "compiling": "⟳ ejecutando tests…",
+        "deployed": "✓ desplegado en daetrym.com"
       }
     },
     "services": {

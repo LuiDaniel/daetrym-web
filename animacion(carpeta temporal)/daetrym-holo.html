@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daetrym Holo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* Estilos solo de esta página de demo */
+  html, body { margin: 0; background: #03060f; }
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; }
+
+  /* ================= COMPONENTE .dh (copia desde aquí) ================= */
+  .dh {
+    --holo: #3ff2ff;
+    --holo-soft: rgba(63, 242, 255, .55);
+    --violet: #b388ff;
+    --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    aspect-ratio: 1000 / 560;
+    overflow: hidden;
+    border-radius: 20px;
+    isolation: isolate;
+    background:
+      radial-gradient(55% 60% at 72% 45%, rgba(63, 242, 255, .10), transparent 70%),
+      radial-gradient(45% 55% at 22% 70%, rgba(124, 92, 255, .14), transparent 70%),
+      #060a17;
+  }
+  .dh::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(140, 170, 255, .18) 1px, transparent 1.3px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 85%);
+            mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 85%);
+  }
+  .dh * { box-sizing: border-box; }
+  .dh-stage { position: absolute; left: 0; top: 0; width: 1000px; height: 560px; transform-origin: 0 0; }
+  .dh-stage.is-stacked { width: 520px; height: 880px; }
+
+  /* ---------- Luz de proyección (difuminada) ---------- */
+  .dh-beam { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; overflow: visible; opacity: 0; transition: opacity 1.2s; }
+  .dh-stage.live .dh-beam { opacity: 1; }
+  .dh-ray { stroke-width: 1.2; stroke-linecap: round; opacity: .15; animation: dhRay 3.4s ease-in-out infinite; }
+  .dh-ray:nth-of-type(2) { animation-duration: 4.1s; animation-delay: -1.2s; }
+  .dh-ray:nth-of-type(3) { animation-duration: 2.9s; animation-delay: -.6s; }
+  .dh-ray:nth-of-type(4) { animation-duration: 3.7s; animation-delay: -2.1s; }
+
+  /* ---------- Laptop ---------- */
+  /* Modelo 3D: tapa y base del mismo tamaño, unidas por la bisagra; cámara un poco desde arriba */
+  .dh-laptop { position: absolute; left: 50px; top: 50px; width: 440px; height: 280px; z-index: 2; transform-style: preserve-3d; transform: perspective(2200px) rotateX(-24deg) rotateY(18deg); }
+  .is-stacked .dh-laptop { left: 40px; top: 470px; transform: perspective(2200px) rotateX(-24deg); }
+  .dh-lid {
+    position: absolute; inset: 0; padding: 12px 12px 14px;
+    transform-origin: 50% 100%; transform: rotateX(18deg);
+    border-radius: 16px 16px 6px 6px; border: 1px solid #3a4560;
+    background: linear-gradient(160deg, #2a3246, #161b29);
+    box-shadow: 0 0 60px rgba(63, 242, 255, .12), inset 0 1px 0 rgba(255, 255, 255, .08);
+  }
+  .dh-cam { position: absolute; top: 4px; left: 50%; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: #0d1220; box-shadow: 0 0 0 1px #3a4560; }
+  .dh-screen { position: relative; height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: 7px; background: #0a0f1d; }
+  .dh-screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, .06), transparent 35%); }
+  .dh-tabs { flex: none; height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 10px; background: #0e1426; border-bottom: 1px solid #1b2440; font: 500 10.5px var(--mono); color: #8b9bb4; }
+  .dh-tabs i { display: block; width: 8px; height: 8px; border-radius: 50%; }
+  .dh-tabs i:nth-child(1) { background: #ff5f57; }
+  .dh-tabs i:nth-child(2) { background: #febc2e; }
+  .dh-tabs i:nth-child(3) { background: #28c840; }
+  .dh-tab { margin-left: 10px; padding: 4px 10px; transform: translateY(3px); border: 1px solid #1b2440; border-bottom-color: #0a0f1d; border-radius: 6px 6px 0 0; background: #0a0f1d; color: #cfe3ff; }
+  .dh-code { position: relative; flex: 1; overflow: hidden; padding: 8px 0; font: 12px/18px var(--mono); color: #e6edf3; scroll-behavior: smooth; transition: opacity .6s; }
+  .dh-code.out { opacity: 0; }
+  .dh-row { display: flex; white-space: pre; }
+  .dh-row.cur { background: rgba(79, 214, 255, .06); }
+  .dh-row .ln { flex: none; width: 34px; padding-right: 12px; text-align: right; color: #3b4866; }
+  .dh-cursor { display: inline-block; width: 7px; height: 14px; vertical-align: -2px; background: #4fd6ff; box-shadow: 0 0 8px #4fd6ff; animation: dhBlink 1s steps(1) infinite; }
+  .c-k { color: #c792ea; } .c-f { color: #82aaff; } .c-t { color: #4fd6ff; }
+  .c-a { color: #ffcb6b; } .c-s { color: #c3e88d; } .c-n { color: #f78c6c; }
+  .c-x { color: #e6edf3; } .c-p { color: #8b9bb4; }
+  .dh-statusbar { flex: none; height: 22px; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; border-top: 1px solid #1b2440; background: #0e1426; font: 10px var(--mono); color: #8b9bb4; }
+  .dh-status.busy { color: #ffcb6b; }
+  .dh-status.ok { color: #5cf2a6; }
+
+  /* Base: misma anchura que la tapa y profundidad igual a su altura, acostada en el plano */
+  .dh-deck {
+    position: absolute; left: 0; top: 100%; width: 440px; height: 280px; padding: 18px 22px 0;
+    border: 1px solid #3a4560; border-radius: 4px 4px 18px 18px;
+    background: linear-gradient(180deg, #262d40, #1c2233);
+    transform-style: preserve-3d; transform-origin: top center; transform: rotateX(90deg);
+  }
+  .dh-deck-edge { position: absolute; left: -1px; right: -1px; top: 100%; height: 12px; border-radius: 0 0 12px 12px; background: linear-gradient(#4c5672, #232a3a); transform-origin: top center; transform: rotateX(-90deg); }
+  .dh-deck-edge::before { content: ""; position: absolute; top: 0; left: 50%; width: 70px; height: 4px; margin-left: -35px; border-radius: 0 0 5px 5px; background: #1c2130; }
+  .dh-deck-side { position: absolute; left: -1px; top: 0; width: 12px; height: 100%; border-radius: 0 0 0 12px; background: linear-gradient(90deg, #2c3346, #1d2231); transform-origin: left center; transform: rotateY(90deg); }
+  .dh-shadow { position: absolute; inset: -30px -50px -40px; transform: translateZ(-14px); background: radial-gradient(closest-side, rgba(0, 0, 0, .55), rgba(63, 242, 255, .05) 70%, transparent); pointer-events: none; }
+  .dh-kb { display: flex; flex-direction: column; gap: 5px; padding: 6px; border-radius: 6px; background: radial-gradient(90% 110% at 50% 50%, rgba(63, 242, 255, .10), rgba(63, 242, 255, .02) 75%); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .35); }
+  .dh-krow { display: flex; gap: 5px; }
+  .dh-key {
+    flex: var(--u, 1) 1 0; height: 22px; display: flex; align-items: center; justify-content: center;
+    border-radius: 3px; background: linear-gradient(#1b2133, #121724);
+    box-shadow: 0 2px 0 #080b13, 0 0 0 1px rgba(63, 242, 255, .10), 0 0 6px rgba(63, 242, 255, .16);
+    font: 700 8px var(--mono); color: rgba(140, 240, 255, .55); text-shadow: 0 0 4px rgba(63, 242, 255, .6);
+    transition: transform .25s ease-out, box-shadow .35s ease-out, color .35s, background .35s;
+  }
+  .dh-key.down {
+    transform: translateY(1.5px) scale(.92);
+    background: linear-gradient(#1d3245, #142636);
+    box-shadow: 0 0 0 #080b13, 0 0 0 1px rgba(63, 242, 255, .55), 0 0 14px rgba(63, 242, 255, .7);
+    color: #eafdff;
+    transition-duration: 0s;
+  }
+  .dh-pad { width: 170px; height: 98px; margin: 18px auto 0; border-radius: 9px; background: linear-gradient(#21283b, #1a2031); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06); }
+
+  /* ---------- Holograma ---------- */
+  .dh-holo { position: absolute; left: 620px; top: 95px; width: 340px; z-index: 2; transform: perspective(1100px) rotateY(-18deg) rotateX(4deg); }
+  .is-stacked .dh-holo { left: 90px; top: 50px; transform: perspective(1100px) rotateX(8deg); }
+  .dh-holo::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -50px; height: 40px; opacity: 0; transition: opacity .8s; background: radial-gradient(closest-side, rgba(63, 242, 255, .45), transparent); filter: blur(8px); }
+  .dh-holo.live::after { opacity: .7; }
+  .dh-float { animation: dhFloat 6s ease-in-out infinite, dhFlicker 7s steps(1) infinite; }
+  .dh-holo.out .dh-float { animation: dhOut .8s ease-in forwards; }
+  .dh-win {
+    position: relative; overflow: hidden; padding: 0 14px 14px;
+    border: 1px solid var(--holo-soft); border-radius: 12px;
+    background: linear-gradient(180deg, rgba(63, 242, 255, .12), rgba(63, 242, 255, .03));
+    box-shadow: 0 0 22px rgba(63, 242, 255, .35), inset 0 0 26px rgba(63, 242, 255, .14);
+    transition: box-shadow .6s;
+    color: #c9fbff; font-family: "Space Grotesk", system-ui, sans-serif;
+    text-shadow: 0 0 8px rgba(63, 242, 255, .7);
+  }
+  .dh-holo.done .dh-win { box-shadow: 0 0 46px rgba(63, 242, 255, .65), inset 0 0 30px rgba(63, 242, 255, .22); }
+  .dh-win::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(63, 242, 255, .07) 0 1px, transparent 1px 3px); }
+  .dh-scan { position: absolute; left: 0; right: 0; top: -60px; height: 60px; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(63, 242, 255, .18), transparent); animation: dhScan 3.2s linear infinite; }
+  .dh-flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle at 50% 50%, rgba(63, 242, 255, .35), rgba(63, 242, 255, .08)); }
+  .dh-holo.done .dh-flash { animation: dhFlashA 1.6s ease-out; }
+  .dh-bar { height: 28px; display: flex; align-items: center; gap: 5px; margin: 0 -14px 12px; padding: 0 12px; border-bottom: 1px solid rgba(63, 242, 255, .25); }
+  .dh-bar i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--holo-soft); }
+  .dh-url { flex: 1; height: 16px; margin-left: 10px; padding: 0 8px; border: 1px solid rgba(63, 242, 255, .3); border-radius: 8px; font: 9px/14px var(--mono); color: rgba(201, 251, 255, .8); }
+  .dh-nav { height: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .dh-logo { font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+  .dh-links { display: flex; gap: 8px; }
+  .dh-links i, .dh-line, .dh-foot i { display: block; border-radius: 3px; background: rgba(63, 242, 255, .45); box-shadow: 0 0 6px rgba(63, 242, 255, .6); }
+  .dh-links i { width: 24px; height: 4px; }
+  .dh-hero { margin-top: 16px; }
+  .dh-h1 { font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: .01em; }
+  .dh-line { height: 5px; margin-top: 8px; }
+  .dh-btn { display: inline-block; margin-top: 14px; padding: 6px 14px; border: 1px solid var(--violet); border-radius: 999px; background: rgba(179, 136, 255, .16); box-shadow: 0 0 14px rgba(179, 136, 255, .55); font-size: 11px; font-weight: 700; color: #e6d9ff; text-shadow: 0 0 8px rgba(179, 136, 255, .9); }
+  .dh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .dh-slot { position: relative; height: 78px; border: 1px dashed rgba(63, 242, 255, .35); border-radius: 8px; }
+  .dh-card { position: absolute; inset: -1px; padding: 10px 8px; border: 1px solid var(--holo-soft); border-radius: 8px; background: rgba(63, 242, 255, .10); box-shadow: inset 0 0 14px rgba(63, 242, 255, .18); }
+  .dh-card .dh-line { height: 4px; margin-top: 10px; }
+  .dh-ico { font: 700 15px var(--mono); }
+  .dh-foot { display: flex; justify-content: space-between; margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(63, 242, 255, .25); }
+  .dh-foot i { width: 60px; height: 4px; }
+
+  /* Cada pieza del holograma aparece al "compilarse" su línea */
+  .dh-step { opacity: 0; }
+  .dh-step.on { animation: dhMat .75s cubic-bezier(.2, .8, .2, 1) forwards; }
+
+  /* ---------- Partículas de código ---------- */
+  .dh-fx { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .dh-p { position: absolute; left: 0; top: 0; font: 700 11px var(--mono); color: #aaf7ff; text-shadow: 0 0 8px var(--holo); }
+
+  @keyframes dhFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes dhFlicker { 0%, 41%, 43%, 77%, 80%, 100% { opacity: 1; } 42% { opacity: .72; } 78% { opacity: .85; } }
+  @keyframes dhScan { to { top: 100%; } }
+  @keyframes dhBlink { 50% { opacity: 0; } }
+  @keyframes dhRay { 0%, 100% { opacity: .06; } 50% { opacity: .32; } }
+  @keyframes dhFlashA { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes dhMat {
+    0%   { opacity: 0;   transform: scaleY(.08);  filter: brightness(3) blur(3px); }
+    35%  { opacity: 1;   transform: scaleY(1.04); filter: brightness(2) blur(.6px); }
+    50%  { opacity: .35; }
+    62%  { opacity: 1; }
+    100% { opacity: 1;   transform: none;         filter: none; }
+  }
+  @keyframes dhOut {
+    0%   { opacity: 1; }
+    15%  { opacity: .4; transform: translateX(6px) skewX(10deg); }
+    30%  { opacity: .9; transform: translateX(-4px); }
+    100% { opacity: 0;  transform: scaleY(.02); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dh-float, .dh-scan, .dh-cursor, .dh-ray { animation: none; }
+    .dh-step.on { animation: none; opacity: 1; }
+  }
+  /* ================= FIN COMPONENTE ================= */
+</style>
+</head>
+<body>
+
+<!-- ================= HTML DEL COMPONENTE ================= -->
+<section class="dh" aria-label="Animación de Daetrym: una laptop escribe código mientras frente a ella se construye una página web holográfica">
+  <div class="dh-stage">
+    <svg class="dh-beam" aria-hidden="true">
+      <defs>
+        <linearGradient id="dhBeamGrad" gradientUnits="userSpaceOnUse">
+          <stop offset="0"   stop-color="#3ff2ff" stop-opacity=".30"/>
+          <stop offset=".55" stop-color="#3ff2ff" stop-opacity=".10"/>
+          <stop offset="1"   stop-color="#3ff2ff" stop-opacity=".02"/>
+        </linearGradient>
+        <filter id="dhBeamBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="dhRayBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.4"/></filter>
+      </defs>
+      <polygon class="dh-cone" fill="url(#dhBeamGrad)" filter="url(#dhBeamBlur)"/>
+      <g filter="url(#dhRayBlur)">
+        <line class="dh-ray" stroke="url(#dhBeamGrad)"/>
+        <line class="dh-ray" stroke="url(#dhBeamGrad)"/>
+        <line class="dh-ray" stroke="url(#dhBeamGrad)"/>
+        <line class="dh-ray" stroke="url(#dhBeamGrad)"/>
+      </g>
+    </svg>
+
+    <div class="dh-laptop" aria-hidden="true">
+      <div class="dh-lid">
+        <span class="dh-cam"></span>
+        <div class="dh-screen">
+          <div class="dh-tabs"><i></i><i></i><i></i><span class="dh-tab">App.jsx</span></div>
+          <div class="dh-code"></div>
+          <div class="dh-statusbar"><span>⎇ main</span><span class="dh-status"></span></div>
+        </div>
+      </div>
+      <div class="dh-deck">
+        <div class="dh-shadow"></div>
+        <div class="dh-kb"></div>
+        <div class="dh-pad"></div>
+        <div class="dh-deck-edge"></div>
+        <div class="dh-deck-side"></div>
+      </div>
+    </div>
+
+    <div class="dh-holo" aria-hidden="true">
+      <div class="dh-float">
+        <div class="dh-win dh-step" data-step="frame">
+          <div class="dh-scan"></div>
+          <div class="dh-bar"><i></i><i></i><i></i><span class="dh-url">https://daetrym.com</span></div>
+          <div class="dh-nav dh-step" data-step="nav">
+            <span class="dh-logo">◆ daetrym</span>
+            <span class="dh-links"><i></i><i></i><i></i></span>
+          </div>
+          <div class="dh-hero dh-step" data-step="hero">
+            <div class="dh-h1">Daetrym</div>
+            <span class="dh-line" style="width:88%"></span>
+            <span class="dh-line" style="width:62%"></span>
+          </div>
+          <div class="dh-btn dh-step" data-step="btn">Empezar →</div>
+          <div class="dh-grid dh-step" data-step="grid">
+            <div class="dh-slot"><div class="dh-card dh-step" data-step="card1"><div class="dh-ico">&lt;/&gt;</div><span class="dh-line"></span><span class="dh-line" style="width:60%"></span></div></div>
+            <div class="dh-slot"><div class="dh-card dh-step" data-step="card2"><div class="dh-ico">{ }</div><span class="dh-line"></span><span class="dh-line" style="width:60%"></span></div></div>
+            <div class="dh-slot"><div class="dh-card dh-step" data-step="card3"><div class="dh-ico">▲</div><span class="dh-line"></span><span class="dh-line" style="width:60%"></span></div></div>
+          </div>
+          <div class="dh-foot dh-step" data-step="footer"><i></i><i style="width:90px"></i></div>
+          <div class="dh-flash"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dh-fx" aria-hidden="true"></div>
+  </div>
+</section>
+<!-- ================= FIN HTML ================= -->
+
+<script>
+(() => {
+  // Código que se "escribe". step = pieza del holograma que se construye con esa línea.
+  const LINES = [
+    { t: [['k', 'export default function '], ['f', 'App'], ['p', '() {']] },
+    { t: [['p', '  '], ['k', 'return'], ['p', ' (']] },
+    { t: [['p', '    <'], ['t', 'Page'], ['a', ' theme'], ['p', '='], ['s', '"holo"'], ['p', '>']], step: 'frame' },
+    { t: [['p', '      <'], ['t', 'Navbar'], ['a', ' logo'], ['p', '='], ['s', '"daetrym"'], ['p', ' />']], step: 'nav' },
+    { t: [['p', '      <'], ['t', 'Hero'], ['a', ' title'], ['p', '='], ['s', '"Daetrym"'], ['p', ' />']], step: 'hero' },
+    { t: [['p', '      <'], ['t', 'Button'], ['p', '>'], ['x', 'Empezar'], ['p', '</'], ['t', 'Button'], ['p', '>']], step: 'btn' },
+    { t: [['p', '      <'], ['t', 'Grid'], ['a', ' cols'], ['p', '={'], ['n', '3'], ['p', '}>']], step: 'grid' },
+    { t: [['p', '        <'], ['t', 'Card'], ['a', ' icon'], ['p', '='], ['s', '"code"'], ['p', ' />']], step: 'card1' },
+    { t: [['p', '        <'], ['t', 'Card'], ['a', ' icon'], ['p', '='], ['s', '"api"'], ['p', ' />']], step: 'card2' },
+    { t: [['p', '        <'], ['t', 'Card'], ['a', ' icon'], ['p', '='], ['s', '"deploy"'], ['p', ' />']], step: 'card3' },
+    { t: [['p', '      </'], ['t', 'Grid'], ['p', '>']] },
+    { t: [['p', '      <'], ['t', 'Footer'], ['p', ' />']], step: 'footer' },
+    { t: [['p', '    </'], ['t', 'Page'], ['p', '>']] },
+    { t: [['p', '  );']] },
+    { t: [['p', '}']] },
+  ];
+
+  // Distribución del teclado: 'x' o [id, etiqueta, ancho].
+  const KEYBOARD = [
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', ['back', '⌫', 1.6]],
+    [['tab', '⇥', 1.5], 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', ['\\', '\\', 1.1]],
+    [['caps', '', 1.8], 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", ['enter', '↵', 2]],
+    [['shift', '⇧', 2.3], 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', ['rshift', '⇧', 2.5]],
+    [['fn', 'fn', 1], ['ctrl', '', 1], ['alt', '', 1], ['cmd', '⌘', 1.3], ['space', '', 6], ['cmd2', '⌘', 1.3], ['alt2', '', 1], ['left', '◂', 1], ['down', '▾', 1], ['right', '▸', 1]],
+  ];
+  // Caracteres que se escriben con Shift + otra tecla.
+  const SHIFTED = { '<': ',', '>': '.', '"': "'", '{': '[', '}': ']', '(': '9', ')': '0', '?': '/', ':': ';', '_': '-', '+': '=' };
+
+  const root = document.querySelector('.dh');
+  const stage = root.querySelector('.dh-stage');
+  const code = root.querySelector('.dh-code');
+  const screen = root.querySelector('.dh-screen');
+  const holo = root.querySelector('.dh-holo');
+  const win = root.querySelector('.dh-win');
+  const fx = root.querySelector('.dh-fx');
+  const kb = root.querySelector('.dh-kb');
+  const status = root.querySelector('.dh-status');
+  const cone = root.querySelector('.dh-cone');
+  const rays = [...root.querySelectorAll('.dh-ray')];
+  const grad = root.querySelector('#dhBeamGrad');
+  const STEPS = [...holo.querySelectorAll('.dh-step')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let scale = 1;
+  let paused = false;
+
+  // ---------- Teclado ----------
+  const keys = {};
+  KEYBOARD.forEach(row => {
+    const r = document.createElement('div');
+    r.className = 'dh-krow';
+    row.forEach(k => {
+      const [id, label, u] = Array.isArray(k) ? k : [k, k.toUpperCase(), 1];
+      const el = document.createElement('span');
+      el.className = 'dh-key';
+      el.style.setProperty('--u', u);
+      el.textContent = label;
+      r.appendChild(el);
+      keys[id] = el;
+    });
+    kb.appendChild(r);
+  });
+
+  function tap(el) {
+    if (!el) return;
+    el.classList.add('down');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('down'), 110);
+  }
+
+  function press(ch) {
+    if (ch === ' ') return tap(keys.space);
+    if (ch === '\n') return tap(keys.enter);
+    const base = SHIFTED[ch] || ch.toLowerCase();
+    if (SHIFTED[ch] || ch !== ch.toLowerCase()) tap(keys.shift);
+    tap(keys[base]);
+  }
+
+  // ---------- Escala y luz de proyección ----------
+  function fit() {
+    const w = root.clientWidth;
+    const stacked = w < 680;
+    stage.classList.toggle('is-stacked', stacked);
+    const SW = stacked ? 520 : 1000, SH = stacked ? 880 : 560;
+    scale = w / SW;
+    stage.style.transform = `scale(${scale})`;
+    root.style.aspectRatio = `${SW} / ${SH}`;
+    drawBeam();
+  }
+
+  function local(el) {
+    const r = el.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    return { x: (r.left - s.left) / scale, y: (r.top - s.top) / scale, w: r.width / scale, h: r.height / scale };
+  }
+
+  const RAY_STOPS = [.18, .42, .63, .86];
+
+  function drawBeam() {
+    const a = local(screen), b = local(win);
+    let src, along, pts;
+    if (stage.classList.contains('is-stacked')) {
+      src = [a.x + a.w / 2, a.y + 4];
+      along = f => [b.x + b.w * f, b.y + b.h - 6];
+      pts = [[a.x + a.w * .3, a.y + 4], along(.04), along(.96), [a.x + a.w * .7, a.y + 4]];
+    } else {
+      src = [a.x + a.w - 4, a.y + a.h / 2];
+      along = f => [b.x + 4, b.y + b.h * f];
+      pts = [[a.x + a.w - 4, a.y + a.h * .3], along(.04), along(.96), [a.x + a.w - 4, a.y + a.h * .7]];
+    }
+    const mid = along(.5);
+    grad.setAttribute('x1', src[0]); grad.setAttribute('y1', src[1]);
+    grad.setAttribute('x2', mid[0]); grad.setAttribute('y2', mid[1]);
+    cone.setAttribute('points', pts.map(p => p.join(',')).join(' '));
+    rays.forEach((ray, i) => {
+      const t = along(RAY_STOPS[i]);
+      ray.setAttribute('x1', src[0]); ray.setAttribute('y1', src[1]);
+      ray.setAttribute('x2', t[0]); ray.setAttribute('y2', t[1]);
+    });
+  }
+
+  new ResizeObserver(fit).observe(root);
+  fit();
+
+  // ---------- Escritura del código ----------
+  const cursor = document.createElement('span');
+  cursor.className = 'dh-cursor';
+
+  const sleep = async ms => {
+    await new Promise(r => setTimeout(r, ms));
+    while (paused) await new Promise(r => setTimeout(r, 250));
+  };
+
+  function addRow(i) {
+    code.querySelectorAll('.cur').forEach(r => r.classList.remove('cur'));
+    const row = document.createElement('div');
+    row.className = 'dh-row cur';
+    row.innerHTML = `<span class="ln">${i + 1}</span><span class="txt"></span>`;
+    code.appendChild(row);
+    const txt = row.lastChild;
+    txt.appendChild(cursor);
+    code.scrollTop = Math.max(0, row.offsetTop + row.offsetHeight + 8 - code.clientHeight);
+    return txt;
+  }
+
+  async function typeLine(line, i) {
+    const txt = addRow(i);
+    let indent = true; // la sangría la pone el editor, no se teclea
+    for (const [cls, str] of line.t) {
+      const sp = document.createElement('span');
+      sp.className = 'c-' + cls;
+      txt.insertBefore(sp, cursor);
+      for (const ch of str) {
+        sp.textContent += ch;
+        if (ch !== ' ') indent = false;
+        if (indent) continue;
+        press(ch);
+        await sleep(ch === ' ' ? 30 : 30 + Math.random() * 45);
+      }
+    }
+  }
+
+  // Lanza "glifos" de código desde el cursor hasta la pieza del holograma y la materializa.
+  function burst(step) {
+    const target = holo.querySelector(`[data-step="${step}"]`);
+    const a = local(cursor), b = local(target);
+    const glyphs = '<>/{}=;01';
+    for (let k = 0; k < 7; k++) {
+      const p = document.createElement('span');
+      p.className = 'dh-p';
+      p.textContent = glyphs[Math.random() * glyphs.length | 0];
+      fx.appendChild(p);
+      const x1 = b.x + b.w * (.2 + Math.random() * .6), y1 = b.y + b.h * (.2 + Math.random() * .6);
+      const mx = (a.x + x1) / 2, my = Math.min(a.y, y1) - 30 - Math.random() * 60;
+      p.animate([
+        { transform: `translate(${a.x}px,${a.y}px) scale(.6)`, opacity: 0 },
+        { transform: `translate(${mx}px,${my}px) scale(1.2)`, opacity: 1, offset: .5 },
+        { transform: `translate(${x1}px,${y1}px) scale(.4)`, opacity: 0 },
+      ], { duration: 700 + Math.random() * 250, delay: k * 45, easing: 'cubic-bezier(.45,0,.25,1)', fill: 'both' })
+        .onfinish = () => p.remove();
+    }
+    setTimeout(() => {
+      target.classList.add('on');
+      if (step === 'frame') { holo.classList.add('live'); stage.classList.add('live'); }
+    }, 520);
+  }
+
+  function setStatus(text, cls = '') {
+    status.textContent = text;
+    status.className = 'dh-status ' + cls;
+  }
+
+  function reset() {
+    code.innerHTML = '';
+    code.classList.remove('out');
+    STEPS.forEach(s => s.classList.remove('on'));
+    holo.classList.remove('live', 'done', 'out');
+    stage.classList.remove('live');
+    setStatus('● editando App.jsx');
+  }
+
+  async function loop() {
+    for (;;) {
+      reset();
+      await sleep(700);
+      for (let i = 0; i < LINES.length; i++) {
+        await typeLine(LINES[i], i);
+        press('\n');
+        if (LINES[i].step) { burst(LINES[i].step); await sleep(420); }
+        else await sleep(160);
+      }
+      setStatus('⟳ compilando…', 'busy');
+      await sleep(1000);
+      setStatus('✓ desplegado en daetrym.com', 'ok');
+      holo.classList.add('done');
+      await sleep(4200);
+      holo.classList.add('out');
+      code.classList.add('out');
+      await sleep(900);
+    }
+  }
+
+  function renderStatic() {
+    reset();
+    LINES.forEach((l, i) => {
+      const txt = addRow(i);
+      l.t.forEach(([cls, str]) => {
+        const sp = document.createElement('span');
+        sp.className = 'c-' + cls;
+        sp.textContent = str;
+        txt.insertBefore(sp, cursor);
+      });
+    });
+    STEPS.forEach(s => s.classList.add('on'));
+    holo.classList.add('live');
+    stage.classList.add('live');
+    setStatus('✓ desplegado', 'ok');
+  }
+
+  if (reduce) {
+    renderStatic();
+  } else {
+    // Pausa cuando la animación no está en pantalla.
+    new IntersectionObserver(([e]) => { paused = !e.isIntersecting; }).observe(root);
+    (function tick() { if (!paused) drawBeam(); requestAnimationFrame(tick); })();
+    loop();
+  }
+})();
+</script>
+</body>
+</html>
